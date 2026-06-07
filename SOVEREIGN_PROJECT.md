@@ -545,7 +545,7 @@ _Rationale: Silent staleness is more dangerous than explicit friction._
 
 > Software engineering fundamentals matter more than ever.
 > These skills are our best effort at condensing these fundamentals
-> into repeatable practices to help engineers ship the best
+> into repeatable practices — to help engineers ship the best
 > products of their careers.
 >
 > Not vibe coded. Sovereign built.
