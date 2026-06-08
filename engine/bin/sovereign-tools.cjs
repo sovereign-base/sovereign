@@ -27,6 +27,7 @@ const { cmdGateOpen, cmdGatePass } = require('./lib/gate.cjs');
 const { cmdCommit } = require('./lib/commit.cjs');
 const { cmdResolveModel } = require('./lib/model.cjs');
 const { cmdValidateSkills } = require('./lib/validate.cjs');
+const { cmdInit } = require('./lib/init.cjs');
 
 // ─── Arg parsing helpers ──────────────────────────────────────────────────────
 
@@ -327,7 +328,14 @@ async function runCommand(command, args, cwd, raw, pick) {
       break;
     }
 
-    // TODO(plan 05): init
+    case 'init': {
+      // The one-blob orientation contract (Core Value). workflow = args[1].
+      // --pick is applied upstream by the router's stdout interceptor over the
+      // full JSON blob, so cmdInit always emits the whole nested shape.
+      const workflow = args[1];
+      cmdInit(cwd, workflow, raw);
+      break;
+    }
 
     default: {
       output({ command, status: 'not_implemented' }, raw, null);
