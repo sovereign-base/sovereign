@@ -168,4 +168,6 @@ function cmdValidateSkills(cwd, paths, raw) {
 module.exports = {
   validateSkills,
   cmdValidateSkills,
+  walkSkillFiles,
+  parseFrontmatter,
 };

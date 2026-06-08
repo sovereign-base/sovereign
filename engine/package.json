@@ -15,6 +15,7 @@
     "templates",
     "agents",
     "skills",
+    "references",
     "VERSION"
   ],
   "scripts": {

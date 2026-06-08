@@ -28,6 +28,7 @@ const { cmdCommit } = require('./lib/commit.cjs');
 const { cmdResolveModel } = require('./lib/model.cjs');
 const { cmdValidateSkills } = require('./lib/validate.cjs');
 const { cmdInit } = require('./lib/init.cjs');
+const { cmdDoctor } = require('./lib/doctor.cjs');
 
 // ─── Arg parsing helpers ──────────────────────────────────────────────────────
 
@@ -206,8 +207,8 @@ async function main() {
   if (!command) {
     error(
       'Usage: sovereign-tools <command> [args] [--raw] [--pick <field>] [--cwd <path>]\n' +
-        'Commands: version, state (load|save|patch), gate (open|pass) ' +
-        '(commit, resolve-model, model, validate, init — plan 04)'
+        'Commands: version, state (load|save|patch), gate (open|pass), ' +
+        'commit, resolve-model, model, validate (skills), init <workflow>, doctor'
     );
   }
 
@@ -334,6 +335,13 @@ async function runCommand(command, args, cwd, raw, pick) {
       // full JSON blob, so cmdInit always emits the whole nested shape.
       const workflow = args[1];
       cmdInit(cwd, workflow, raw);
+      break;
+    }
+
+    case 'doctor': {
+      // Skill-listing budget check (SKL-07). Flows through output() so --pick
+      // works for free; exits non-zero only when the budget is breached.
+      cmdDoctor(cwd, raw);
       break;
     }
 
