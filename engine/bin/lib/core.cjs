@@ -19,6 +19,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const os = require('node:os');
+const { spawnSync, execFileSync } = require('node:child_process');
 
 // ─── Output helpers ─────────────────────────────────────────────────────────
 
@@ -185,6 +186,52 @@ function loadConfig(cwd) {
   return merged;
 }
 
+// ─── Git helpers ──────────────────────────────────────────────────────────────
+
+/**
+ * Run a git command via execFileSync (array args, no shell), never throwing.
+ * Returns the exit code plus trimmed stdout/stderr so callers branch on results
+ * rather than try/catch. Array args prevent shell interpretation of file paths.
+ * @param {string} cwd
+ * @param {string[]} args
+ * @returns {{ exitCode: number, stdout: string, stderr: string }}
+ */
+function execGit(cwd, args) {
+  const result = spawnSync('git', args, {
+    cwd,
+    stdio: 'pipe',
+    encoding: 'utf-8',
+  });
+  return {
+    exitCode: result.status ?? 1,
+    stdout: (result.stdout ?? '').toString().trim(),
+    stderr: (result.stderr ?? '').toString().trim(),
+  };
+}
+
+/**
+ * Report whether `targetPath` is gitignored under `cwd`.
+ *
+ * Uses `git check-ignore -q --no-index`; `--no-index` honors .gitignore rules
+ * even for already-tracked paths (the common case where `.sovereign/` was
+ * committed before being added to .gitignore). execFileSync with array args
+ * avoids shell interpretation of crafted path names.
+ * @param {string} cwd
+ * @param {string} targetPath
+ * @returns {boolean}
+ */
+function isGitIgnored(cwd, targetPath) {
+  try {
+    execFileSync('git', ['check-ignore', '-q', '--no-index', '--', targetPath], {
+      cwd,
+      stdio: 'pipe',
+    });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 module.exports = {
   output,
   error,
@@ -192,4 +239,6 @@ module.exports = {
   findProjectRoot,
   loadConfig,
   deepMerge,
+  execGit,
+  isGitIgnored,
 };
