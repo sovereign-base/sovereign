@@ -28,7 +28,7 @@ const ENGINE_ROOT = path.join(__dirname, '..');
 const BIN = path.join(ENGINE_ROOT, 'bin', 'sovereign-tools.cjs');
 const TEMPLATE_SOVEREIGN = path.join(ENGINE_ROOT, 'templates', 'sovereign');
 
-const { buildInit } = require(path.join(ENGINE_ROOT, 'bin', 'lib', 'init.cjs'));
+const { buildInit, checkAgents, requiredAgentsFor } = require(path.join(ENGINE_ROOT, 'bin', 'lib', 'init.cjs'));
 
 /** Recursively copy a directory tree (Node >=20 has fs.cpSync). */
 function copyTree(src, dest) {
@@ -53,8 +53,24 @@ function mkEmptyProject() {
   return fs.mkdtempSync(path.join(os.tmpdir(), 'sov-init-empty-'));
 }
 
+/** Seed minimal `<name>.md` files into a project's .claude/agents/ dir. */
+function seedAgents(dir, names) {
+  const agentsDir = path.join(dir, '.claude', 'agents');
+  fs.mkdirSync(agentsDir, { recursive: true });
+  for (const name of names) {
+    fs.writeFileSync(
+      path.join(agentsDir, name + '.md'),
+      `---\nname: ${name}\ndescription: test fixture\n---\nbody\n`
+    );
+  }
+}
+
+/** The three subagents the `council` workflow requires (per requiredAgentsFor). */
+const COUNCIL_AGENTS = ['sovereign-advisor', 'sovereign-chairman', 'sovereign-peer-reviewer'];
+
 test('init council returns the nested one-blob contract', () => {
   const dir = mkSeededProject({ model_profile: 'quality' });
+  seedAgents(dir, COUNCIL_AGENTS);
   const blob = buildInit(dir, 'council');
 
   assert.equal(blob.project_root, dir);
@@ -155,6 +171,46 @@ test('phase block derives current/name/gate_status from STATE.md when present', 
   const blob = buildInit(dir, 'council');
   assert.equal(blob.phase.current, 3);
   assert.equal(blob.phase.gate_status, 'In progress');
+});
+
+// ─── agents_installed / missing_agents (real filesystem check, plan 02-03) ───
+
+test('Test A: council with all required agents present → installed true, missing []', () => {
+  const dir = mkSeededProject({});
+  seedAgents(dir, COUNCIL_AGENTS);
+  const blob = buildInit(dir, 'council');
+  assert.equal(blob.agents_installed, true);
+  assert.deepEqual(blob.missing_agents, []);
+});
+
+test('Test B: council missing peer-reviewer → installed false, missing lists it', () => {
+  const dir = mkSeededProject({});
+  seedAgents(dir, ['sovereign-advisor', 'sovereign-chairman']);
+  const blob = buildInit(dir, 'council');
+  assert.equal(blob.agents_installed, false);
+  assert.deepEqual(blob.missing_agents, ['sovereign-peer-reviewer']);
+});
+
+test('Test C: sovereign-init (no required agents) → installed true even with empty .claude', () => {
+  const dir = mkSeededProject({});
+  const blob = buildInit(dir, 'sovereign-init');
+  assert.equal(blob.agents_installed, true);
+  assert.deepEqual(blob.missing_agents, []);
+});
+
+test('requiredAgentsFor maps workflows to required agent names', () => {
+  assert.deepEqual(requiredAgentsFor('council'), COUNCIL_AGENTS);
+  assert.deepEqual(requiredAgentsFor('sentinel'), ['sovereign-sentinel']);
+  assert.deepEqual(requiredAgentsFor('sovereign-init'), []);
+  assert.deepEqual(requiredAgentsFor('grill-with-docs'), []);
+});
+
+test('checkAgents probes .claude/agents/ and reports missing names', () => {
+  const dir = mkSeededProject({});
+  seedAgents(dir, ['sovereign-advisor']);
+  const result = checkAgents(dir, 'council');
+  assert.equal(result.agents_installed, false);
+  assert.deepEqual(result.missing_agents, ['sovereign-chairman', 'sovereign-peer-reviewer']);
 });
 
 // ─── CLI integration (spawnSync) ────────────────────────────────────────────
