@@ -28,6 +28,7 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
+const os = require('node:os');
 
 const { output, error, loadConfig, safeReadFile } = require('./core.cjs');
 const { resolveModelInternal } = require('./model.cjs');
@@ -139,29 +140,82 @@ function contextInjection(cwd) {
 }
 
 /**
- * Inject the project-wide context every blob carries: project_root, the engine
- * version, and the agent-presence guard. Mirrors GSD's withProjectRoot.
+ * The subagent names each workflow dispatches and therefore requires installed.
+ * Council fans out to the three reasoning agents; the fast-lane `sentinel` skill
+ * dispatches the post-phase reviewer; sovereign-init and the other fast-lane
+ * stubs dispatch none. A workflow not listed here requires no agents.
  *
- * For M1 the agent-presence check is hardcoded true/[] — the guard SHAPE must
- * exist now (ARCHITECTURE.md #1371) so orchestrators can branch on missing
- * subagents; the real filesystem check lands in Phase 2 when subagent
- * definitions ship.
+ * Keyed exactly to the agent definition filenames shipped in engine/agents/
+ * (plan 02-02) so checkAgents can probe `<name>.md` directly.
+ *
+ * @type {Record<string, string[]>}
+ */
+const REQUIRED_AGENTS = {
+  council: ['sovereign-advisor', 'sovereign-chairman', 'sovereign-peer-reviewer'],
+  sentinel: ['sovereign-sentinel'],
+  'sovereign-init': [],
+};
+
+/**
+ * The subagent names a workflow requires installed (empty list when none).
+ * @param {string} workflow
+ * @returns {string[]}
+ */
+function requiredAgentsFor(workflow) {
+  return REQUIRED_AGENTS[workflow] || [];
+}
+
+/**
+ * Real agent-presence guard (replaces the Phase-1 hardcoded stub). For the
+ * workflow's required subagents, probe for `<name>.md` in the two locations
+ * Claude Code actually loads subagents from — the project `.claude/agents/` and
+ * the user `~/.claude/agents/` (subagents are NOT loaded from --add-dir, per
+ * STACK.md). Found in EITHER location counts as present.
+ *
+ * A name with no file in either location is missing. agents_installed is true
+ * only when nothing is missing — there is NO silent fallback to a
+ * general-purpose agent (ARCHITECTURE anti-pattern #4): an orchestrator must be
+ * able to hard-error before dispatching into a void.
+ *
+ * An empty required list short-circuits to {true, []}.
  *
  * @param {string} cwd - project root
+ * @param {string} workflow - workflow/skill name being oriented
+ * @returns {{agents_installed: boolean, missing_agents: string[]}}
+ */
+function checkAgents(cwd, workflow) {
+  const required = requiredAgentsFor(workflow);
+  const projectAgents = path.join(cwd, '.claude', 'agents');
+  const userAgents = path.join(os.homedir(), '.claude', 'agents');
+  const missing_agents = required.filter((name) => {
+    const file = name + '.md';
+    return !fs.existsSync(path.join(projectAgents, file)) &&
+      !fs.existsSync(path.join(userAgents, file));
+  });
+  return { agents_installed: missing_agents.length === 0, missing_agents };
+}
+
+/**
+ * Inject the project-wide context every blob carries: project_root, the engine
+ * version, and the real agent-presence guard. Mirrors GSD's withProjectRoot.
+ *
+ * The guard is computed from the filesystem per the requested workflow's
+ * required subagents (checkAgents) — orchestrators branch on missing subagents
+ * with no silent general-purpose fallback.
+ *
+ * @param {string} cwd - project root
+ * @param {string} workflow - workflow/skill name (determines required agents)
  * @param {Record<string, *>} blob
  * @returns {Record<string, *>}
  */
-function withProjectContext(cwd, blob) {
+function withProjectContext(cwd, workflow, blob) {
   return Object.assign(
     {
       project_root: cwd,
       sovereign_version: readVersion(),
     },
     blob,
-    {
-      agents_installed: true, // TODO(Phase 2): real agent presence check
-      missing_agents: [],
-    }
+    checkAgents(cwd, workflow)
   );
 }
 
@@ -264,7 +318,7 @@ function buildInit(cwd, workflow) {
     }
   }
 
-  return withProjectContext(cwd, blob);
+  return withProjectContext(cwd, workflow, blob);
 }
 
 /**
@@ -289,6 +343,8 @@ module.exports = {
   buildInit,
   cmdInit,
   withProjectContext,
+  checkAgents,
+  requiredAgentsFor,
   readState,
   existsBlock,
   relevantAdrs,
