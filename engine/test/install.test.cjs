@@ -167,6 +167,26 @@ test('launcher: sovereign.cjs init --full scaffolds .sovereign in the cwd', () =
   }
 });
 
+test('launcher: sovereign.cjs init --cwd <dir> installs into that dir, not process.cwd()', () => {
+  // Regression: the launcher must honor --cwd (like the engine bin) instead of
+  // hardcoding process.cwd(). Run the child FROM the engine root but target a
+  // separate tmp dir via --cwd; assert the install landed in the tmp dir and the
+  // engine root was left untouched.
+  const dir = mkProject();
+  try {
+    const res = spawnSync(process.execPath, [SOVEREIGN_BIN, 'init', '--full', '--cwd', dir], {
+      cwd: ENGINE_ROOT,
+      encoding: 'utf-8',
+    });
+    assert.equal(res.status, 0, res.stderr);
+    assert.ok(fs.existsSync(path.join(dir, '.sovereign', 'STATE.md')), 'scaffolded .sovereign in --cwd dir');
+    assert.ok(fs.existsSync(path.join(dir, '.claude', 'skills')), 'installed skills into --cwd dir');
+    assert.ok(!fs.existsSync(path.join(ENGINE_ROOT, '.sovereign')), 'did NOT scaffold in the engine root');
+  } finally {
+    rm(dir);
+  }
+});
+
 test('launcher: sovereign.cjs --version prints the version', () => {
   const res = spawnSync(process.execPath, [SOVEREIGN_BIN, '--version'], { encoding: 'utf-8' });
   assert.equal(res.status, 0, res.stderr);

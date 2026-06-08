@@ -39,7 +39,11 @@ function main() {
     const quick = args.includes('--quick');
     const full = args.includes('--full');
     const global = args.includes('--global');
-    cmdInstall(process.cwd(), { quick, full, global }, false);
+    // Honor --cwd <dir> like the engine bin does, so the install target is
+    // scriptable/testable; default to the real working directory.
+    const cwdIdx = args.indexOf('--cwd');
+    const cwd = cwdIdx !== -1 && args[cwdIdx + 1] ? args[cwdIdx + 1] : process.cwd();
+    cmdInstall(cwd, { quick, full, global }, false);
     return;
   }
 
