@@ -30,7 +30,13 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. A fresh project has a `.sovereign/` tree (MANIFEST.md, SOVEREIGN.md, CONTEXT.md, STATE.md, config.json, docs/); MANIFEST.md is regenerated on every `state save` and stays within ~500 tokens (engine-derived, never hand-edited).
   4. The engine runs as zero-dependency `.cjs` with no build step: `node --test` passes and an `npm pack` clean-install smoke test in a fresh dir succeeds (shebang, bin path, CJS, `engines.node >= 20`).
   5. `sovereign-tools validate skills` lints SKILL.md frontmatter (name ≤64 chars, lowercase-hyphen, no "claude"/"anthropic"; description within cap) and exits non-zero on violations.
-**Plans**: TBD
+**Plans**: 5 plans
+Plans:
+- [ ] 01-01-PLAN.md — ADRs (before code) + engine/ CJS scaffold + .sovereign/ templates
+- [ ] 01-02-PLAN.md — Engine layer A: router, arg helpers, output() @file: spill, loadConfig, model-profiles
+- [ ] 01-03-PLAN.md — Engine layer B (state): state load/save field-patch, derived MANIFEST regen, gate open/pass
+- [ ] 01-04-PLAN.md — Engine layer B (commands): commit (gated+sanitized), model/resolve-model, validate skills
+- [ ] 01-05-PLAN.md — Engine layer C: init <workflow> nested JSON contract + npm pack clean-install smoke test
 **ADRs locked in this phase (before code)**: (a) engine = zero-dep `.cjs`, no compiled TS/`tsx`/`bun`; (b) CJS packaging, `"type"` not `"module"`, `engines.node >= 20`; (c) every command authored as a skill directory (skill wins over bare command file on name clash); (d) drop v1 non-standard frontmatter (`triggers`, `works-best-with`, `min-model`, bare `phase`) for the real Agent Skills spec; (e) MANIFEST is engine-derived on every `state save`. The subagent return-JSON schema contract is also fixed here.
 
 ### Phase 2: Bootstrap + Subagent Definitions
@@ -87,7 +93,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Engine Foundation | 0/TBD | Not started | - |
+| 1. Engine Foundation | 0/5 | Not started | - |
 | 2. Bootstrap + Subagent Definitions | 0/TBD | Not started | - |
 | 3. Council `--standard` | 0/TBD | Not started | - |
 | 4. Fast Lane Skills | 0/TBD | Not started | - |
