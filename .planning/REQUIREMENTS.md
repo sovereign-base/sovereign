@@ -9,7 +9,7 @@ Derived from `/SOVEREIGN.md` (gated vision) + `.planning/research/SUMMARY.md`.
 
 ### Engine (`sovereign-tools`)
 
-- [ ] **ENG-01**: An agent can run `sovereign-tools init <workflow>` and receive a single JSON blob containing resolved models, config flags, phase status, and file paths+existence — with payloads >50KB spilled to a `@file:` tmpfile.
+- [x] **ENG-01**: An agent can run `sovereign-tools init <workflow>` and receive a single JSON blob containing resolved models, config flags, phase status, and file paths+existence — with payloads >50KB spilled to a `@file:` tmpfile.
 - [x] **ENG-02**: An agent can read and update project state via `sovereign-tools state load|save`, with field-level patching (not whole-file rewrites).
 - [x] **ENG-03**: An agent can open and pass phase gates via `sovereign-tools gate open|pass <phase>` using append-only writes.
 - [x] **ENG-04**: An agent can commit state/planning artifacts via `sovereign-tools commit "<msg>" --files ...` that respects `commit_docs` config and gitignore status.
@@ -83,7 +83,7 @@ REQ-ID → Phase. Coverage: 28/28 M1 requirements mapped, each to exactly one ph
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| ENG-01 | Phase 1 — Engine Foundation | Pending |
+| ENG-01 | Phase 1 — Engine Foundation | Complete |
 | ENG-02 | Phase 1 — Engine Foundation | Complete |
 | ENG-03 | Phase 1 — Engine Foundation | Complete |
 | ENG-04 | Phase 1 — Engine Foundation | Complete |

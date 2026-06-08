@@ -12,7 +12,7 @@ M1 builds SOVEREIGN's foundation in the one order the research is willing to def
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Engine Foundation** - Zero-dep `.cjs` engine + `.sovereign/` state model; a skill can call `init <workflow>` and get one JSON blob
+- [x] **Phase 1: Engine Foundation** - Zero-dep `.cjs` engine + `.sovereign/` state model; a skill can call `init <workflow>` and get one JSON blob (completed 2026-06-08)
 - [ ] **Phase 2: Bootstrap + Subagent Definitions** - `npx sovereign init` scaffolds `.sovereign/`; advisor + reasoning subagents defined; listing-budget held
 - [ ] **Phase 3: Council `--standard` (Integration Proof)** - 5 parallel advisors + anonymous peer review + chairman verdict exercise every engine primitive end-to-end
 - [ ] **Phase 4: Fast Lane Skills** - `ubiquitous-language`, `grill-with-docs`, `handoff`, `sentinel`, `tdd` — thin orchestrators over the engine
@@ -36,7 +36,7 @@ Plans:
 - [x] 01-02-PLAN.md — Engine layer A: router, arg helpers, output() @file: spill, loadConfig, model-profiles
 - [x] 01-03-PLAN.md — Engine layer B (state): state load/save field-patch, derived MANIFEST regen, gate open/pass
 - [x] 01-04-PLAN.md — Engine layer B (commands): commit (gated+sanitized), model/resolve-model, validate skills
-- [ ] 01-05-PLAN.md — Engine layer C: init <workflow> nested JSON contract + npm pack clean-install smoke test
+- [x] 01-05-PLAN.md — Engine layer C: init <workflow> nested JSON contract + npm pack clean-install smoke test
 **ADRs locked in this phase (before code)**: (a) engine = zero-dep `.cjs`, no compiled TS/`tsx`/`bun`; (b) CJS packaging, `"type"` not `"module"`, `engines.node >= 20`; (c) every command authored as a skill directory (skill wins over bare command file on name clash); (d) drop v1 non-standard frontmatter (`triggers`, `works-best-with`, `min-model`, bare `phase`) for the real Agent Skills spec; (e) MANIFEST is engine-derived on every `state save`. The subagent return-JSON schema contract is also fixed here.
 
 ### Phase 2: Bootstrap + Subagent Definitions
@@ -93,7 +93,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Engine Foundation | 0/5 | Not started | - |
+| 1. Engine Foundation | 5/5 | Complete   | 2026-06-08 |
 | 2. Bootstrap + Subagent Definitions | 0/TBD | Not started | - |
 | 3. Council `--standard` | 0/TBD | Not started | - |
 | 4. Fast Lane Skills | 0/TBD | Not started | - |
