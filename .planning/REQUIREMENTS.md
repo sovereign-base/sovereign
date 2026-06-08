@@ -25,9 +25,9 @@ Derived from `/SOVEREIGN.md` (gated vision) + `.planning/research/SUMMARY.md`.
 
 ### Bootstrap (`sovereign-init` / `npx sovereign`)
 
-- [ ] **INIT-01**: A user can run `npx sovereign init` to install SOVEREIGN skills and scaffold `.sovereign/` in their project.
-- [ ] **INIT-02**: `init --quick` installs only the Fast Lane 5; `init --full` installs the full M1 skill set.
-- [ ] **INIT-03**: Install is idempotent and version-aware — re-running is safe and updates cleanly.
+- [x] **INIT-01**: A user can run `npx sovereign init` to install SOVEREIGN skills and scaffold `.sovereign/` in their project.
+- [x] **INIT-02**: `init --quick` installs only the Fast Lane 5; `init --full` installs the full M1 skill set.
+- [x] **INIT-03**: Install is idempotent and version-aware — re-running is safe and updates cleanly.
 
 ### Council (`--standard`)
 
@@ -93,9 +93,9 @@ REQ-ID → Phase. Coverage: 28/28 M1 requirements mapped, each to exactly one ph
 | STATE-01 | Phase 1 — Engine Foundation | Complete |
 | STATE-02 | Phase 1 — Engine Foundation | Complete |
 | STATE-03 | Phase 1 — Engine Foundation | Complete |
-| INIT-01 | Phase 2 — Bootstrap + Subagent Definitions | Pending |
-| INIT-02 | Phase 2 — Bootstrap + Subagent Definitions | Pending |
-| INIT-03 | Phase 2 — Bootstrap + Subagent Definitions | Pending |
+| INIT-01 | Phase 2 — Bootstrap + Subagent Definitions | Complete |
+| INIT-02 | Phase 2 — Bootstrap + Subagent Definitions | Complete |
+| INIT-03 | Phase 2 — Bootstrap + Subagent Definitions | Complete |
 | SKL-07 | Phase 2 — Bootstrap + Subagent Definitions | Pending |
 | CNL-01 | Phase 3 — Council `--standard` | Pending |
 | CNL-02 | Phase 3 — Council `--standard` | Pending |

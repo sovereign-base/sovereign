@@ -50,7 +50,7 @@ Plans:
   4. Orchestrator-only skills set `disable-model-invocation: true`; the set of auto-triggerable M1 skills stays within the skill-listing budget (~7 max), verified by a `/doctor`-style check.
 **Plans**: 3 plans
 Plans:
-- [ ] 02-01-PLAN.md — `npx sovereign init` installer: copy skills+agents to .claude/, scaffold .sovereign/, --quick/--full, idempotent + version-aware (INIT-01/02/03)
+- [x] 02-01-PLAN.md — `npx sovereign init` installer: copy skills+agents to .claude/, scaffold .sovereign/, --quick/--full, idempotent + version-aware (INIT-01/02/03)
 - [ ] 02-02-PLAN.md — 4 M1-dispatched subagent definitions (advisor/chairman/peer-reviewer/sentinel) with fixed JSON return schemas + agents added to package files allowlist (INIT-01)
 - [ ] 02-03-PLAN.md — real agents_installed/missing_agents check (replaces stub) + `doctor` listing-budget command + disable-model-invocation convention (SKL-07, INIT-01)
 
