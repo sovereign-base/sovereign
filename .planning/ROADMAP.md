@@ -79,8 +79,15 @@ Plans:
   3. The `SOVEREIGN:UNVERIFIED` marker specification is defined (mini-ADR), and `sentinel` scans for it plus checks commenting-standard, spec alignment, and ADR consistency, emitting a structured verdict.
   4. Every Fast Lane skill is a thin orchestrator: orients via a single `init` call, ends with a navigation footer (recommended next + alternatives), and includes a plain-language "Why this matters" section.
   5. After this phase, a `/doctor`-style budget check confirms all ~7 auto-triggerable skills remain within the 1% listing budget with no description collisions.
-**Plans**: TBD
-**Research flag**: Define the `SOVEREIGN:UNVERIFIED` marker spec (format, valid contexts, scan rules, gate-blocking threshold) as a mini-ADR before implementing `sentinel`.
+**Plans**: 6 plans
+Plans:
+- [ ] 04-01-PLAN.md — Author the SOVEREIGN:UNVERIFIED marker spec (engine/references/unverified-marker.md) (CONV-03)
+- [ ] 04-02-PLAN.md — Author ubiquitous-language skill: glossary one term at a time, conflict detection (SKL-01, SKL-06)
+- [ ] 04-03-PLAN.md — Author grill-with-docs skill: interrogate a plan vs CONTEXT.md + ADRs, recommendation-first, inline updates (SKL-02, SKL-06)
+- [ ] 04-04-PLAN.md — Author handoff skill: compress session into resumable HANDOFF.md, STATE via engine (SKL-03, SKL-06)
+- [ ] 04-05-PLAN.md — Author tdd skill: red-green-refactor, behavior-at-interface, stack-agnostic (SKL-05, SKL-06)
+- [ ] 04-06-PLAN.md — Author sentinel skill: native-tier reviewer, UNVERIFIED scan + commenting + spec + ADR → structured verdict (SKL-04, SKL-06)
+**Research flag**: Define the `SOVEREIGN:UNVERIFIED` marker spec (format, valid contexts, scan rules, gate-blocking threshold) as a mini-ADR before implementing `sentinel` (plan 04-01, satisfied first in wave 1).
 
 ### Phase 5: Conventions + Per-Skill Docs
 **Goal**: The authoring standards and documentation that codify what Phases 1–4 demonstrated — so extensions and future-milestone skills have a concrete spec to follow rather than theory written before practice.
@@ -103,5 +110,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 1. Engine Foundation | 5/5 | Complete   | 2026-06-08 |
 | 2. Bootstrap + Subagent Definitions | 3/3 | Complete   | 2026-06-08 |
 | 3. Council `--standard` | 2/2 | Complete   | 2026-06-08 |
-| 4. Fast Lane Skills | 0/TBD | Not started | - |
+| 4. Fast Lane Skills | 0/6 | Not started | - |
 | 5. Conventions + Per-Skill Docs | 0/TBD | Not started | - |
