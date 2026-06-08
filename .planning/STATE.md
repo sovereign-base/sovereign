@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: verifying
-stopped_at: Completed 02-02-PLAN.md
-last_updated: "2026-06-08T17:58:03.569Z"
+stopped_at: Completed 02-03-PLAN.md
+last_updated: "2026-06-08T18:05:22.606Z"
 last_activity: 2026-06-08
 progress:
   total_phases: 5
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 8
-  completed_plans: 7
+  completed_plans: 8
 ---
 
 # Project State
@@ -57,6 +57,7 @@ Progress: [██░░░░░░░░] phase 1/5 complete
 | Phase 01 P04 | 6min | 3 tasks | 9 files |
 | Phase 02 P01 | 3min | 2 tasks | 4 files |
 | Phase 02 P02 | 6 | 2 tasks | 5 files |
+| Phase 02 P03 | 5min | 2 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -78,6 +79,7 @@ Phase 1 ADRs to lock before code: (a) zero-dep `.cjs`; (b) CJS packaging, `engin
 - [Phase 01]: Engine layer B (commands): doubly-gated (commit_docs + gitignore) prompt-injection-sanitized commit returning short hash; GSD-verbatim model resolution (override->omit->profile->sonnet); validate skills SKILL.md frontmatter linter (name<=64/lowercase-hyphen/no claude|anthropic; desc<=1024) exits non-zero on violation
 - [Phase 02]: Installer = copy not symlink into .claude/; version stamp at .sovereign/.sovereign-version makes init idempotent + version-aware; bare init defaults to --full
 - [Phase 02]: Plan 02-02: 4 M1-dispatched subagents (advisor lens-shell/chairman/peer-reviewer/sentinel) defined with real Agent Skills frontmatter + pinned ok:boolean JSON schemas (JSON only); planner/researcher deferred (no M1 caller); model:inherit (engine resolves via model-profiles)
+- [Phase 02]: Plan 02-03: real agents_installed check (probe .claude/agents then ~/.claude/agents per workflow's required subagents; no silent general-purpose fallback) replaces the Phase-1 stub; sovereign-tools doctor enforces AUTO_MAX=7 + ~2000-token listing budget counting only auto-triggerable skills; disable-model-invocation convention documented at engine/references/listing-budget.md (CONV-01)
 
 ### Pending Todos
 
@@ -91,6 +93,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-08T17:57:55.789Z
-Stopped at: Completed 02-02-PLAN.md
+Last session: 2026-06-08T18:05:08.850Z
+Stopped at: Completed 02-03-PLAN.md
 Resume file: None

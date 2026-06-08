@@ -44,7 +44,7 @@ Derived from `/SOVEREIGN.md` (gated vision) + `.planning/research/SUMMARY.md`.
 - [ ] **SKL-04**: `sentinel` (native tier) — scans for `SOVEREIGN:UNVERIFIED` markers and checks commenting-standard, spec alignment, and ADR consistency, emitting a structured verdict.
 - [ ] **SKL-05**: `tdd` — drives a red-green-refactor loop.
 - [ ] **SKL-06**: Every skill is a thin orchestrator that orients via a single `init` call, ends with a navigation footer (recommended next + alternatives), and includes a plain-language "Why this matters" section.
-- [ ] **SKL-07**: Orchestrator-only skills set `disable-model-invocation`; the set of auto-triggerable M1 skills stays within Claude Code's skill-listing token budget (verified by a `/doctor`-style check).
+- [x] **SKL-07**: Orchestrator-only skills set `disable-model-invocation`; the set of auto-triggerable M1 skills stays within Claude Code's skill-listing token budget (verified by a `/doctor`-style check).
 
 ### Conventions & Docs
 
@@ -96,7 +96,7 @@ REQ-ID → Phase. Coverage: 28/28 M1 requirements mapped, each to exactly one ph
 | INIT-01 | Phase 2 — Bootstrap + Subagent Definitions | Complete |
 | INIT-02 | Phase 2 — Bootstrap + Subagent Definitions | Complete |
 | INIT-03 | Phase 2 — Bootstrap + Subagent Definitions | Complete |
-| SKL-07 | Phase 2 — Bootstrap + Subagent Definitions | Pending |
+| SKL-07 | Phase 2 — Bootstrap + Subagent Definitions | Complete |
 | CNL-01 | Phase 3 — Council `--standard` | Pending |
 | CNL-02 | Phase 3 — Council `--standard` | Pending |
 | CNL-03 | Phase 3 — Council `--standard` | Pending |

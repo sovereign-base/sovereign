@@ -52,7 +52,7 @@ Plans:
 Plans:
 - [x] 02-01-PLAN.md — `npx sovereign init` installer: copy skills+agents to .claude/, scaffold .sovereign/, --quick/--full, idempotent + version-aware (INIT-01/02/03)
 - [x] 02-02-PLAN.md — 4 M1-dispatched subagent definitions (advisor/chairman/peer-reviewer/sentinel) with fixed JSON return schemas + agents added to package files allowlist (INIT-01)
-- [ ] 02-03-PLAN.md — real agents_installed/missing_agents check (replaces stub) + `doctor` listing-budget command + disable-model-invocation convention (SKL-07, INIT-01)
+- [x] 02-03-PLAN.md — real agents_installed/missing_agents check (replaces stub) + `doctor` listing-budget command + disable-model-invocation convention (SKL-07, INIT-01)
 
 ### Phase 3: Council `--standard` (Integration Proof)
 **Goal**: `/council --standard "<decision>"` runs end-to-end and in doing so exercises every engine primitive in combination (init, state save, gate pass, commit, model resolution) plus the full parallel fan-out / fan-in — validating the architecture before any Fast Lane skill is written.
