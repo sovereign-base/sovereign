@@ -32,7 +32,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   5. `sovereign-tools validate skills` lints SKILL.md frontmatter (name ≤64 chars, lowercase-hyphen, no "claude"/"anthropic"; description within cap) and exits non-zero on violations.
 **Plans**: 5 plans
 Plans:
-- [ ] 01-01-PLAN.md — ADRs (before code) + engine/ CJS scaffold + .sovereign/ templates
+- [x] 01-01-PLAN.md — ADRs (before code) + engine/ CJS scaffold + .sovereign/ templates
 - [ ] 01-02-PLAN.md — Engine layer A: router, arg helpers, output() @file: spill, loadConfig, model-profiles
 - [ ] 01-03-PLAN.md — Engine layer B (state): state load/save field-patch, derived MANIFEST regen, gate open/pass
 - [ ] 01-04-PLAN.md — Engine layer B (commands): commit (gated+sanitized), model/resolve-model, validate skills

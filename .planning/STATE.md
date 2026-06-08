@@ -1,3 +1,19 @@
+---
+gsd_state_version: 1.0
+milestone: v1.0
+milestone_name: milestone
+status: planning
+stopped_at: Completed 01-01-PLAN.md
+last_updated: "2026-06-08T07:04:04.436Z"
+last_activity: 2026-06-08 — Roadmap created (5 phases, M1 Foundation); 28/28 requirements mapped
+progress:
+  total_phases: 5
+  completed_phases: 0
+  total_plans: 5
+  completed_plans: 1
+  percent: 20
+---
+
 # Project State
 
 ## Project Reference
@@ -10,15 +26,16 @@ See: .planning/PROJECT.md (updated 2026-06-08)
 ## Current Position
 
 Phase: 1 of 5 (Engine Foundation)
-Plan: 0 of TBD in current phase
-Status: Ready to plan
-Last activity: 2026-06-08 — Roadmap created (5 phases, M1 Foundation); 28/28 requirements mapped
+Plan: 1 of 5 in current phase
+Status: In progress
+Last activity: 2026-06-08 — Completed 01-01 (ADRs-before-code + engine/ scaffold + .sovereign/ templates)
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [██░░░░░░░░] 20%
 
 ## Performance Metrics
 
 **Velocity:**
+
 - Total plans completed: 0
 - Average duration: — min
 - Total execution time: 0.0 hours
@@ -30,10 +47,12 @@ Progress: [░░░░░░░░░░] 0%
 | - | - | - | - |
 
 **Recent Trend:**
+
 - Last 5 plans: none yet
 - Trend: —
 
 *Updated after each plan completion*
+| Phase 01 P01 | 4 | 3 tasks | 20 files |
 
 ## Accumulated Context
 
@@ -48,6 +67,9 @@ Recent decisions affecting current work:
 
 Phase 1 ADRs to lock before code: (a) zero-dep `.cjs`; (b) CJS packaging, `engines.node >= 20`; (c) commands authored as skill directories; (d) drop v1 non-standard frontmatter; (e) MANIFEST engine-derived.
 
+- [Phase 01]: Engine test script uses glob 'test/**/*.test.cjs' (Node 23 cannot resolve bare 'test/' dir)
+- [Phase 01]: Six Phase-1 ADRs (002,009,010,011,012,013) locked before engine code; subagent JSON schema pinned
+
 ### Pending Todos
 
 None yet.
@@ -60,6 +82,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-08
-Stopped at: ROADMAP.md and STATE.md written; REQUIREMENTS.md traceability filled
+Last session: 2026-06-08T07:03:57.299Z
+Stopped at: Completed 01-01-PLAN.md
 Resume file: None
