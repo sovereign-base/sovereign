@@ -79,4 +79,35 @@ Derived from `/SOVEREIGN.md` (gated vision) + `.planning/research/SUMMARY.md`.
 
 ## Traceability
 
-<!-- Filled by roadmapper: REQ-ID → Phase -->
+REQ-ID → Phase. Coverage: 28/28 M1 requirements mapped, each to exactly one phase.
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| ENG-01 | Phase 1 — Engine Foundation | Pending |
+| ENG-02 | Phase 1 — Engine Foundation | Pending |
+| ENG-03 | Phase 1 — Engine Foundation | Pending |
+| ENG-04 | Phase 1 — Engine Foundation | Pending |
+| ENG-05 | Phase 1 — Engine Foundation | Pending |
+| ENG-06 | Phase 1 — Engine Foundation | Pending |
+| ENG-07 | Phase 1 — Engine Foundation | Pending |
+| STATE-01 | Phase 1 — Engine Foundation | Pending |
+| STATE-02 | Phase 1 — Engine Foundation | Pending |
+| STATE-03 | Phase 1 — Engine Foundation | Pending |
+| INIT-01 | Phase 2 — Bootstrap + Subagent Definitions | Pending |
+| INIT-02 | Phase 2 — Bootstrap + Subagent Definitions | Pending |
+| INIT-03 | Phase 2 — Bootstrap + Subagent Definitions | Pending |
+| SKL-07 | Phase 2 — Bootstrap + Subagent Definitions | Pending |
+| CNL-01 | Phase 3 — Council `--standard` | Pending |
+| CNL-02 | Phase 3 — Council `--standard` | Pending |
+| CNL-03 | Phase 3 — Council `--standard` | Pending |
+| CNL-04 | Phase 3 — Council `--standard` | Pending |
+| SKL-01 | Phase 4 — Fast Lane Skills | Pending |
+| SKL-02 | Phase 4 — Fast Lane Skills | Pending |
+| SKL-03 | Phase 4 — Fast Lane Skills | Pending |
+| SKL-04 | Phase 4 — Fast Lane Skills | Pending |
+| SKL-05 | Phase 4 — Fast Lane Skills | Pending |
+| SKL-06 | Phase 4 — Fast Lane Skills | Pending |
+| CONV-03 | Phase 4 — Fast Lane Skills | Pending |
+| CONV-01 | Phase 5 — Conventions + Per-Skill Docs | Pending |
+| CONV-02 | Phase 5 — Conventions + Per-Skill Docs | Pending |
+| CONV-04 | Phase 5 — Conventions + Per-Skill Docs | Pending |
