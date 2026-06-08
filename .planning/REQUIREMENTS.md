@@ -38,19 +38,19 @@ Derived from `/SOVEREIGN.md` (gated vision) + `.planning/research/SUMMARY.md`.
 
 ### Fast Lane Skills
 
-- [ ] **SKL-01**: `ubiquitous-language` — establishes and updates the CONTEXT.md glossary one term at a time, detecting conflicts with existing terms.
-- [ ] **SKL-02**: `grill-with-docs` — interrogates a plan against CONTEXT.md and ADRs one question at a time, recommendation-first, updating docs inline as decisions crystallize.
-- [ ] **SKL-03**: `handoff` — compresses the current session into a resumable handoff document.
-- [ ] **SKL-04**: `sentinel` (native tier) — scans for `SOVEREIGN:UNVERIFIED` markers and checks commenting-standard, spec alignment, and ADR consistency, emitting a structured verdict.
-- [ ] **SKL-05**: `tdd` — drives a red-green-refactor loop.
-- [ ] **SKL-06**: Every skill is a thin orchestrator that orients via a single `init` call, ends with a navigation footer (recommended next + alternatives), and includes a plain-language "Why this matters" section.
+- [x] **SKL-01**: `ubiquitous-language` — establishes and updates the CONTEXT.md glossary one term at a time, detecting conflicts with existing terms.
+- [x] **SKL-02**: `grill-with-docs` — interrogates a plan against CONTEXT.md and ADRs one question at a time, recommendation-first, updating docs inline as decisions crystallize.
+- [x] **SKL-03**: `handoff` — compresses the current session into a resumable handoff document.
+- [x] **SKL-04**: `sentinel` (native tier) — scans for `SOVEREIGN:UNVERIFIED` markers and checks commenting-standard, spec alignment, and ADR consistency, emitting a structured verdict.
+- [x] **SKL-05**: `tdd` — drives a red-green-refactor loop.
+- [x] **SKL-06**: Every skill is a thin orchestrator that orients via a single `init` call, ends with a navigation footer (recommended next + alternatives), and includes a plain-language "Why this matters" section.
 - [x] **SKL-07**: Orchestrator-only skills set `disable-model-invocation`; the set of auto-triggerable M1 skills stays within Claude Code's skill-listing token budget (verified by a `/doctor`-style check).
 
 ### Conventions & Docs
 
 - [ ] **CONV-01**: A SKILL_FORMAT reference defines SOVEREIGN's standard frontmatter and the thin-body / single-`init`-load rule, explicitly dropping v1's non-standard fields (`triggers`, `works-best-with`, `min-model`, `tokens`).
 - [ ] **CONV-02**: ADR-FORMAT and COMMENTING standard references exist and are referenced by the relevant skills.
-- [ ] **CONV-03**: The `SOVEREIGN:UNVERIFIED` marker specification is defined (and consumed by `sentinel`).
+- [x] **CONV-03**: The `SOVEREIGN:UNVERIFIED` marker specification is defined (and consumed by `sentinel`).
 - [ ] **CONV-04**: Each M1 skill has one documentation page (what it does, when to use, example, navigation, token cost).
 
 ---
@@ -101,13 +101,13 @@ REQ-ID → Phase. Coverage: 28/28 M1 requirements mapped, each to exactly one ph
 | CNL-02 | Phase 3 — Council `--standard` | Complete |
 | CNL-03 | Phase 3 — Council `--standard` | Complete |
 | CNL-04 | Phase 3 — Council `--standard` | Complete |
-| SKL-01 | Phase 4 — Fast Lane Skills | Pending |
-| SKL-02 | Phase 4 — Fast Lane Skills | Pending |
-| SKL-03 | Phase 4 — Fast Lane Skills | Pending |
-| SKL-04 | Phase 4 — Fast Lane Skills | Pending |
-| SKL-05 | Phase 4 — Fast Lane Skills | Pending |
-| SKL-06 | Phase 4 — Fast Lane Skills | Pending |
-| CONV-03 | Phase 4 — Fast Lane Skills | Pending |
+| SKL-01 | Phase 4 — Fast Lane Skills | Complete |
+| SKL-02 | Phase 4 — Fast Lane Skills | Complete |
+| SKL-03 | Phase 4 — Fast Lane Skills | Complete |
+| SKL-04 | Phase 4 — Fast Lane Skills | Complete |
+| SKL-05 | Phase 4 — Fast Lane Skills | Complete |
+| SKL-06 | Phase 4 — Fast Lane Skills | Complete |
+| CONV-03 | Phase 4 — Fast Lane Skills | Complete |
 | CONV-01 | Phase 5 — Conventions + Per-Skill Docs | Pending |
 | CONV-02 | Phase 5 — Conventions + Per-Skill Docs | Pending |
 | CONV-04 | Phase 5 — Conventions + Per-Skill Docs | Pending |

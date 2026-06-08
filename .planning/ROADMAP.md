@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Engine Foundation** - Zero-dep `.cjs` engine + `.sovereign/` state model; a skill can call `init <workflow>` and get one JSON blob (completed 2026-06-08)
 - [x] **Phase 2: Bootstrap + Subagent Definitions** - `npx sovereign init` scaffolds `.sovereign/`; advisor + reasoning subagents defined; listing-budget held (completed 2026-06-08)
 - [x] **Phase 3: Council `--standard` (Integration Proof)** - 5 parallel advisors + anonymous peer review + chairman verdict exercise every engine primitive end-to-end (completed 2026-06-08)
-- [ ] **Phase 4: Fast Lane Skills** - `ubiquitous-language`, `grill-with-docs`, `handoff`, `sentinel`, `tdd` — thin orchestrators over the engine
+- [x] **Phase 4: Fast Lane Skills** - `ubiquitous-language`, `grill-with-docs`, `handoff`, `sentinel`, `tdd` — thin orchestrators over the engine (completed 2026-06-08)
 - [ ] **Phase 5: Conventions + Per-Skill Docs** - SKILL_FORMAT / ADR-FORMAT / commenting standards + one doc page per M1 skill, distilled from what was built
 
 ## Phase Details
@@ -81,12 +81,12 @@ Plans:
   5. After this phase, a `/doctor`-style budget check confirms all ~7 auto-triggerable skills remain within the 1% listing budget with no description collisions.
 **Plans**: 6 plans
 Plans:
-- [ ] 04-01-PLAN.md — Author the SOVEREIGN:UNVERIFIED marker spec (engine/references/unverified-marker.md) (CONV-03)
-- [ ] 04-02-PLAN.md — Author ubiquitous-language skill: glossary one term at a time, conflict detection (SKL-01, SKL-06)
-- [ ] 04-03-PLAN.md — Author grill-with-docs skill: interrogate a plan vs CONTEXT.md + ADRs, recommendation-first, inline updates (SKL-02, SKL-06)
-- [ ] 04-04-PLAN.md — Author handoff skill: compress session into resumable HANDOFF.md, STATE via engine (SKL-03, SKL-06)
-- [ ] 04-05-PLAN.md — Author tdd skill: red-green-refactor, behavior-at-interface, stack-agnostic (SKL-05, SKL-06)
-- [ ] 04-06-PLAN.md — Author sentinel skill: native-tier reviewer, UNVERIFIED scan + commenting + spec + ADR → structured verdict (SKL-04, SKL-06)
+- [x] 04-01-PLAN.md — Author the SOVEREIGN:UNVERIFIED marker spec (engine/references/unverified-marker.md) (CONV-03)
+- [x] 04-02-PLAN.md — Author ubiquitous-language skill: glossary one term at a time, conflict detection (SKL-01, SKL-06)
+- [x] 04-03-PLAN.md — Author grill-with-docs skill: interrogate a plan vs CONTEXT.md + ADRs, recommendation-first, inline updates (SKL-02, SKL-06)
+- [x] 04-04-PLAN.md — Author handoff skill: compress session into resumable HANDOFF.md, STATE via engine (SKL-03, SKL-06)
+- [x] 04-05-PLAN.md — Author tdd skill: red-green-refactor, behavior-at-interface, stack-agnostic (SKL-05, SKL-06)
+- [x] 04-06-PLAN.md — Author sentinel skill: native-tier reviewer, UNVERIFIED scan + commenting + spec + ADR → structured verdict (SKL-04, SKL-06)
 **Research flag**: Define the `SOVEREIGN:UNVERIFIED` marker spec (format, valid contexts, scan rules, gate-blocking threshold) as a mini-ADR before implementing `sentinel` (plan 04-01, satisfied first in wave 1).
 
 ### Phase 5: Conventions + Per-Skill Docs
@@ -110,5 +110,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 1. Engine Foundation | 5/5 | Complete   | 2026-06-08 |
 | 2. Bootstrap + Subagent Definitions | 3/3 | Complete   | 2026-06-08 |
 | 3. Council `--standard` | 2/2 | Complete   | 2026-06-08 |
-| 4. Fast Lane Skills | 0/6 | Not started | - |
+| 4. Fast Lane Skills | 6/6 | Complete   | 2026-06-08 |
 | 5. Conventions + Per-Skill Docs | 0/TBD | Not started | - |
