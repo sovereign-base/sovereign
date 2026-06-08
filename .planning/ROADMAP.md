@@ -46,9 +46,13 @@ Plans:
 **Success Criteria** (what must be TRUE):
   1. `npx sovereign init` installs SOVEREIGN skills and scaffolds `.sovereign/` from templates in the user's project.
   2. `init --quick` installs only the Fast Lane 5; `init --full` installs the full M1 skill set; re-running either is idempotent and version-aware (safe, updates cleanly).
-  3. Advisor subagents (Skeptic, Architect, Builder, Outsider, Risk Officer) plus chairman/synthesizer, sentinel-reviewer, planner, and researcher are defined, each returning validated JSON (never prose), with an `agents_installed`/`missing_agents` hard-error path (no silent general-purpose fallback).
+  3. The M1-dispatched subagents (`sovereign-advisor` parameterized shell, `sovereign-chairman`, `sovereign-peer-reviewer`, `sovereign-sentinel`) are defined, each returning validated JSON (never prose), with an `agents_installed`/`missing_agents` hard-error path (no silent general-purpose fallback). NOTE (scope decision, 02-CONTEXT): `planner`/`researcher` are DEFERRED — M1 has no skill that dispatches them; defining callerless agents is the over-scope trap. The 5 Council lens personas (Skeptic/Architect/Builder/Outsider/Risk Officer) are CONTENT injected by the Phase-3 Council orchestrator into the single advisor shell.
   4. Orchestrator-only skills set `disable-model-invocation: true`; the set of auto-triggerable M1 skills stays within the skill-listing budget (~7 max), verified by a `/doctor`-style check.
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 02-01-PLAN.md — `npx sovereign init` installer: copy skills+agents to .claude/, scaffold .sovereign/, --quick/--full, idempotent + version-aware (INIT-01/02/03)
+- [ ] 02-02-PLAN.md — 4 M1-dispatched subagent definitions (advisor/chairman/peer-reviewer/sentinel) with fixed JSON return schemas + agents added to package files allowlist (INIT-01)
+- [ ] 02-03-PLAN.md — real agents_installed/missing_agents check (replaces stub) + `doctor` listing-budget command + disable-model-invocation convention (SKL-07, INIT-01)
 
 ### Phase 3: Council `--standard` (Integration Proof)
 **Goal**: `/council --standard "<decision>"` runs end-to-end and in doing so exercises every engine primitive in combination (init, state save, gate pass, commit, model resolution) plus the full parallel fan-out / fan-in — validating the architecture before any Fast Lane skill is written.
@@ -94,7 +98,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Engine Foundation | 5/5 | Complete   | 2026-06-08 |
-| 2. Bootstrap + Subagent Definitions | 0/TBD | Not started | - |
+| 2. Bootstrap + Subagent Definitions | 0/3 | Not started | - |
 | 3. Council `--standard` | 0/TBD | Not started | - |
 | 4. Fast Lane Skills | 0/TBD | Not started | - |
 | 5. Conventions + Per-Skill Docs | 0/TBD | Not started | - |
