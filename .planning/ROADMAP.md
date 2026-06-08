@@ -13,7 +13,7 @@ M1 builds SOVEREIGN's foundation in the one order the research is willing to def
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Engine Foundation** - Zero-dep `.cjs` engine + `.sovereign/` state model; a skill can call `init <workflow>` and get one JSON blob (completed 2026-06-08)
-- [ ] **Phase 2: Bootstrap + Subagent Definitions** - `npx sovereign init` scaffolds `.sovereign/`; advisor + reasoning subagents defined; listing-budget held
+- [x] **Phase 2: Bootstrap + Subagent Definitions** - `npx sovereign init` scaffolds `.sovereign/`; advisor + reasoning subagents defined; listing-budget held (completed 2026-06-08)
 - [ ] **Phase 3: Council `--standard` (Integration Proof)** - 5 parallel advisors + anonymous peer review + chairman verdict exercise every engine primitive end-to-end
 - [ ] **Phase 4: Fast Lane Skills** - `ubiquitous-language`, `grill-with-docs`, `handoff`, `sentinel`, `tdd` — thin orchestrators over the engine
 - [ ] **Phase 5: Conventions + Per-Skill Docs** - SKILL_FORMAT / ADR-FORMAT / commenting standards + one doc page per M1 skill, distilled from what was built
@@ -98,7 +98,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Engine Foundation | 5/5 | Complete   | 2026-06-08 |
-| 2. Bootstrap + Subagent Definitions | 0/3 | Not started | - |
+| 2. Bootstrap + Subagent Definitions | 3/3 | Complete   | 2026-06-08 |
 | 3. Council `--standard` | 0/TBD | Not started | - |
 | 4. Fast Lane Skills | 0/TBD | Not started | - |
 | 5. Conventions + Per-Skill Docs | 0/TBD | Not started | - |
