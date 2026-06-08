@@ -63,7 +63,10 @@ Plans:
   2. Council injects project context (CONTEXT.md glossary, current phase, relevant ADRs) into every advisor using paths from the `init council` JSON, then runs an anonymous peer-review round (responses anonymized A–E and cross-reviewed) before synthesis.
   3. Council produces a chairman synthesis and a binding verdict (PASS / CONDITIONAL PASS / BLOCKED), written by the orchestrator only to a timestamped transcript in `.sovereign/council/`, and referenced in the gate log via `gate pass`.
   4. The full side-effecting cycle completes: `state save` regenerates MANIFEST, `commit` lands with a sanitized message, and a navigation footer prints the next action + copy-paste command; all advisors and the Council skill itself use `disable-model-invocation: true`.
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 03-01-PLAN.md — Author lenses.md: the 5 locked advisor lenses + the 3 subagent JSON return contracts (CNL-01)
+- [ ] 03-02-PLAN.md — Author the thin council SKILL.md: --standard 7-dispatch flow (init → 5 parallel advisors → anonymized A–E peer review → chairman verdict → orchestrator-only transcript → state save/gate pass/commit → nav footer) (CNL-01..04)
 **Research flag**: Design spike before implementation — the anonymized peer-review round (shuffle A–E, dispatch reviewer, chairman resolves minority positions) has no direct GSD analog; pin the anonymization mechanism and chairman prompt shape.
 
 ### Phase 4: Fast Lane Skills
@@ -99,6 +102,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 |-------|----------------|--------|-----------|
 | 1. Engine Foundation | 5/5 | Complete   | 2026-06-08 |
 | 2. Bootstrap + Subagent Definitions | 3/3 | Complete   | 2026-06-08 |
-| 3. Council `--standard` | 0/TBD | Not started | - |
+| 3. Council `--standard` | 0/2 | Not started | - |
 | 4. Fast Lane Skills | 0/TBD | Not started | - |
 | 5. Conventions + Per-Skill Docs | 0/TBD | Not started | - |
