@@ -22,6 +22,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const { output, error, findProjectRoot } = require('./lib/core.cjs');
+const { cmdStateLoad, cmdStatePatch } = require('./lib/state.cjs');
+const { cmdGateOpen, cmdGatePass } = require('./lib/gate.cjs');
 
 // ─── Arg parsing helpers ──────────────────────────────────────────────────────
 
@@ -72,6 +74,33 @@ function parseMultiwordArg(args, flag) {
     tokens.push(args[i]);
   }
   return tokens.length > 0 ? tokens.join(' ') : null;
+}
+
+/**
+ * Parse repeatable `--field NAME --value V` pairs in argument order into a
+ * patches array. A `--field` opens a pair; the next `--value` closes it. Used by
+ * `state save|patch` so multiple fields can be patched in one call.
+ *
+ *   parseFieldValuePairs(['--field','Phase','--value','2','--field','Status','--value','Done'])
+ *     → [{field:'Phase',value:'2'}, {field:'Status',value:'Done'}]
+ *
+ * @param {string[]} args
+ * @returns {Array<{field: string, value: string}>}
+ */
+function parseFieldValuePairs(args) {
+  /** @type {Array<{field: string, value: string}>} */
+  const pairs = [];
+  let field = null;
+  for (let i = 0; i < args.length; i++) {
+    if (args[i] === '--field') {
+      field = args[i + 1] !== undefined && !args[i + 1].startsWith('--') ? args[++i] : null;
+    } else if (args[i] === '--value' && field !== null) {
+      const value = args[i + 1] !== undefined && !args[i + 1].startsWith('--') ? args[++i] : '';
+      pairs.push({ field, value });
+      field = null;
+    }
+  }
+  return pairs;
 }
 
 /**
@@ -153,7 +182,8 @@ async function main() {
   if (!command) {
     error(
       'Usage: sovereign-tools <command> [args] [--raw] [--pick <field>] [--cwd <path>]\n' +
-        'Commands: version (state, gate, commit, resolve-model, model, validate, init — plans 03/04)'
+        'Commands: version, state (load|save|patch), gate (open|pass) ' +
+        '(commit, resolve-model, model, validate, init — plan 04)'
     );
   }
 
@@ -218,8 +248,36 @@ async function runCommand(command, args, cwd, raw, pick) {
       break;
     }
 
-    // TODO(plan 03): state|gate|commit|resolve-model|model|validate
+    case 'state': {
+      const sub = args[1];
+      if (sub === 'load') {
+        cmdStateLoad(cwd, raw);
+      } else if (sub === 'save' || sub === 'patch') {
+        // Parse positional --field NAME --value V pairs (repeatable, in order).
+        const patches = parseFieldValuePairs(args.slice(2));
+        if (patches.length === 0) error('state patch: at least one --field/--value pair required');
+        cmdStatePatch(cwd, patches, raw);
+      } else {
+        error(`Unknown state subcommand: ${sub || '(none)'} (expected load|save|patch)`);
+      }
+      break;
+    }
+
+    case 'gate': {
+      const sub = args[1];
+      const phase = args[2] && !args[2].startsWith('--') ? args[2] : null;
+      if (sub === 'open') {
+        cmdGateOpen(cwd, phase, raw);
+      } else if (sub === 'pass') {
+        cmdGatePass(cwd, phase, raw);
+      } else {
+        error(`Unknown gate subcommand: ${sub || '(none)'} (expected open|pass)`);
+      }
+      break;
+    }
+
     // TODO(plan 04): init
+    // TODO(plan 04): commit|resolve-model|model|validate
 
     default: {
       output({ command, status: 'not_implemented' }, raw, null);
@@ -232,4 +290,4 @@ if (require.main === module) {
   main().catch((e) => error(e && e.message ? e.message : String(e)));
 }
 
-module.exports = { main, runCommand, parseNamedArgs, parseMultiwordArg, extractField };
+module.exports = { main, runCommand, parseNamedArgs, parseMultiwordArg, parseFieldValuePairs, extractField };
