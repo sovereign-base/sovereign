@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: planning
-stopped_at: Completed 01-01-PLAN.md
-last_updated: "2026-06-08T07:04:04.436Z"
-last_activity: 2026-06-08 — Roadmap created (5 phases, M1 Foundation); 28/28 requirements mapped
+status: executing
+stopped_at: Completed 01-02-PLAN.md
+last_updated: "2026-06-08T07:10:03.835Z"
+last_activity: 2026-06-08
 progress:
   total_phases: 5
   completed_phases: 0
   total_plans: 5
-  completed_plans: 1
+  completed_plans: 2
   percent: 20
 ---
 
@@ -26,9 +26,9 @@ See: .planning/PROJECT.md (updated 2026-06-08)
 ## Current Position
 
 Phase: 1 of 5 (Engine Foundation)
-Plan: 1 of 5 in current phase
-Status: In progress
-Last activity: 2026-06-08 — Completed 01-01 (ADRs-before-code + engine/ scaffold + .sovereign/ templates)
+Plan: 2 of 5 in current phase
+Status: Ready to execute
+Last activity: 2026-06-08
 
 Progress: [██░░░░░░░░] 20%
 
@@ -53,6 +53,7 @@ Progress: [██░░░░░░░░] 20%
 
 *Updated after each plan completion*
 | Phase 01 P01 | 4 | 3 tasks | 20 files |
+| Phase 01 P02 | 4 | 4 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -69,6 +70,7 @@ Phase 1 ADRs to lock before code: (a) zero-dep `.cjs`; (b) CJS packaging, `engin
 
 - [Phase 01]: Engine test script uses glob 'test/**/*.test.cjs' (Node 23 cannot resolve bare 'test/' dir)
 - [Phase 01]: Six Phase-1 ADRs (002,009,010,011,012,013) locked before engine code; subagent JSON schema pinned
+- [Phase 01]: Engine layer A: zero-dep router (--cwd/--raw/--pick), output() @file: 50KB spill, loadConfig 3-layer deep-merge, model-profiles table (reasoning agents = opus under quality)
 
 ### Pending Todos
 
@@ -82,6 +84,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-08T07:03:57.299Z
-Stopped at: Completed 01-01-PLAN.md
+Last session: 2026-06-08T07:10:03.833Z
+Stopped at: Completed 01-02-PLAN.md
 Resume file: None

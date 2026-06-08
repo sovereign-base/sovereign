@@ -33,7 +33,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 5 plans
 Plans:
 - [x] 01-01-PLAN.md — ADRs (before code) + engine/ CJS scaffold + .sovereign/ templates
-- [ ] 01-02-PLAN.md — Engine layer A: router, arg helpers, output() @file: spill, loadConfig, model-profiles
+- [x] 01-02-PLAN.md — Engine layer A: router, arg helpers, output() @file: spill, loadConfig, model-profiles
 - [ ] 01-03-PLAN.md — Engine layer B (state): state load/save field-patch, derived MANIFEST regen, gate open/pass
 - [ ] 01-04-PLAN.md — Engine layer B (commands): commit (gated+sanitized), model/resolve-model, validate skills
 - [ ] 01-05-PLAN.md — Engine layer C: init <workflow> nested JSON contract + npm pack clean-install smoke test
