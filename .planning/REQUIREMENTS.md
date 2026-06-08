@@ -31,10 +31,10 @@ Derived from `/SOVEREIGN.md` (gated vision) + `.planning/research/SUMMARY.md`.
 
 ### Council (`--standard`)
 
-- [ ] **CNL-01**: A user can run `/council --standard "<decision>"` and receive five distinct advisor perspectives (Skeptic, Architect, Builder, Outsider, Risk Officer) produced by parallel subagents.
-- [ ] **CNL-02**: Council runs an anonymous peer-review round — advisor responses are anonymized and cross-reviewed — before synthesis.
-- [ ] **CNL-03**: Council injects project context (CONTEXT.md glossary, current phase, relevant ADRs) into every advisor.
-- [ ] **CNL-04**: Council produces a chairman synthesis and a binding verdict (PASS / CONDITIONAL PASS / BLOCKED), saved to `.sovereign/council/` by the orchestrator only, and referenced in the gate log.
+- [x] **CNL-01**: A user can run `/council --standard "<decision>"` and receive five distinct advisor perspectives (Skeptic, Architect, Builder, Outsider, Risk Officer) produced by parallel subagents.
+- [x] **CNL-02**: Council runs an anonymous peer-review round — advisor responses are anonymized and cross-reviewed — before synthesis.
+- [x] **CNL-03**: Council injects project context (CONTEXT.md glossary, current phase, relevant ADRs) into every advisor.
+- [x] **CNL-04**: Council produces a chairman synthesis and a binding verdict (PASS / CONDITIONAL PASS / BLOCKED), saved to `.sovereign/council/` by the orchestrator only, and referenced in the gate log.
 
 ### Fast Lane Skills
 
@@ -97,10 +97,10 @@ REQ-ID → Phase. Coverage: 28/28 M1 requirements mapped, each to exactly one ph
 | INIT-02 | Phase 2 — Bootstrap + Subagent Definitions | Complete |
 | INIT-03 | Phase 2 — Bootstrap + Subagent Definitions | Complete |
 | SKL-07 | Phase 2 — Bootstrap + Subagent Definitions | Complete |
-| CNL-01 | Phase 3 — Council `--standard` | Pending |
-| CNL-02 | Phase 3 — Council `--standard` | Pending |
-| CNL-03 | Phase 3 — Council `--standard` | Pending |
-| CNL-04 | Phase 3 — Council `--standard` | Pending |
+| CNL-01 | Phase 3 — Council `--standard` | Complete |
+| CNL-02 | Phase 3 — Council `--standard` | Complete |
+| CNL-03 | Phase 3 — Council `--standard` | Complete |
+| CNL-04 | Phase 3 — Council `--standard` | Complete |
 | SKL-01 | Phase 4 — Fast Lane Skills | Pending |
 | SKL-02 | Phase 4 — Fast Lane Skills | Pending |
 | SKL-03 | Phase 4 — Fast Lane Skills | Pending |

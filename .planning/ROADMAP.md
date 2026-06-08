@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Engine Foundation** - Zero-dep `.cjs` engine + `.sovereign/` state model; a skill can call `init <workflow>` and get one JSON blob (completed 2026-06-08)
 - [x] **Phase 2: Bootstrap + Subagent Definitions** - `npx sovereign init` scaffolds `.sovereign/`; advisor + reasoning subagents defined; listing-budget held (completed 2026-06-08)
-- [ ] **Phase 3: Council `--standard` (Integration Proof)** - 5 parallel advisors + anonymous peer review + chairman verdict exercise every engine primitive end-to-end
+- [x] **Phase 3: Council `--standard` (Integration Proof)** - 5 parallel advisors + anonymous peer review + chairman verdict exercise every engine primitive end-to-end (completed 2026-06-08)
 - [ ] **Phase 4: Fast Lane Skills** - `ubiquitous-language`, `grill-with-docs`, `handoff`, `sentinel`, `tdd` — thin orchestrators over the engine
 - [ ] **Phase 5: Conventions + Per-Skill Docs** - SKILL_FORMAT / ADR-FORMAT / commenting standards + one doc page per M1 skill, distilled from what was built
 
@@ -65,8 +65,8 @@ Plans:
   4. The full side-effecting cycle completes: `state save` regenerates MANIFEST, `commit` lands with a sanitized message, and a navigation footer prints the next action + copy-paste command; all advisors and the Council skill itself use `disable-model-invocation: true`.
 **Plans**: 2 plans
 Plans:
-- [ ] 03-01-PLAN.md — Author lenses.md: the 5 locked advisor lenses + the 3 subagent JSON return contracts (CNL-01)
-- [ ] 03-02-PLAN.md — Author the thin council SKILL.md: --standard 7-dispatch flow (init → 5 parallel advisors → anonymized A–E peer review → chairman verdict → orchestrator-only transcript → state save/gate pass/commit → nav footer) (CNL-01..04)
+- [x] 03-01-PLAN.md — Author lenses.md: the 5 locked advisor lenses + the 3 subagent JSON return contracts (CNL-01)
+- [x] 03-02-PLAN.md — Author the thin council SKILL.md: --standard 7-dispatch flow (init → 5 parallel advisors → anonymized A–E peer review → chairman verdict → orchestrator-only transcript → state save/gate pass/commit → nav footer) (CNL-01..04)
 **Research flag**: Design spike before implementation — the anonymized peer-review round (shuffle A–E, dispatch reviewer, chairman resolves minority positions) has no direct GSD analog; pin the anonymization mechanism and chairman prompt shape.
 
 ### Phase 4: Fast Lane Skills
@@ -102,6 +102,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 |-------|----------------|--------|-----------|
 | 1. Engine Foundation | 5/5 | Complete   | 2026-06-08 |
 | 2. Bootstrap + Subagent Definitions | 3/3 | Complete   | 2026-06-08 |
-| 3. Council `--standard` | 0/2 | Not started | - |
+| 3. Council `--standard` | 2/2 | Complete   | 2026-06-08 |
 | 4. Fast Lane Skills | 0/TBD | Not started | - |
 | 5. Conventions + Per-Skill Docs | 0/TBD | Not started | - |
