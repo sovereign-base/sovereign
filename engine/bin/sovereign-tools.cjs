@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// @ts-check
+'use strict';
 
 /**
  * sovereign-tools — the SOVEREIGN engine.
@@ -6,43 +8,228 @@
  * Zero-dependency CommonJS CLI (ADR-002, ADR-009). The source IS the artifact:
  * no build step, no runtime dependencies, native process.argv parsing.
  *
- * This file is a STUB in plan 01-01. It exists to wire the bin entry, prove the
- * shebang + CJS load via the smoke test, and reserve the entry point that plans
- * 01-02..01-04 fill in with the real switch router (init, state, gate, commit,
- * model, validate, ...).
+ * This file is engine layer A (plan 01-02): the deterministic router + arg
+ * helpers + extractField + the --cwd/--raw/--pick flags. The only working
+ * command is `version`; every other command returns a not_implemented stub.
+ * Plans 01-03 (state|gate|commit|resolve-model|model|validate) and 01-04 (init)
+ * fill the marked switch insertion points.
  *
- * Usage (stub):
- *   sovereign-tools version    -> prints the contents of ../VERSION
- *   sovereign-tools <other>    -> {"error":"not implemented","command":"<other>"}
+ * Usage:
+ *   sovereign-tools <command> [args] [--raw] [--pick <field>] [--cwd <path>]
  */
-
-'use strict';
 
 const fs = require('node:fs');
 const path = require('node:path');
 
-/**
- * Minimal stub entry point. Replaced by the real router in plans 01-02..01-04.
- */
-function main() {
-  const argv = process.argv.slice(2);
-  const command = argv[0];
+const { output, error, findProjectRoot } = require('./lib/core.cjs');
 
-  if (command === 'version') {
-    const versionPath = path.join(__dirname, '..', 'VERSION');
-    const version = fs.readFileSync(versionPath, 'utf8').trim();
-    fs.writeSync(1, version + '\n');
+// ─── Arg parsing helpers ──────────────────────────────────────────────────────
+
+/**
+ * Parse named flags from an argument list.
+ *
+ * Value flags consume the following token (unless it's another --flag);
+ * boolean flags are true when present.
+ *
+ *   parseNamedArgs(args, ['phase', 'plan'])        → { phase: '3', plan: '1' }
+ *   parseNamedArgs(args, [], ['amend', 'force'])    → { amend: true, force: false }
+ *
+ * @param {string[]} args
+ * @param {string[]} [valueFlags]
+ * @param {string[]} [booleanFlags]
+ * @returns {Record<string, string | boolean | null>}
+ */
+function parseNamedArgs(args, valueFlags = [], booleanFlags = []) {
+  /** @type {Record<string, string | boolean | null>} */
+  const result = {};
+  for (const flag of valueFlags) {
+    const idx = args.indexOf(`--${flag}`);
+    result[flag] = idx !== -1 && args[idx + 1] !== undefined && !args[idx + 1].startsWith('--')
+      ? args[idx + 1]
+      : null;
+  }
+  for (const flag of booleanFlags) {
+    result[flag] = args.includes(`--${flag}`);
+  }
+  return result;
+}
+
+/**
+ * Collect all tokens after --flag until the next --flag or end of args.
+ * Handles multi-word values like `--name Foo Bar Version 1`.
+ * Returns null if the flag is absent.
+ *
+ * @param {string[]} args
+ * @param {string} flag
+ * @returns {string | null}
+ */
+function parseMultiwordArg(args, flag) {
+  const idx = args.indexOf(`--${flag}`);
+  if (idx === -1) return null;
+  const tokens = [];
+  for (let i = idx + 1; i < args.length; i++) {
+    if (args[i].startsWith('--')) break;
+    tokens.push(args[i]);
+  }
+  return tokens.length > 0 ? tokens.join(' ') : null;
+}
+
+/**
+ * Extract a field from an object using dot-notation and bracket syntax.
+ * Supports: 'field', 'parent.child', 'arr[-1]', 'arr[0]', 'a.b[0].c'.
+ *
+ * @param {*} obj
+ * @param {string} fieldPath
+ * @returns {*}
+ */
+function extractField(obj, fieldPath) {
+  const parts = fieldPath.split('.');
+  let current = obj;
+  for (const part of parts) {
+    if (current === null || current === undefined) return undefined;
+    const bracketMatch = part.match(/^(.+?)\[(-?\d+)]$/);
+    if (bracketMatch) {
+      const key = bracketMatch[1];
+      const index = parseInt(bracketMatch[2], 10);
+      current = current[key];
+      if (!Array.isArray(current)) return undefined;
+      current = index < 0 ? current[current.length + index] : current[index];
+    } else {
+      current = current[part];
+    }
+  }
+  return current;
+}
+
+// ─── CLI Router ───────────────────────────────────────────────────────────────
+
+/**
+ * Entry point. Resolves --cwd/--raw/--pick, finds the project root, then
+ * dispatches to runCommand. When --pick is set, intercepts stdout so the chosen
+ * field is extracted (handling @file: spill) and emitted as a raw scalar.
+ * @returns {Promise<void>}
+ */
+async function main() {
+  const args = process.argv.slice(2);
+
+  // Optional --cwd override for sandboxed subagents running outside project root.
+  let cwd = process.cwd();
+  const cwdEqArg = args.find((arg) => arg.startsWith('--cwd='));
+  const cwdIdx = args.indexOf('--cwd');
+  if (cwdEqArg) {
+    const value = cwdEqArg.slice('--cwd='.length).trim();
+    if (!value) error('Missing value for --cwd');
+    args.splice(args.indexOf(cwdEqArg), 1);
+    cwd = path.resolve(value);
+  } else if (cwdIdx !== -1) {
+    const value = args[cwdIdx + 1];
+    if (!value || value.startsWith('--')) error('Missing value for --cwd');
+    args.splice(cwdIdx, 2);
+    cwd = path.resolve(value);
+  }
+
+  if (!fs.existsSync(cwd) || !fs.statSync(cwd).isDirectory()) {
+    error(`Invalid --cwd: ${cwd}`);
+  }
+
+  // --raw boolean.
+  const rawIndex = args.indexOf('--raw');
+  const raw = rawIndex !== -1;
+  if (rawIndex !== -1) args.splice(rawIndex, 1);
+
+  // --pick <field>: extract a single field from the JSON output (dot + bracket).
+  const pickIdx = args.indexOf('--pick');
+  let pickField = null;
+  if (pickIdx !== -1) {
+    pickField = args[pickIdx + 1];
+    if (!pickField || pickField.startsWith('--')) error('Missing value for --pick');
+    args.splice(pickIdx, 2);
+  }
+
+  // Resolve project root (nearest ancestor with .sovereign/); fallback to cwd.
+  const root = findProjectRoot(cwd);
+
+  const command = args[0];
+  if (!command) {
+    error(
+      'Usage: sovereign-tools <command> [args] [--raw] [--pick <field>] [--cwd <path>]\n' +
+        'Commands: version (state, gate, commit, resolve-model, model, validate, init — plans 03/04)'
+    );
+  }
+
+  // When --pick is active, intercept stdout to extract the requested field.
+  // Handles @file: spill by reading the tmpfile back before parsing.
+  if (pickField) {
+    const origWriteSync = fs.writeSync;
+    const chunks = [];
+    // @ts-ignore — intentional monkeypatch of fs.writeSync to capture fd 1.
+    fs.writeSync = function (fd, data, ...rest) {
+      if (fd === 1) { chunks.push(String(data)); return; }
+      return origWriteSync.call(fs, fd, data, ...rest);
+    };
+    const cleanup = () => {
+      fs.writeSync = origWriteSync;
+      const captured = chunks.join('');
+      let jsonStr = captured;
+      if (jsonStr.startsWith('@file:')) {
+        jsonStr = fs.readFileSync(jsonStr.slice('@file:'.length), 'utf-8');
+      }
+      try {
+        const obj = JSON.parse(jsonStr);
+        const value = extractField(obj, pickField);
+        const result = value === null || value === undefined ? '' : String(value);
+        origWriteSync.call(fs, 1, result);
+      } catch {
+        origWriteSync.call(fs, 1, captured);
+      }
+    };
+    try {
+      await runCommand(command, args, root, true, pickField);
+      cleanup();
+    } catch (e) {
+      fs.writeSync = origWriteSync;
+      throw e;
+    }
     return;
   }
 
-  fs.writeSync(
-    1,
-    JSON.stringify({ error: 'not implemented', command: command ?? null }) + '\n'
-  );
+  await runCommand(command, args, root, raw, null);
+}
+
+/**
+ * Dispatch a command. Only `version` is implemented in plan 01-02; everything
+ * else returns a not_implemented stub. Plans 03/04 add the real cases at the
+ * marked insertion points below.
+ *
+ * @param {string} command
+ * @param {string[]} args
+ * @param {string} cwd - resolved project root
+ * @param {boolean} raw
+ * @param {string | null} pick
+ * @returns {Promise<void>}
+ */
+async function runCommand(command, args, cwd, raw, pick) {
+  switch (command) {
+    case 'version': {
+      const version = fs
+        .readFileSync(path.join(__dirname, '..', 'VERSION'), 'utf8')
+        .trim();
+      output({ version }, raw, version);
+      break;
+    }
+
+    // TODO(plan 03): state|gate|commit|resolve-model|model|validate
+    // TODO(plan 04): init
+
+    default: {
+      output({ command, status: 'not_implemented' }, raw, null);
+      break;
+    }
+  }
 }
 
 if (require.main === module) {
-  main();
+  main().catch((e) => error(e && e.message ? e.message : String(e)));
 }
 
-module.exports = { main };
+module.exports = { main, runCommand, parseNamedArgs, parseMultiwordArg, extractField };
