@@ -24,6 +24,9 @@ const path = require('node:path');
 const { output, error, findProjectRoot } = require('./lib/core.cjs');
 const { cmdStateLoad, cmdStatePatch } = require('./lib/state.cjs');
 const { cmdGateOpen, cmdGatePass } = require('./lib/gate.cjs');
+const { cmdCommit } = require('./lib/commit.cjs');
+const { cmdResolveModel } = require('./lib/model.cjs');
+const { cmdValidateSkills } = require('./lib/validate.cjs');
 
 // ─── Arg parsing helpers ──────────────────────────────────────────────────────
 
@@ -101,6 +104,26 @@ function parseFieldValuePairs(args) {
     }
   }
   return pairs;
+}
+
+/**
+ * Collect all tokens after `--flag` until the next `--flag` or end of args,
+ * returning them as an array (used by `commit --files a b c`). Returns null
+ * when the flag is absent.
+ *
+ * @param {string[]} args
+ * @param {string} flag
+ * @returns {string[] | null}
+ */
+function parseListArg(args, flag) {
+  const idx = args.indexOf(`--${flag}`);
+  if (idx === -1) return null;
+  const tokens = [];
+  for (let i = idx + 1; i < args.length; i++) {
+    if (args[i].startsWith('--')) break;
+    tokens.push(args[i]);
+  }
+  return tokens;
 }
 
 /**
@@ -276,8 +299,35 @@ async function runCommand(command, args, cwd, raw, pick) {
       break;
     }
 
-    // TODO(plan 04): init
-    // TODO(plan 04): commit|resolve-model|model|validate
+    case 'commit': {
+      // message: --message (multiword) or first positional after the command.
+      const message = parseMultiwordArg(args, 'message') ||
+        (args[1] && !args[1].startsWith('--') ? args[1] : null);
+      // files: --files a b c (array). null/empty → cmdCommit defaults to .sovereign/.
+      const files = parseListArg(args, 'files');
+      cmdCommit(cwd, message, files, raw);
+      break;
+    }
+
+    case 'model':
+    case 'resolve-model': {
+      const agent = args[1] && !args[1].startsWith('--') ? args[1] : null;
+      cmdResolveModel(cwd, agent, raw);
+      break;
+    }
+
+    case 'validate': {
+      const sub = args[1];
+      if (sub === 'skills') {
+        const paths = args.slice(2).filter((a) => !a.startsWith('--'));
+        cmdValidateSkills(cwd, paths.length > 0 ? paths : null, raw);
+      } else {
+        error(`Unknown validate subcommand: ${sub || '(none)'} (expected skills)`);
+      }
+      break;
+    }
+
+    // TODO(plan 05): init
 
     default: {
       output({ command, status: 'not_implemented' }, raw, null);
