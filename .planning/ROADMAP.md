@@ -36,7 +36,12 @@ M3 extends SOVEREIGN beyond a single fresh project — retrofit it onto an exist
   3. `sovereign-tools adopt scan` emits the Layers-1+2 JSON contract (manifests, detected languages/managers/flags, gitignore-filtered structure tree capped with a `truncated` flag, and heuristic `deep_read_candidates`), reusing `execGit`/`git ls-files` and returning safe values on a missing `.sovereign/` or non-git dir.
   4. `sovereign-tools init bridge`, `init adopt`, and `init extension` each return a greenfield-safe orientation JSON blob (paths + config + relevant artifacts) so the M3 skills orient with one call.
   5. `node --test` passes for the new `bridge.cjs`, `extension.cjs`, `adopt.cjs`, and extended `security.cjs` modules, and the engine still has **zero runtime dependencies** (`node:` built-ins only) with all output flowing through the existing `output()`/`@file:` spill (never reimplemented).
-**Plans**: TBD
+**Plans**: 5 plans
+  - [ ] 10-01-PLAN.md — bridge.cjs: SHA-256 per-file + combined hash (node:crypto) + registry diff (BRIDGE-02 substrate)
+  - [ ] 10-02-PLAN.md — scanSkillContent() in security.cjs: exfiltration/overbroad-perm/prompt-injection scan → {findings,verdict} (EXT-02 substrate)
+  - [ ] 10-03-PLAN.md — adopt.cjs: Layers-1+2 scan (manifests/detected/structure/deep_read_candidates), gitignore-aware via git ls-files (ADOPT substrate)
+  - [ ] 10-04-PLAN.md — extension.cjs: exit-code-driven npx skills wrapper (array args) + audit via scanSkillContent (EXT substrate)
+  - [ ] 10-05-PLAN.md — wire bridge/extension/adopt router cases + init bridge|adopt|extension workflows + integration tests
 **UI hint**: no
 
 ### Phase 11: Bridge Skill
