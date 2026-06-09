@@ -24,24 +24,24 @@ It is for engineers and agents who want to build properly — and refuse to let 
 - ✓ `council --standard` (5 parallel advisors + anonymous peer review + chairman verdict) + 4 subagents — M1
 - ✓ Conventions (skill-format, adr-format, commenting, unverified-marker, listing-budget) + per-skill docs — M1
 
-## Current Milestone: v1.1 — M2 Architecture phase skills
+## Current State (between milestones)
 
-**Goal:** Add SOVEREIGN's Phase-3 (Architecture) design skills — the conversational, recommendation-first skills that turn a grilled idea into a recorded architecture — as hand-authored thin orchestrators over the existing M1 engine.
+**Shipped:** **v1.0 (M1 — Foundation)** + **v1.1 (M2 — Architecture)**, both complete and verified. SOVEREIGN now ships a zero-dependency engine + `npx sovereign-cli init` installer + **13 skills** (5 Fast Lane auto-triggerable; Council + 7 architecture skills phase-gated) + 4 subagents + 5 references. 77 engine tests pass; the skill-listing budget held at 5 auto-triggerable across all 13. Milestone detail archived under `.planning/milestones/`.
 
-**Target skills:** `adr-log`, `entity-design`, `api-design` (+ `API_SPEC.md` output), `stack-select`, `scale-design`, `security-design`, `deploy-design`.
+- ✓ **M2 (v1.1):** `adr-log`, `entity-design`, `api-design` (→ API_SPEC.md), `stack-select`, `scale-design`, `security-design` (→ SECURITY_MODEL.md), `deploy-design` (→ DEPLOY_MODEL.md) — all hand-authored thin orchestrators, `disable-model-invocation`, composing with `adr-log`.
+
+### Next Milestone Goals (M3 candidate — not yet scoped)
+
+- `sovereign-adopt` — retrofit SOVEREIGN onto an existing codebase (3-layer archaeology).
+- `bridge` — cross-project handoff (BRIDGE.md + staleness detection).
+- Extension protocol — wrap `npx skills` (find/add) + a vetting layer.
+- `anchor-docs` / `verify-self` — the anti-hallucination skills the architecture skills already flag the need for.
+
+Run `/gsd:new-milestone` to scope M3 (requirements → roadmap).
 
 ### Active
 
-<!-- M2 — Architecture. Building toward these. -->
-
-- [ ] `adr-log` — record an architectural decision to `.sovereign/docs/adr/` per `adr-format.md` (the 3-condition gate)
-- [ ] `entity-design` — domain model / entities / relationships / bounded contexts → `.sovereign/docs/`
-- [ ] `api-design` — contract-first API design (REST/GraphQL/gRPC/events) → `.sovereign/docs/api/API_SPEC.md`
-- [ ] `stack-select` — guided, recommendation-first stack selection (project type/scale/budget/constraints)
-- [ ] `scale-design` — scaling conversation → recorded strategy + ADRs
-- [ ] `security-design` — layered security model → `.sovereign/docs/security/SECURITY_MODEL.md`
-- [ ] `deploy-design` — budget-aware deploy/infra plan → `.sovereign/docs/infra/DEPLOY_MODEL.md`
-- [ ] All M2 skills are phase-gated, user-invoked (`disable-model-invocation: true`) so the auto-trigger listing budget stays at the 5 Fast Lane skills; each is a thin orchestrator over the engine (no engine changes needed) with Why-this-matters + nav footer + recommendation-first, per `skill-format.md`
+_None — between milestones._
 
 ### Out of Scope
 

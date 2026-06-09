@@ -1,16 +1,16 @@
 ---
 gsd_state_version: 1.0
 milestone: v1.1
-milestone_name: M2 — Architecture
-status: planning
-stopped_at: M2 roadmap created — ready to plan Phase 6
-last_updated: "2026-06-09T00:00:00.000Z"
+milestone_name: M2 — Architecture (complete)
+status: between_milestones
+stopped_at: v1.1 (M2) archived & tagged — run /gsd:new-milestone for M3
+last_updated: "2026-06-09T01:00:00.000Z"
 last_activity: 2026-06-09
 progress:
   total_phases: 4
-  completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
+  completed_phases: 4
+  total_plans: 7
+  completed_plans: 7
 ---
 
 # Project State
