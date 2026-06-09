@@ -21,7 +21,7 @@ Derived from `/SOVEREIGN.md` §6 + the locked Ground Truth System design in `arc
 
 ### Engine & cross-cutting
 
-- [ ] **ENG-09**: A modest **zero-dependency** engine surface backs anchoring: an `anchor` command (store/list/check-stale external-doc metadata under `.sovereign/external-docs/`, computing staleness from `re-verify-by`) + `init anchor-docs` / `init verify-self` workflows. Tested (`node --test`); deps stay `{}`.
+- [x] **ENG-09**: A modest **zero-dependency** engine surface backs anchoring: an `anchor` command (store/list/check-stale external-doc metadata under `.sovereign/external-docs/`, computing staleness from `re-verify-by`) + `init anchor-docs` / `init verify-self` workflows. Tested (`node --test`); deps stay `{}`.
 - [ ] **M4-CC**: Both M4 skills are core-tier thin orchestrators per `skill-format.md` / ADR-014 — one `sovereign-tools init <skill>` orient call, "Why this matters", recommendation-first, navigation footer — and are **user-invoked** (`disable-model-invocation: true`), so `sovereign-tools doctor` still reports the auto-trigger budget at the 5 Fast Lane skills. `validate skills` passes for both. They compose (`verify-self` → `anchor-docs`; markers → `sentinel`).
 
 ---
@@ -47,7 +47,7 @@ Derived from `/SOVEREIGN.md` §6 + the locked Ground Truth System design in `arc
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| ENG-09 | Phase 14 | Pending |
+| ENG-09 | Phase 14 | Complete |
 | ANCHOR-01 | Phase 15 | Pending |
 | ANCHOR-02 | Phase 16 | Pending |
 | VERIFY-01 | Phase 16 | Pending |
