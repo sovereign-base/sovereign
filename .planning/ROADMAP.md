@@ -40,7 +40,7 @@ M3 extends SOVEREIGN beyond a single fresh project — retrofit it onto an exist
   - [x] 10-01-PLAN.md — bridge.cjs: SHA-256 per-file + combined hash (node:crypto) + registry diff (BRIDGE-02 substrate)
   - [x] 10-02-PLAN.md — scanSkillContent() in security.cjs: exfiltration/overbroad-perm/prompt-injection scan → {findings,verdict} (EXT-02 substrate)
   - [x] 10-03-PLAN.md — adopt.cjs: Layers-1+2 scan (manifests/detected/structure/deep_read_candidates), gitignore-aware via git ls-files (ADOPT substrate)
-  - [ ] 10-04-PLAN.md — extension.cjs: exit-code-driven npx skills wrapper (array args) + audit via scanSkillContent (EXT substrate)
+  - [x] 10-04-PLAN.md — extension.cjs: exit-code-driven npx skills wrapper (array args) + audit via scanSkillContent (EXT substrate)
   - [ ] 10-05-PLAN.md — wire bridge/extension/adopt router cases + init bridge|adopt|extension workflows + integration tests
 **UI hint**: no
 
@@ -87,7 +87,7 @@ M3 extends SOVEREIGN beyond a single fresh project — retrofit it onto an exist
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 10. Engine Additions | 3/5 | In Progress|  |
+| 10. Engine Additions | 4/5 | In Progress|  |
 | 11. Bridge Skill | 0/TBD | Not started | - |
 | 12. Extension Protocol Skill | 0/TBD | Not started | - |
 | 13. sovereign-adopt Skill | 0/TBD | Not started | - |
