@@ -47,7 +47,7 @@ Execute these steps in order. The Council is a **thin orchestrator**: every stat
 **1 — Orient with ONE call.** Run the engine's `init council` and handle the `@file:` spill:
 
 ```bash
-INIT=$(node "$ENGINE/bin/sovereign-tools.cjs" init council)
+INIT=$(node ".claude/sovereign-engine/sovereign-tools.cjs" init council)
 if [[ "$INIT" == @file:* ]]; then INIT=$(cat "${INIT#@file:}"); fi
 ```
 
@@ -79,10 +79,10 @@ Advisors deliberating...
 **8 — Side effects + footer.** In order:
 
 ```bash
-node "$ENGINE/bin/sovereign-tools.cjs" state save          # regenerates MANIFEST
+node ".claude/sovereign-engine/sovereign-tools.cjs" state save          # regenerates MANIFEST
 # Only if the council was convened at a phase gate:
-node "$ENGINE/bin/sovereign-tools.cjs" gate pass <phase.current>   # references the transcript path
-node "$ENGINE/bin/sovereign-tools.cjs" commit "council: <verdict> — <short summary>" \
+node ".claude/sovereign-engine/sovereign-tools.cjs" gate pass <phase.current>   # references the transcript path
+node ".claude/sovereign-engine/sovereign-tools.cjs" commit "council: <verdict> — <short summary>" \
   --files <paths.transcript> <paths.state> <paths.manifest>
 ```
 

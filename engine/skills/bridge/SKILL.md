@@ -23,14 +23,14 @@ A **thin orchestrator** — the engine does all hashing and registry diffing (`b
 
 **1 — Orient (one call).**
 ```bash
-INIT=$(node "$ENGINE/bin/sovereign-tools.cjs" init bridge)
+INIT=$(node ".claude/sovereign-engine/sovereign-tools.cjs" init bridge)
 if [[ "$INIT" == @file:* ]]; then INIT=$(cat "${INIT#@file:}"); fi
 ```
 Parse the bridgeable source docs that exist (API_SPEC.md, SECURITY_MODEL.md, CONTEXT.md, relevant ADRs — at their real `.sovereign/docs/...` paths), `paths.registry` (`.sovereign/bridges/registry.json`), and git info. Zero other orientation reads.
 
 **2 — Check staleness FIRST.**
 ```bash
-node "$ENGINE/bin/sovereign-tools.cjs" bridge check --id <name>
+node ".claude/sovereign-engine/sovereign-tools.cjs" bridge check --id <name>
 ```
 If `fresh:true` (combined hash matches a prior bridge) → tell the user it's up to date and **stop** (don't regenerate needlessly). If stale → name the `changed` source paths and continue. (`reason:no_registry` → first run; continue.)
 
@@ -41,7 +41,7 @@ If `fresh:true` (combined hash matches a prior bridge) → tell the user it's up
 
 **4 — Hash + write frontmatter.**
 ```bash
-node "$ENGINE/bin/sovereign-tools.cjs" bridge hash --files <the source docs> --raw
+node ".claude/sovereign-engine/sovereign-tools.cjs" bridge hash --files <the source docs> --raw
 ```
 This returns `{ files: [{path, sha256}], combined }`. Write `.sovereign/BRIDGE.md` with the frontmatter below, taking `combined_hash` from `combined` and `sources_hashed` from `files` — **never compute hashes yourself.**
 

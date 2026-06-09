@@ -23,7 +23,7 @@ A **thin orchestrator** over the engine — recommendation-first, concrete, like
 
 **1 — Orient (one call).**
 ```bash
-INIT=$(node "$ENGINE/bin/sovereign-tools.cjs" init scale-design)
+INIT=$(node ".claude/sovereign-engine/sovereign-tools.cjs" init scale-design)
 if [[ "$INIT" == @file:* ]]; then INIT=$(cat "${INIT#@file:}"); fi
 ```
 Parse `paths.state` + project context from the blob. Read `STACK.md`/`ENTITY_MODEL.md` by path if present — bottlenecks are stack- and data-shaped.
