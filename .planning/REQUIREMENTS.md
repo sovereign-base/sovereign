@@ -45,4 +45,13 @@ Derived from `/SOVEREIGN.md` §6 + the locked Ground Truth System design in `arc
 
 ## Traceability
 
-<!-- Filled by roadmapper: REQ-ID → Phase -->
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| ENG-09 | Phase 14 | Pending |
+| ANCHOR-01 | Phase 15 | Pending |
+| ANCHOR-02 | Phase 16 | Pending |
+| VERIFY-01 | Phase 16 | Pending |
+| VERIFY-02 | Phase 16 | Pending |
+| M4-CC | Phase 15 + Phase 16 (cross-cutting) | Pending |
+
+**Coverage: 6/6 M4 requirements mapped.** Each requirement maps to exactly one phase; M4-CC is the cross-cutting gate applied to both skill phases (15 and 16). ANCHOR-02 (list + flag-stale) is assigned to Phase 16, where the full anchor→verify→sentinel loop closes and stale-anchor surfacing is exercised end-to-end via the `verify-self`→`anchor-docs` composition.

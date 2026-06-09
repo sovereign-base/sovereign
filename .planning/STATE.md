@@ -1,41 +1,41 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.2
-milestone_name: M3 — Adoption, Bridging & Extensions
-status: between_milestones
-stopped_at: v1.2 (M3) complete & archived — 8/8 reqs, phases 10-13 verified
-last_updated: "2026-06-09T13:00:00.000Z"
+milestone: v1.3
+milestone_name: M4 — Ground Truth (Anti-Hallucination)
+status: active
+stopped_at: M4 roadmapped (phases 14-16) — awaiting plan-phase 14
+last_updated: "2026-06-09T14:00:00.000Z"
 last_activity: 2026-06-09
 progress:
-  total_phases: 4
-  completed_phases: 4
-  total_plans: 9
-  completed_plans: 9
+  total_phases: 3
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (Current Milestone: v1.2 — M3 Adoption, Bridging & Extensions)
+See: .planning/PROJECT.md (Current Milestone: v1.3 — M4 Ground Truth / Anti-Hallucination)
 
 **Core value:** The engine — a skill orients itself with one CLI call (`sovereign-tools init <workflow>` → one JSON blob), not ten file reads. If the token-efficient engine + committed `.sovereign/` state works, everything else layers on cheaply.
-**Current focus:** Phase 12 — Extension Protocol Skill (M3 phase 3 of 4)
+**Current focus:** Phase 14 — Engine `anchor` command + init workflows (M4 phase 1 of 3)
 
 ## Current Position
 
-Phase: 12 of 13 (Extension Protocol Skill) — M3 phase 3 of 4
-Plan: 1 of 2 complete (12-01 done; extension.cjs corrected to verified `npx skills` surface)
-Status: In progress — 12-02 (import-skill skill) remaining
+Phase: 14 of 16 (Engine `anchor` command + init workflows) — M4 phase 1 of 3
+Plan: not yet planned
+Status: Not started — roadmap approved, awaiting `/gsd:plan-phase 14`
 Last activity: 2026-06-09
 
-Progress: [█████████░] 88% — M3: Phase 10 ✓, Phase 11 ✓, Phase 12 1/2
+Progress: [░░░░░░░░░░] 0% — M4: Phase 14 ○, Phase 15 ○, Phase 16 ○
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed (M3): 0
+- Total plans completed (M4): 0
 - Average duration: — min
 - Total execution time: 0.0 hours
 
@@ -47,36 +47,23 @@ Progress: [█████████░] 88% — M3: Phase 10 ✓, Phase 11 �
 
 **Recent Trend:**
 
-- Last 5 plans: none yet for M3
+- Last 5 plans: none yet for M4
 - Trend: —
 
 *Updated after each plan completion*
-| Phase 10 P01 | 3 | 2 tasks | 2 files |
-| Phase 10 P02 | 4 | 2 tasks | 2 files |
-| Phase 10 P03 | 2 | 2 tasks | 2 files |
-| Phase 10 P04 | 2 | 2 tasks | 2 files |
-| Phase 10 P05 | 3 | 3 tasks | 4 files |
-| Phase 12 P01 | 3 | 3 tasks | 2 files |
 
 ## Accumulated Context
 
 ### Decisions
 
 Decisions are logged in PROJECT.md Key Decisions table.
-M3-relevant standing decisions:
+M4-relevant standing decisions:
 
-- **M3 has REAL engine work, not just skill authoring** (unlike M2). Engine-vs-skill split is the spine: engine = mechanical/deterministic/zero-dep; skills = judgment.
-- **Build order is engine-first (R-002):** Phase 10 lands all ENG-08 engine additions (the helpers the skills wrap) before any skill phase. Then bridge (smallest, fully testable, no external process) → extension (needs live `npx skills` smoke-test) → adopt (largest, most reasoning).
-- **Engine additions (Phase 10):** `bridge.cjs` (SHA-256 per-file + combined hash via `node:crypto`, registry diff in `.sovereign/bridges/registry.json`); `extension.cjs` (`spawnSync('npx', ['skills', ...])` array args, drives on EXIT CODE — there is NO `--json`; use `skills use` to fetch content for audit BEFORE `add`); `adopt.cjs` (`adopt scan` → Layers-1+2 JSON contract via `git ls-files`/walk); `scanSkillContent()` extending `security.cjs` (reuse `sanitizeForPrompt` regex toolkit). `init` gains `bridge`/`adopt`/`extension` workflows. Zero deps; emit via `output()`/`@file:` spill (never reimplement spill).
-- **M3-CC is cross-cutting** across the three skill phases (11–13): each skill is a thin orchestrator (single `init` orient, "Why this matters", recommendation-first, nav footer), `disable-model-invocation: true`, so the doctor auto-trigger budget stays at the 5 Fast Lane skills; `validate skills` passes for all.
-- **Scope guards (from REQUIREMENTS):** `sovereign-adopt` reads + records only, never refactors source; Type-3 legacy deferred. Bridge ships LOCAL hash staleness only (no deploy-gate/GitHub-issue). Extensions never auto-installed without vetting + logged decision. Wrap `npx skills`, never reinvent the registry (R-003).
-- [Phase 10]: bridge.cjs combined hash = sha256 of sorted path:sha256 lines (order-independent, fast equality); cmdBridgeCheck greenfield-safe (no_registry) and flags byte-changed + now-missing recorded sources
-- [Phase 10]: [Phase 10] scanSkillContent: data-driven SKILL_SCAN_PATTERNS table; verdict escalation high->block, medium->review, none->clean; low findings reported but stay clean; reuses sanitizeForPrompt markers; zero deps
-- [Phase 10]: [Phase 10] OWASP pages offline at authoring; grounded scanSkillContent categories against LLM01/02/06 + Agentic taxonomy, documented fallback in JSDoc, re-verify+extend later
-- [Phase 10]: adopt.cjs scanProject = pure read-only Layers-1+2 scan emitting M3-NOTES §3 contract; gitignore-aware via git ls-files (repo) / bounded SKIP_DIRS walk (non-git); MAX_TREE=2000 cap+truncated; deep_read_candidates heuristic (entrypoint/auth/base-model/config, ≤10); read-only invariant test-asserted via dir snapshot
-- [Phase 10]: extension.cjs: exit-code-driven npx skills wrapper; preview=skills use (materialize-for-audit BEFORE add), install=skills add --copy -y, list; source as single discrete argv element (no shell injection); audit runs scanSkillContent → {findings,verdict}, ok=verdict!=='block', no_content greenfield-safe; runSkills injectable for network-free tests; zero deps
-- [Phase 10]: 10-05: bridge/extension/adopt wired into the public router via existing array-arg helpers (no commander); init bridge|adopt|extension orient blobs added (adopt carries detected.in_git probe); full suite 130 green, deps still {}. ENG-08 COMPLETE.
-- [Phase 12]: 12-01: corrected extension.cjs to verified npx skills surface — preview = bare 'skills use <source>' (no -a/--copy); audit re-runs preview and scans the prompt-wrapped STDOUT via scanSkillContent (no file-path); readMaterializedContent + node:fs/path removed; install/list unchanged; 129 tests green, deps still {}
+- **M4 has BOTH engine work AND skills** (like M3, unlike M2). Engine-vs-skill split holds: engine = mechanical/deterministic/zero-dep storage + staleness math; skills = judgment (what to anchor, when to hard-stop, which user choice).
+- **Build order is engine-first (R-002):** Phase 14 lands all ENG-09 engine additions (the `anchor` command + `init anchor-docs`/`init verify-self` orient workflows the skills wrap) before any skill phase. Then `anchor-docs` (wraps `anchor`) → `verify-self` (composes with `anchor-docs` + emits markers).
+- **Engine additions (Phase 14):** an `anchor` command mirroring the bridge.cjs/adopt.cjs/extension.cjs shape — `anchor add` (store URL-by-default + `source`/`version`/`date-retrieved`/`re-verify-by` metadata under `.sovereign/external-docs/<slug>.md`; full content opt-in per ADR-004), `anchor list`, `anchor check` (flag stale = past `re-verify-by`, computed deterministically from stored dates). `init` gains `anchor-docs`/`verify-self` orient blobs. Array-arg parsing; emit via `output()`/`@file:` spill (never reimplement spill); greenfield-safe (no `external-docs/` yet); deps stay `{}`; `node --test`.
+- **M4-CC is cross-cutting** across the two skill phases (15–16): each skill is a core-tier thin orchestrator (single `init` orient, "Why this matters", recommendation-first, nav footer), `disable-model-invocation: true`, so the doctor auto-trigger budget stays at the 5 Fast Lane skills; `validate skills` passes for both. They compose (`verify-self` → `anchor-docs`; markers → `sentinel`).
+- **Scope guards (from REQUIREMENTS):** no engine HTTP/fetch client — anchoring stores URLs + metadata + opt-in user-pasted content; the agent fetches with its own tools. URLs by default, content opt-in with a copyright warning (ADR-004). `verify-self` never silently continues — it always surfaces + offers the three choices. Pre-flight deploy-gate BLOCKING on stale anchors / unresolved markers is deferred to M5+ (M4 surfaces only).
 
 ### Pending Todos
 
@@ -84,15 +71,14 @@ None yet.
 
 ### Blockers/Concerns
 
-- **`npx skills` output instability (MEDIUM).** `find`/`add` stdout is undocumented and could shift between versions. Wrapper MUST drive on exit codes + use `skills use` for content; only loosely regex `owner/repo@skill` from `find`. `find-skills/SKILL.md` is stale (documents a dropped `check` subcommand — use the README set: `add/use/list/find/remove/update`).
-- **`skills use` behavior to verify in Phase 12 (MEDIUM):** smoke-test that `npx skills use <source> --agent claude-code` reliably yields the raw `SKILL.md` body for the security scan (vs only a transformed prompt). Fall back to a shallow git/HTTP fetch of the source `SKILL.md` if insufficient.
-- **Recurring meta-risk: skill-listing token budget.** All three M3 skills MUST set `disable-model-invocation: true` so the auto-trigger count stays at the 5 Fast Lane skills — re-verify via `sovereign-tools doctor` at the end of every skill phase (especially Phase 13, after all three M3 skills installed).
-- **OWASP Agentic Top-10 mapping (MEDIUM):** re-verify the current OWASP list when authoring `scanSkillContent`'s pattern set rather than hard-coding from memory.
-- **Extensions log location (LOW):** v2 uses per-decision files `.sovereign/extensions/<date>-<skill>.md` (not v1's single `SOVEREIGN_EXTENSIONS.md`) — confirm against manifest naming during planning.
+- **Recurring meta-risk: skill-listing token budget.** Both M4 skills MUST set `disable-model-invocation: true` so the auto-trigger count stays at the 5 Fast Lane skills — re-verify via `sovereign-tools doctor` at the end of every skill phase (15 and 16).
+- **`SOVEREIGN:UNVERIFIED` marker contract is fixed** by `engine/references/unverified-marker.md` (CONV-03) — `verify-self` (choice B) writes markers in that exact `<comment> SOVEREIGN:UNVERIFIED — <reason> | ref: <url-or-ADR> | <YYYY-MM-DD>` form so `sentinel`'s existing literal-token scan finds them. Do not invent a new marker shape.
+- **"Last verified anchor" boundary (MEDIUM):** `verify-self`'s retroactive audit needs a notion of "since the last verified anchor." Decide during Phase 16 planning how that boundary is derived (e.g. from `anchor` metadata dates / git history) — the engine stores the dates; the skill applies the judgment.
+- **ADR-004 copyright warning placement (LOW):** confirm the opt-in full-content path surfaces the copyright warning at the skill layer (judgment) while the engine just stores what it's given.
 
 ## Session Continuity
 
-Last session: 2026-06-09T12:27:57.750Z
-Stopped at: Completed 12-01-PLAN.md
+Last session: 2026-06-09T14:00:00.000Z
+Stopped at: M4 roadmap created (phases 14-16); REQUIREMENTS traceability filled; STATE reset
 Resume file: None
-Next: `/gsd:plan-phase 10`
+Next: `/gsd:plan-phase 14`
