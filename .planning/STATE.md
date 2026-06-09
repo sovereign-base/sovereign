@@ -1,16 +1,16 @@
 ---
 gsd_state_version: 1.0
 milestone: v1.2
-milestone_name: — M3
-status: verifying
-stopped_at: Completed 12-01-PLAN.md
-last_updated: "2026-06-09T12:28:05.069Z"
+milestone_name: M3 — Adoption, Bridging & Extensions
+status: between_milestones
+stopped_at: v1.2 (M3) complete & archived — 8/8 reqs, phases 10-13 verified
+last_updated: "2026-06-09T13:00:00.000Z"
 last_activity: 2026-06-09
 progress:
   total_phases: 4
-  completed_phases: 2
-  total_plans: 8
-  completed_plans: 7
+  completed_phases: 4
+  total_plans: 9
+  completed_plans: 9
 ---
 
 # Project State
