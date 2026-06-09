@@ -56,7 +56,7 @@ Completed milestones are archived (full phase detail + final progress) under `.p
   2. The skill presents the three choices — (A) provide docs by handing off to `anchor-docs`, (B) mark `SOVEREIGN:UNVERIFIED` and continue, (C) discard the unverified code and restart with docs — and on choice B emits `SOVEREIGN:UNVERIFIED` markers per `engine/references/unverified-marker.md`, which `sentinel` already scans.
   3. `anchor-docs` surfaces stale anchors (past `re-verify-by`) so the user knows what needs re-checking before relying on it, and `verify-self` composes with it on choice A — completing the anchor→verify→sentinel loop (ANCHOR-02).
   4. The skill orients with a single `sovereign-tools init verify-self` call, follows the thin-orchestrator shape, sets `disable-model-invocation: true` (doctor budget held at 5), and `sovereign-tools validate skills` passes for it.
-**Plans**: TBD
+**Plans**: 1 (16-01)
 
 ### M4 Progress
 
