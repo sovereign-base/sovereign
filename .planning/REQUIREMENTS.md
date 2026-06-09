@@ -18,12 +18,12 @@ SOVEREIGN's Phase-3 (Architecture) skills: conversational, recommendation-first 
 - [x] **ARCH-03**: `api-design` — a user can design a contract-first API (protocol-agnostic: REST/GraphQL/gRPC/events) and the skill produces a living `.sovereign/docs/api/API_SPEC.md` (endpoints/messages, auth, versioning, errors, pagination).
 - [x] **ARCH-04**: `stack-select` — a user gets a guided, recommendation-first stack selection based on project type, scale, budget, and constraints (not trend-following); the choice is recorded (ADR-worthy decisions offered).
 - [x] **ARCH-05**: `scale-design` — a user is walked through a scaling conversation (expected load, read/write ratio, caching, queues, data-layer bottlenecks) producing a recorded strategy + ADRs.
-- [ ] **ARCH-06**: `security-design` — a user designs a layered security model (auth/authz, data classification, app/OWASP, infra, agent/prompt-injection) recorded to `.sovereign/docs/security/SECURITY_MODEL.md`.
-- [ ] **ARCH-07**: `deploy-design` — a user designs a budget-aware deployment/infra plan (self-hosted vs managed, container strategy, IaC, CI/CD, environments, DR) recorded to `.sovereign/docs/infra/DEPLOY_MODEL.md`.
+- [x] **ARCH-06**: `security-design` — a user designs a layered security model (auth/authz, data classification, app/OWASP, infra, agent/prompt-injection) recorded to `.sovereign/docs/security/SECURITY_MODEL.md`.
+- [x] **ARCH-07**: `deploy-design` — a user designs a budget-aware deployment/infra plan (self-hosted vs managed, container strategy, IaC, CI/CD, environments, DR) recorded to `.sovereign/docs/infra/DEPLOY_MODEL.md`.
 
 ### Cross-cutting
 
-- [ ] **ARCH-08**: Every M2 skill is a thin orchestrator over the M1 engine — orients via one `sovereign-tools init <skill>` call, recommendation-first, one-question-at-a-time where conversational, with a "Why this matters" section and a navigation footer (per `skill-format.md`). They set `disable-model-invocation: true` (phase-gated, user-invoked), so `sovereign-tools doctor` still reports the auto-trigger budget at the 5 Fast Lane skills. No engine changes; `validate skills` passes for all.
+- [x] **ARCH-08**: Every M2 skill is a thin orchestrator over the M1 engine — orients via one `sovereign-tools init <skill>` call, recommendation-first, one-question-at-a-time where conversational, with a "Why this matters" section and a navigation footer (per `skill-format.md`). They set `disable-model-invocation: true` (phase-gated, user-invoked), so `sovereign-tools doctor` still reports the auto-trigger budget at the 5 Fast Lane skills. No engine changes; `validate skills` passes for all.
 
 ---
 
@@ -53,8 +53,8 @@ SOVEREIGN's Phase-3 (Architecture) skills: conversational, recommendation-first 
 | ARCH-03 | Phase 7 | Complete |
 | ARCH-04 | Phase 8 | Complete |
 | ARCH-05 | Phase 8 | Complete |
-| ARCH-06 | Phase 9 | Pending |
-| ARCH-07 | Phase 9 | Pending |
-| ARCH-08 | Phases 6, 7, 8, 9 (cross-cutting) | Pending |
+| ARCH-06 | Phase 9 | Complete |
+| ARCH-07 | Phase 9 | Complete |
+| ARCH-08 | Phases 6, 7, 8, 9 (cross-cutting) | Complete |
 
 **Coverage:** 8/8 M2 requirements mapped. ARCH-08 is cross-cutting (a success criterion of every M2 skill phase); ARCH-01..07 each map to exactly one phase.

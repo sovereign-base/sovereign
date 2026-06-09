@@ -113,7 +113,7 @@ M2 adds SOVEREIGN's Phase-3 (Architecture) design skills: the conversational, re
 - [x] **Phase 6: ADR Log + Entity Design** - Record decisions to `.sovereign/docs/adr/` (the 3-condition gate) and model the domain one entity at a time — the foundation every later architecture skill builds on (completed 2026-06-09)
 - [x] **Phase 7: API Design** - Contract-first, protocol-agnostic API design producing a living `API_SPEC.md` over the Phase-6 entities (completed 2026-06-09)
 - [x] **Phase 8: Stack & Scale Design** - Recommendation-first stack selection and a scaling-strategy conversation, each recording ADR-worthy decisions (completed 2026-06-09)
-- [ ] **Phase 9: Security & Deploy Design** - Layered `SECURITY_MODEL.md` and budget-aware `DEPLOY_MODEL.md` — closing out the Architecture phase
+- [x] **Phase 9: Security & Deploy Design** - Layered `SECURITY_MODEL.md` and budget-aware `DEPLOY_MODEL.md` — closing out the Architecture phase (completed 2026-06-09)
 
 ## Phase Details
 
@@ -173,8 +173,8 @@ Plans:
   4. Both skills are thin orchestrators: single `init` orient call, "Why this matters" section, recommendation-first questioning, navigation footer, and `disable-model-invocation: true`; `validate skills` passes for both and `doctor` confirms the auto-trigger budget remains at the 5 Fast Lane skills after all 7 M2 skills are installed.
 **Plans**: 2 plans
 Plans:
-- [ ] 09-01-PLAN.md — Author security-design skill: layered model (auth/authz, data classification, app/OWASP, infra, agent/prompt-injection), per-layer classification, SECURITY_MODEL.md (in-place update), offers adr-log (ARCH-06, ARCH-08)
-- [ ] 09-02-PLAN.md — Author deploy-design skill: budget-aware (asks budget first), self-hosted vs managed + platform, containers, IaC, CI/CD, environments, DR, DEPLOY_MODEL.md (in-place update), offers adr-log, closes ARCH-08 (ARCH-07, ARCH-08)
+- [x] 09-01-PLAN.md — Author security-design skill: layered model (auth/authz, data classification, app/OWASP, infra, agent/prompt-injection), per-layer classification, SECURITY_MODEL.md (in-place update), offers adr-log (ARCH-06, ARCH-08)
+- [x] 09-02-PLAN.md — Author deploy-design skill: budget-aware (asks budget first), self-hosted vs managed + platform, containers, IaC, CI/CD, environments, DR, DEPLOY_MODEL.md (in-place update), offers adr-log, closes ARCH-08 (ARCH-07, ARCH-08)
 **UI hint**: no
 
 ## Progress
@@ -193,4 +193,4 @@ M2 phases execute in numeric order: 6 → 7 → 8 → 9
 | 6. ADR Log + Entity Design | 2/2 | Complete   | 2026-06-09 |
 | 7. API Design | 1/1 | Complete   | 2026-06-09 |
 | 8. Stack & Scale Design | 2/2 | Complete   | 2026-06-09 |
-| 9. Security & Deploy Design | 0/2 | Not started | - |
+| 9. Security & Deploy Design | 2/2 | Complete   | 2026-06-09 |
