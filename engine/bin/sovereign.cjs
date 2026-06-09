@@ -125,7 +125,9 @@ function usage() {
   say('    npx sovereign-cli init --json          raw machine-readable result (scripting/CI)');
   say('    npx sovereign-cli --version');
   say('');
-  say('  After install, the skills run \x1b[1minside your agent\x1b[0m (e.g. /council, /tdd). See the docs:');
+  say('  After install, the skills run \x1b[1minside your agent\x1b[0m (e.g. /council, /tdd).');
+  say('  \x1b[2mIn Claude Code, type /skill-name; in other SKILL.md agents (Gemini CLI, …), open the\x1b[0m');
+  say('  \x1b[2mskill\x27s SKILL.md under .claude/skills/ and invoke it by name.\x1b[0m See the docs:');
   say('  https://github.com/sovereign-base/sovereign');
   say('');
 }

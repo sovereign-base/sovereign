@@ -23,6 +23,8 @@ SOVEREIGN is a small **engine** with **skills** layered on top.
 
 The skills run **inside your AI agent** (Claude Code, or any SKILL.md-compatible tool). `npx sovereign-cli init` just installs them into your project; you invoke them by typing `/skill-name` in your agent.
 
+> **Invoking skills per agent:** typing `/skill-name` with autocomplete is **Claude Code's** affordance. Other SKILL.md agents (Gemini CLI, Cursor, Codex, …) don't surface a `/`-menu — open the skill's `SKILL.md` (under `.claude/skills/<name>/`) and **invoke it by name** / follow its steps. The skills themselves are portable; only the way you *trigger* them differs by agent.
+
 No language lock-in. No stack opinion. No domain constraint — web, mobile, IoT, data, AI, anything.
 
 ---

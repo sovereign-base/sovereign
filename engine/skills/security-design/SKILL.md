@@ -36,6 +36,8 @@ Parse `paths.state` + project context. Read `ENTITY_MODEL.md`/`STACK.md` by path
 - **AI / agent (OWASP Agentic)** — prompt-injection prevention; skill supply-chain vetting; agent permission scoping.
 Recommend at each layer; assign an overall **security classification** (low / medium / high / critical) that sets the rigor bar.
 
+**2b — Controls-coverage check.** Read `references/security-controls.md` and run its five **control classes** as a checklist against this design — **input validation, injection, authN/authZ/IDOR, secrets handling, rate-limiting/abuse**. For each class, recommendation-first: state the control this system should have, or flag it **uncovered**. These are agnostic *classes* (the project implements each with its own stack) — the concrete complement to the layered model; fold the gaps into `SECURITY_MODEL.md`. On a re-run, surface the classes still uncovered (coverage is the bar, not a one-time pass).
+
 **3 — Record + offer ADRs.** Write/update `.sovereign/docs/security/SECURITY_MODEL.md` (the layered model + the classification). **Update in place** on re-run. Gate-passing choices (auth model, tenancy isolation, encryption/KMS strategy) → **offer `/adr-log`** (don't write ADRs here). Then `state save` + `commit` via `sovereign-tools`.
 
 ## SECURITY_MODEL.md format
