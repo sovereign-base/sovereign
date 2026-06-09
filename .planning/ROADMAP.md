@@ -22,7 +22,7 @@ Completed milestones are archived (full phase detail + final progress) under `.p
 
 - [x] **Phase 14: Engine `anchor` command + init workflows** - Zero-dep `anchor add|list|check` over `.sovereign/external-docs/` + `init anchor-docs`/`init verify-self` orient blobs, fully `node --test`'d (ENG-09) ✅ 2026-06-09
 - [x] **Phase 15: `anchor-docs` skill** - Thin orchestrator that wraps the engine `anchor` command to ingest external docs (URL-by-default, content opt-in) and surface stale anchors (ANCHOR-01/02, M4-CC) ✅ 2026-06-09
-- [ ] **Phase 16: `verify-self` skill** - Thin orchestrator: hard-stop + retroactive audit + 3 user choices, composes with `anchor-docs`, emits `SOVEREIGN:UNVERIFIED` markers `sentinel` scans (VERIFY-01/02, M4-CC)
+- [x] **Phase 16: `verify-self` skill** - Thin orchestrator: hard-stop + retroactive audit + 3 user choices, composes with `anchor-docs`, emits `SOVEREIGN:UNVERIFIED` markers `sentinel` scans (VERIFY-01/02, M4-CC) ✅ 2026-06-09
 
 ### Phase Details
 
@@ -56,7 +56,7 @@ Completed milestones are archived (full phase detail + final progress) under `.p
   2. The skill presents the three choices — (A) provide docs by handing off to `anchor-docs`, (B) mark `SOVEREIGN:UNVERIFIED` and continue, (C) discard the unverified code and restart with docs — and on choice B emits `SOVEREIGN:UNVERIFIED` markers per `engine/references/unverified-marker.md`, which `sentinel` already scans.
   3. `anchor-docs` surfaces stale anchors (past `re-verify-by`) so the user knows what needs re-checking before relying on it, and `verify-self` composes with it on choice A — completing the anchor→verify→sentinel loop (ANCHOR-02).
   4. The skill orients with a single `sovereign-tools init verify-self` call, follows the thin-orchestrator shape, sets `disable-model-invocation: true` (doctor budget held at 5), and `sovereign-tools validate skills` passes for it.
-**Plans**: 1 (16-01)
+**Plans**: 1 (16-01) — ✅ Complete 2026-06-09 (verified 4/4; doctor 18/5/13, validate passes, 164 engine tests green)
 
 ### M4 Progress
 

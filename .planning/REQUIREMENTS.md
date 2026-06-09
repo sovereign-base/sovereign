@@ -12,17 +12,17 @@ Derived from `/SOVEREIGN.md` §6 + the locked Ground Truth System design in `arc
 ### anchor-docs — anchor implementation to current external docs
 
 - [x] **ANCHOR-01**: A user can run `anchor-docs` to ingest external documentation the agent's training may be stale on (payment gateways, SDKs, regional/gov APIs). It stores the **URL by default** (full content opt-in, with a copyright warning, per ADR-004) under `.sovereign/external-docs/<slug>.md` with metadata headers: `source`, `version`, `date-retrieved`, `re-verify-by`.
-- [ ] **ANCHOR-02**: `anchor-docs` lists anchored docs and **flags stale anchors** (those past `re-verify-by`) so the user knows what needs re-checking before relying on it. (Pre-flight deploy-gate *blocking* on stale anchors stays deferred — M4 surfaces, like bridge staleness.)
+- [x] **ANCHOR-02**: `anchor-docs` lists anchored docs and **flags stale anchors** (those past `re-verify-by`) so the user knows what needs re-checking before relying on it. (Pre-flight deploy-gate *blocking* on stale anchors stays deferred — M4 surfaces, like bridge staleness.)
 
 ### verify-self — catch the agent's own uncertainty
 
-- [ ] **VERIFY-01**: A user (or the agent itself) can trigger `verify-self` on low-confidence signals (about to assert a version/endpoint/config with confidence; implementing an integration without anchors; stale-knowledge API). It performs a **hard stop** and a **retroactive audit** of the code written since the last verified anchor, surfacing each specific unverified claim (file:line + what's uncertain).
-- [ ] **VERIFY-02**: `verify-self` presents the three user choices — (A) provide docs (hand off to `anchor-docs`), (B) mark `SOVEREIGN:UNVERIFIED` and continue, (C) discard the unverified code and restart with docs — and on choice B emits `SOVEREIGN:UNVERIFIED` markers per the M1 spec (`engine/references/unverified-marker.md`), which `sentinel` already scans.
+- [x] **VERIFY-01**: A user (or the agent itself) can trigger `verify-self` on low-confidence signals (about to assert a version/endpoint/config with confidence; implementing an integration without anchors; stale-knowledge API). It performs a **hard stop** and a **retroactive audit** of the code written since the last verified anchor, surfacing each specific unverified claim (file:line + what's uncertain).
+- [x] **VERIFY-02**: `verify-self` presents the three user choices — (A) provide docs (hand off to `anchor-docs`), (B) mark `SOVEREIGN:UNVERIFIED` and continue, (C) discard the unverified code and restart with docs — and on choice B emits `SOVEREIGN:UNVERIFIED` markers per the M1 spec (`engine/references/unverified-marker.md`), which `sentinel` already scans.
 
 ### Engine & cross-cutting
 
 - [x] **ENG-09**: A modest **zero-dependency** engine surface backs anchoring: an `anchor` command (store/list/check-stale external-doc metadata under `.sovereign/external-docs/`, computing staleness from `re-verify-by`) + `init anchor-docs` / `init verify-self` workflows. Tested (`node --test`); deps stay `{}`.
-- [ ] **M4-CC**: Both M4 skills are core-tier thin orchestrators per `skill-format.md` / ADR-014 — one `sovereign-tools init <skill>` orient call, "Why this matters", recommendation-first, navigation footer — and are **user-invoked** (`disable-model-invocation: true`), so `sovereign-tools doctor` still reports the auto-trigger budget at the 5 Fast Lane skills. `validate skills` passes for both. They compose (`verify-self` → `anchor-docs`; markers → `sentinel`).
+- [x] **M4-CC**: Both M4 skills are core-tier thin orchestrators per `skill-format.md` / ADR-014 — one `sovereign-tools init <skill>` orient call, "Why this matters", recommendation-first, navigation footer — and are **user-invoked** (`disable-model-invocation: true`), so `sovereign-tools doctor` still reports the auto-trigger budget at the 5 Fast Lane skills. `validate skills` passes for both. They compose (`verify-self` → `anchor-docs`; markers → `sentinel`).
 
 ---
 
@@ -49,9 +49,9 @@ Derived from `/SOVEREIGN.md` §6 + the locked Ground Truth System design in `arc
 |-------------|-------|--------|
 | ENG-09 | Phase 14 | Complete |
 | ANCHOR-01 | Phase 15 | Complete |
-| ANCHOR-02 | Phase 16 | Pending |
-| VERIFY-01 | Phase 16 | Pending |
-| VERIFY-02 | Phase 16 | Pending |
-| M4-CC | Phase 15 + Phase 16 (cross-cutting) | Pending |
+| ANCHOR-02 | Phase 16 | Complete |
+| VERIFY-01 | Phase 16 | Complete |
+| VERIFY-02 | Phase 16 | Complete |
+| M4-CC | Phase 15 + Phase 16 (cross-cutting) | Complete |
 
 **Coverage: 6/6 M4 requirements mapped.** Each requirement maps to exactly one phase; M4-CC is the cross-cutting gate applied to both skill phases (15 and 16). ANCHOR-02 (list + flag-stale) is assigned to Phase 16, where the full anchor→verify→sentinel loop closes and stale-anchor surfacing is exercised end-to-end via the `verify-self`→`anchor-docs` composition.

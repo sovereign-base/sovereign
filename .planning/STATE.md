@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.3
 milestone_name: M4 — Ground Truth (Anti-Hallucination)
-status: active
-stopped_at: Phase 15 complete (anchor-docs skill + ADR-004, ANCHOR-01) — awaiting plan-phase 16
-last_updated: "2026-06-09T17:53:06.801Z"
-last_activity: 2026-06-09 -- Phase 15 complete (ANCHOR-01, verified 3/3)
+status: milestone_complete
+stopped_at: M4 complete — all 3 phases verified (ENG-09, ANCHOR-01/02, VERIFY-01/02, M4-CC). Ready for /gsd:complete-milestone v1.3
+last_updated: "2026-06-09T18:45:41.648Z"
+last_activity: 2026-06-09 -- Phase 16 complete (verify-self); M4 done 3/3
 progress:
   total_phases: 3
-  completed_phases: 2
-  total_plans: 2
-  completed_plans: 2
-  percent: 67
+  completed_phases: 3
+  total_plans: 3
+  completed_plans: 3
+  percent: 100
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (Current Milestone: v1.3 — M4 Ground Truth / Anti-Hallucination)
 
 **Core value:** The engine — a skill orients itself with one CLI call (`sovereign-tools init <workflow>` → one JSON blob), not ten file reads. If the token-efficient engine + committed `.sovereign/` state works, everything else layers on cheaply.
-**Current focus:** Phase 16 — `verify-self` skill (anchor-docs ✅ complete)
+**Current focus:** M4 complete — ready to archive (`/gsd:complete-milestone v1.3`)
 
 ## Current Position
 
-Phase: 15 (anchor-docs-skill) — ✅ COMPLETE (verified 3/3)
-Plan: 1 of 1 complete (15-01)
-Status: Phase 15 complete — next: `/gsd:plan-phase 16` (verify-self skill, M4 capstone)
-Last activity: 2026-06-09 -- Phase 15 complete (ANCHOR-01)
+Phase: 16 (verify-self-skill) — ✅ COMPLETE (verified 4/4) — M4 capstone
+Plan: 1 of 1 complete (16-01)
+Status: ✅ M4 (Ground Truth) COMPLETE — all 3 phases verified, 6/6 requirements
+Last activity: 2026-06-09 -- Phase 16 complete; M4 done
 
-Progress: [███████░░░] 67% — M4: Phase 14 ✓, Phase 15 ✓, Phase 16 ○
+Progress: [██████████] 100% — M4: Phase 14 ✓, Phase 15 ✓, Phase 16 ✓
 
 ## Performance Metrics
 

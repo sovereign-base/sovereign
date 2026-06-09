@@ -57,7 +57,10 @@ If there are **no anchors yet**, the boundary is "all un-anchored work on this b
   ```js
   // SOVEREIGN:UNVERIFIED — Paystack webhook signature is HMAC-SHA512? | ref: https://paystack.com/docs/webhooks | 2026-06-09
   ```
-  `/sentinel` already scans the literal `SOVEREIGN:UNVERIFIED` token, so every marker becomes a tracked, greppable concern instead of a forgotten thought.
+  ```python
+  # SOVEREIGN:UNVERIFIED — assumes the cursor is opaque base64, not an offset | ref: ADR-014
+  ```
+  The comment syntax varies by language; the token does not. `/sentinel` already scans the literal `SOVEREIGN:UNVERIFIED` token, so every marker becomes a tracked, greppable concern instead of a forgotten thought.
 - **(C) Discard and restart with docs** → revert only the unverified change (e.g. `git restore <file>` for the specific hunks, or `git stash` the uncertain work), anchor the doc with `/anchor-docs`, then re-implement against ground truth. (Use when the code is likely wrong and cheap to redo.)
 
 **6 — Persist.** `node ".claude/sovereign-engine/sovereign-tools.cjs" state save`, then commit via `sovereign-tools commit` if `commit_docs` is on, so any markers travel with the repo.
