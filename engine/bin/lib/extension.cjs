@@ -14,9 +14,13 @@
  *   - Shell out with ARRAY args via `spawnSync` (mirroring core.cjs `execGit`) so
  *     a hostile `owner/repo` source can never inject into a shell string. No
  *     `shell: true`, ever — `source` is always a single discrete array element.
- *   - The audit uses `skills use` (preview) to MATERIALIZE the skill body into a
- *     temp dir for `scanSkillContent` BEFORE `add` (adopt). use = fetch-for-
- *     inspection, add = adopt. Never install-then-audit.
+ *   - The audit uses `skills use <source>` (BARE — no `-a`, no `--copy`), which
+ *     prints the prompt-wrapped raw SKILL.md to STDOUT; that stdout IS the
+ *     auditable content `scanSkillContent` scans, fetched BEFORE `add` (adopt).
+ *     use = fetch-for-inspection (to stdout), add = adopt. Never install-then-audit.
+ *     (Live `npx skills` smoke-test, 2026-06-09: `use` rejects `--copy` and
+ *     treats `-a <agent>` as "start that agent INTERACTIVELY" — so preview must
+ *     pass neither.)
  *   - R-003: wrap the registry, never reinvent it.
  *
  * Each command emits the contract { ok, exitCode, stdout, stderr, source } via
@@ -28,8 +32,6 @@
  * and exit-code branching WITHOUT touching the network.
  */
 
-const fs = require('node:fs');
-const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const { output } = require('./core.cjs');
 const { scanSkillContent } = require('./security.cjs');
@@ -52,8 +54,10 @@ function buildSkillsArgs(action, source, opts = {}) {
       if (!source || typeof source !== 'string') {
         throw new Error('extension preview requires a non-empty source');
       }
-      // `skills use` materializes the skill into a temp dir for inspection.
-      return ['skills', 'use', source, '-a', agent, '--copy'];
+      // BARE `skills use <source>` prints the prompt-wrapped raw SKILL.md to
+      // stdout (the auditable content). No `--copy` (it errors "Unknown option")
+      // and no `-a <agent>` (that starts the agent INTERACTIVELY).
+      return ['skills', 'use', source];
     }
     case 'install': {
       if (!source || typeof source !== 'string') {
@@ -107,9 +111,10 @@ function emitRun(run, source, raw) {
 }
 
 /**
- * `extension preview <source>` — wrap `skills use` to materialize the skill into
- * a temp dir for inspection (the fetch-for-audit step). Drives on exit code.
- * @param {string} _cwd unused (skills owns its temp dir); kept for router symmetry.
+ * `extension preview <source>` — wrap the bare `skills use <source>`, which
+ * prints the prompt-wrapped raw SKILL.md to stdout (the fetch-for-audit step).
+ * Drives on exit code; the stdout carries the inspectable content.
+ * @param {string} _cwd unused (skills owns its fetch); kept for router symmetry.
  * @param {string} source
  * @param {boolean} [raw]
  * @param {(args: string[]) => *} [runner]
@@ -148,76 +153,31 @@ function cmdExtensionList(_cwd, raw, runner) {
 }
 
 /**
- * Read materialized skill content at `contentPath` for the audit. If it is a
- * directory, concatenate the bodies of every `*.md` file under it (one level,
- * SKILL.md first); if a file, read it. Missing path yields null. No throw.
- * @param {string} contentPath
- * @returns {string|null}
- */
-function readMaterializedContent(contentPath) {
-  let stat;
-  try {
-    stat = fs.statSync(contentPath);
-  } catch {
-    return null;
-  }
-  if (stat.isFile()) {
-    try {
-      return fs.readFileSync(contentPath, 'utf-8');
-    } catch {
-      return null;
-    }
-  }
-  if (stat.isDirectory()) {
-    let names;
-    try {
-      names = fs.readdirSync(contentPath);
-    } catch {
-      return null;
-    }
-    // SKILL.md first, then the rest of the markdown, for stable scanning order.
-    const mdFiles = names
-      .filter((n) => n.toLowerCase().endsWith('.md'))
-      .sort((a, b) => {
-        const as = a.toLowerCase() === 'skill.md' ? 0 : 1;
-        const bs = b.toLowerCase() === 'skill.md' ? 0 : 1;
-        return as - bs || a.localeCompare(b);
-      });
-    const bodies = [];
-    for (const name of mdFiles) {
-      try {
-        bodies.push(fs.readFileSync(path.join(contentPath, name), 'utf-8'));
-      } catch {
-        // skip unreadable file
-      }
-    }
-    return bodies.length ? bodies.join('\n') : null;
-  }
-  return null;
-}
-
-/**
- * `extension audit <path>` — read the materialized skill content (a SKILL.md
- * file or a dir of markdown) and run `scanSkillContent` over it. Emits
- * { ok, source, findings, verdict }, where `ok = verdict !== 'block'`.
- * Greenfield-safe: a missing path yields a clean no-content result.
- * @param {string} _cwd
- * @param {string} contentPath
+ * `extension audit <source>` — fetch the skill content by re-running the bare
+ * `skills use <source>` (the prompt-wrapped raw SKILL.md printed to stdout) and
+ * run `scanSkillContent` over that stdout. Emits { ok, source, findings, verdict },
+ * where `ok = verdict !== 'block'`. Greenfield/network-safe: a missing source or
+ * empty stdout (not-found / network down) yields a clean no-content result — the
+ * skill decides whether a non-clean fetch means "couldn't fetch". No file path is
+ * ever read; the audit input is always the `skills use` STDOUT.
+ * @param {string} _cwd unused; kept for router symmetry.
+ * @param {string} source the `owner/repo@skill` (or skills.sh URL) to fetch+scan.
  * @param {boolean} [raw]
+ * @param {(args: string[]) => *} [runner] injectable runner (network-free tests).
  * @returns {void}
  */
-function cmdExtensionAudit(_cwd, contentPath, raw) {
-  if (!contentPath || typeof contentPath !== 'string') {
-    output({ ok: true, source: contentPath ?? null, findings: [], verdict: 'clean', reason: 'no_content' }, raw);
+function cmdExtensionAudit(_cwd, source, raw, runner) {
+  if (!source || typeof source !== 'string') {
+    output({ ok: true, source: source ?? null, findings: [], verdict: 'clean', reason: 'no_content' }, raw);
     return;
   }
-  const text = readMaterializedContent(contentPath);
-  if (text === null) {
-    output({ ok: true, source: contentPath, findings: [], verdict: 'clean', reason: 'no_content' }, raw);
+  const run = runSkills(buildSkillsArgs('preview', source), runner);
+  if (!run.stdout) {
+    output({ ok: true, source, findings: [], verdict: 'clean', reason: 'no_content' }, raw);
     return;
   }
-  const { findings, verdict } = scanSkillContent(text);
-  output({ ok: verdict !== 'block', source: contentPath, findings, verdict }, raw);
+  const { findings, verdict } = scanSkillContent(run.stdout);
+  output({ ok: verdict !== 'block', source, findings, verdict }, raw);
 }
 
 module.exports = {
