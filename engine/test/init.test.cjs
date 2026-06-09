@@ -29,6 +29,7 @@ const BIN = path.join(ENGINE_ROOT, 'bin', 'sovereign-tools.cjs');
 const TEMPLATE_SOVEREIGN = path.join(ENGINE_ROOT, 'templates', 'sovereign');
 
 const { buildInit, checkAgents, requiredAgentsFor } = require(path.join(ENGINE_ROOT, 'bin', 'lib', 'init.cjs'));
+const EXPECTED_VERSION = require("node:fs").readFileSync(require("node:path").join(__dirname, "..", "VERSION"), "utf8").trim();
 
 /** Recursively copy a directory tree (Node >=20 has fs.cpSync). */
 function copyTree(src, dest) {
@@ -74,7 +75,7 @@ test('init council returns the nested one-blob contract', () => {
   const blob = buildInit(dir, 'council');
 
   assert.equal(blob.project_root, dir);
-  assert.equal(blob.sovereign_version, '2.0.0');
+  assert.equal(blob.sovereign_version, EXPECTED_VERSION);
   assert.ok(blob.models && typeof blob.models === 'object');
   assert.ok(blob.config && typeof blob.config === 'object');
   assert.ok(blob.phase && typeof blob.phase === 'object');
@@ -133,7 +134,7 @@ test('init council is greenfield-safe in an empty dir (no .sovereign/)', () => {
     blob = buildInit(dir, 'council');
   });
   assert.equal(blob.exists.sovereign_dir, false);
-  assert.equal(blob.sovereign_version, '2.0.0');
+  assert.equal(blob.sovereign_version, EXPECTED_VERSION);
   // Phase defaults to a greenfield Setup state.
   assert.equal(blob.phase.current, 0);
   assert.deepEqual(blob.context_injection.relevant_adrs, []);
@@ -142,7 +143,7 @@ test('init council is greenfield-safe in an empty dir (no .sovereign/)', () => {
 test('init sovereign-init returns the nested shape with empty models', () => {
   const dir = mkSeededProject({});
   const blob = buildInit(dir, 'sovereign-init');
-  assert.equal(blob.sovereign_version, '2.0.0');
+  assert.equal(blob.sovereign_version, EXPECTED_VERSION);
   assert.deepEqual(blob.models, {});
   assert.ok(blob.config && typeof blob.config === 'object');
   assert.ok(blob.phase && typeof blob.phase === 'object');
@@ -152,7 +153,7 @@ test('init sovereign-init returns the nested shape with empty models', () => {
 test('init <fast-lane> stub returns the nested shape', () => {
   const dir = mkSeededProject({});
   const blob = buildInit(dir, 'grill-with-docs');
-  assert.equal(blob.sovereign_version, '2.0.0');
+  assert.equal(blob.sovereign_version, EXPECTED_VERSION);
   assert.ok(blob.config && typeof blob.config === 'object');
   assert.ok(blob.phase && typeof blob.phase === 'object');
   assert.ok(blob.context_injection && typeof blob.context_injection === 'object');
@@ -182,7 +183,7 @@ test('init bridge returns the registry + source-doc paths with project context',
   assert.ok(blob.paths.api_spec, 'paths.api_spec present');
   assert.ok(blob.paths.bridge_dir, 'paths.bridge_dir present');
   assert.equal(blob.project_root, dir);
-  assert.equal(blob.sovereign_version, '2.0.0');
+  assert.equal(blob.sovereign_version, EXPECTED_VERSION);
 });
 
 test('init adopt returns detected.in_git boolean + sovereign_dir path', () => {
@@ -272,7 +273,7 @@ test('CLI: init council --cwd <dir> prints parseable JSON with version + manifes
     jsonStr = fs.readFileSync(jsonStr.slice('@file:'.length), 'utf-8');
   }
   const obj = JSON.parse(jsonStr);
-  assert.equal(obj.sovereign_version, '2.0.0');
+  assert.equal(obj.sovereign_version, EXPECTED_VERSION);
   assert.equal(obj.context_injection.manifest_path, '.sovereign/MANIFEST.md');
 });
 
