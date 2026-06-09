@@ -369,6 +369,48 @@ function buildInit(cwd, workflow) {
       break;
     }
 
+    case 'anchor-docs': {
+      // ENG-09 orientation for the Phase-15 anchor-docs skill — the external-docs
+      // store the `anchor add|list|check` substrate reads/writes, plus state/manifest.
+      // Greenfield-safe: every path is a string regardless of what exists on disk.
+      blob = {
+        models: {},
+        config: orientationConfig,
+        phase,
+        context_injection: contextInjection(cwd),
+        paths: {
+          external_docs_dir: '.sovereign/external-docs',
+          state: '.sovereign/STATE.md',
+          manifest: '.sovereign/MANIFEST.md',
+        },
+        exists,
+      };
+      break;
+    }
+
+    case 'verify-self': {
+      // ENG-09 orientation for the Phase-16 verify-self skill — same external-docs
+      // store PLUS the shipped-package-relative path to the SOVEREIGN:UNVERIFIED
+      // marker spec (`references/` ships at the package root via package.json files,
+      // so the installed skill resolves it as `references/unverified-marker.md`, NOT
+      // the repo-relative `engine/references/...`). The engine surfaces the spec
+      // path only; emitting markers is the skill's job (Phase 16).
+      blob = {
+        models: {},
+        config: orientationConfig,
+        phase,
+        context_injection: contextInjection(cwd),
+        paths: {
+          external_docs_dir: '.sovereign/external-docs',
+          unverified_marker_spec: 'references/unverified-marker.md',
+          state: '.sovereign/STATE.md',
+          manifest: '.sovereign/MANIFEST.md',
+        },
+        exists,
+      };
+      break;
+    }
+
     default: {
       // Fast-lane skill stub (grill-with-docs/ubiquitous-language/tdd/sentinel/
       // handoff). Same nested shape; models empty until the skill's needs are
