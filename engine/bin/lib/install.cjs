@@ -95,6 +95,52 @@ function listAgentNames(dir) {
   }
 }
 
+/**
+ * Seed the "Claude commit attribution off" default into `<installRoot>/settings.json`
+ * so teammates working in a SOVEREIGN project don't get Claude added as a
+ * Co-Authored-By / "Generated with Claude Code" trailer (and thus a GitHub
+ * collaborator). SOVEREIGN's own engine commit never adds a trailer; this guards
+ * the other vector — the host agent's own commits.
+ *
+ * NON-DESTRUCTIVE: preserves every existing key; only sets `includeCoAuthoredBy`
+ * (deprecated form) and `attribution` (current form) when ABSENT — never
+ * overrides an explicit user choice. Creates the file with just these keys when
+ * absent. Leaves a malformed settings.json untouched (returns false) rather than
+ * crashing the install. Returns true only when a key was actually added.
+ *
+ * @param {string} installRoot
+ * @returns {boolean}
+ */
+function applyAttributionDefault(installRoot) {
+  const settingsPath = path.join(installRoot, 'settings.json');
+  /** @type {Record<string, any>} */
+  let settings = {};
+  const existing = safeReadFile(settingsPath);
+  if (existing != null && existing.trim() !== '') {
+    try {
+      settings = JSON.parse(existing);
+    } catch {
+      // Invalid JSON — don't clobber a file we can't safely parse.
+      return false;
+    }
+  }
+
+  let changed = false;
+  if (!('includeCoAuthoredBy' in settings)) {
+    settings.includeCoAuthoredBy = false;
+    changed = true;
+  }
+  if (!('attribution' in settings)) {
+    settings.attribution = { commit: '', pr: '' };
+    changed = true;
+  }
+  if (!changed) return false;
+
+  fs.mkdirSync(installRoot, { recursive: true });
+  fs.writeFileSync(settingsPath, JSON.stringify(settings, null, 2) + '\n', 'utf-8');
+  return true;
+}
+
 // ─── Install core ───────────────────────────────────────────────────────────
 
 /**
@@ -109,6 +155,7 @@ function listAgentNames(dir) {
  * @property {string[]} agents_copied
  * @property {boolean} engine_copied
  * @property {string} engine_path
+ * @property {boolean} attribution_default_set
  * @property {boolean} sovereign_scaffolded
  */
 
@@ -204,6 +251,12 @@ function runInstall(opts) {
   // The project-root-relative path the skills depend on (the default project case).
   const enginePath = '.claude/sovereign-engine';
 
+  // ── Commit-attribution default ───────────────────────────────────────────────
+  // Seed includeCoAuthoredBy:false + attribution:{commit:'',pr:''} into
+  // <installRoot>/settings.json so teammates don't get Claude attributed on their
+  // commits. Non-destructive merge; only sets keys when absent (see helper).
+  const attributionDefaultSet = applyAttributionDefault(installRoot);
+
   // ── Scaffold .sovereign/ (only when absent — non-destructive) ──────────────
   const sovereignDir = path.join(cwd, '.sovereign');
   let sovereignScaffolded = false;
@@ -232,6 +285,7 @@ function runInstall(opts) {
     agents_copied: agentsCopied,
     engine_copied: engineCopied,
     engine_path: enginePath,
+    attribution_default_set: attributionDefaultSet,
     sovereign_scaffolded: sovereignScaffolded,
   };
 }

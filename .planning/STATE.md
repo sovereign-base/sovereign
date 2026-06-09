@@ -2,15 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.3
 milestone_name: M4 — Ground Truth (Anti-Hallucination)
-status: active
-stopped_at: M4 roadmapped (phases 14-16) — awaiting plan-phase 14
-last_updated: "2026-06-09T14:00:00.000Z"
-last_activity: 2026-06-09
+status: between_milestones
+stopped_at: v1.3 (M4) complete, archived + tagged. Between milestones — run /gsd:new-milestone for the next.
+last_updated: "2026-06-09T18:45:41.648Z"
+last_activity: 2026-06-09 -- v1.3 (M4) milestone archived (6/6 reqs)
 progress:
   total_phases: 3
-  completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
+  completed_phases: 3
+  total_plans: 3
+  completed_plans: 3
+  percent: 100
 ---
 
 # Project State
@@ -20,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (Current Milestone: v1.3 — M4 Ground Truth / Anti-Hallucination)
 
 **Core value:** The engine — a skill orients itself with one CLI call (`sovereign-tools init <workflow>` → one JSON blob), not ten file reads. If the token-efficient engine + committed `.sovereign/` state works, everything else layers on cheaply.
-**Current focus:** Phase 14 — Engine `anchor` command + init workflows (M4 phase 1 of 3)
+**Current focus:** Between milestones — M4 (v1.3) shipped & archived. Next: `/gsd:new-milestone` (candidates in BACKLOG.md).
 
 ## Current Position
 
-Phase: 14 of 16 (Engine `anchor` command + init workflows) — M4 phase 1 of 3
-Plan: not yet planned
-Status: Not started — roadmap approved, awaiting `/gsd:plan-phase 14`
-Last activity: 2026-06-09
+Milestone: v1.3 — M4 Ground Truth — ✅ COMPLETE, archived to milestones/v1.3-*, tagged v1.3
+Phases 14–16: all ✅ verified (6/6 requirements)
+Status: Between milestones — REQUIREMENTS.md cleared; run `/gsd:new-milestone` to scope the next
+Last activity: 2026-06-09 -- v1.3 archived
 
-Progress: [░░░░░░░░░░] 0% — M4: Phase 14 ○, Phase 15 ○, Phase 16 ○
+Progress: [██████████] 100% — M4 complete (14 ✓, 15 ✓, 16 ✓)
 
 ## Performance Metrics
 
@@ -51,6 +52,7 @@ Progress: [░░░░░░░░░░] 0% — M4: Phase 14 ○, Phase 15 ○
 - Trend: —
 
 *Updated after each plan completion*
+| Phase 14 P01 | 4 | 5 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -64,6 +66,7 @@ M4-relevant standing decisions:
 - **Engine additions (Phase 14):** an `anchor` command mirroring the bridge.cjs/adopt.cjs/extension.cjs shape — `anchor add` (store URL-by-default + `source`/`version`/`date-retrieved`/`re-verify-by` metadata under `.sovereign/external-docs/<slug>.md`; full content opt-in per ADR-004), `anchor list`, `anchor check` (flag stale = past `re-verify-by`, computed deterministically from stored dates). `init` gains `anchor-docs`/`verify-self` orient blobs. Array-arg parsing; emit via `output()`/`@file:` spill (never reimplement spill); greenfield-safe (no `external-docs/` yet); deps stay `{}`; `node --test`.
 - **M4-CC is cross-cutting** across the two skill phases (15–16): each skill is a core-tier thin orchestrator (single `init` orient, "Why this matters", recommendation-first, nav footer), `disable-model-invocation: true`, so the doctor auto-trigger budget stays at the 5 Fast Lane skills; `validate skills` passes for both. They compose (`verify-self` → `anchor-docs`; markers → `sentinel`).
 - **Scope guards (from REQUIREMENTS):** no engine HTTP/fetch client — anchoring stores URLs + metadata + opt-in user-pasted content; the agent fetches with its own tools. URLs by default, content opt-in with a copyright warning (ADR-004). `verify-self` never silently continues — it always surfaces + offers the three choices. Pre-flight deploy-gate BLOCKING on stale anchors / unresolved markers is deferred to M5+ (M4 surfaces only).
+- [Phase 14]: ENG-09: anchor add|list|check substrate (anchor.cjs) lands URL-by-default external-doc storage + lexicographic staleness; init anchor-docs/verify-self orient blobs added; verify-self surfaces references/unverified-marker.md; deps stay {}
 
 ### Pending Todos
 
@@ -81,10 +84,11 @@ None yet.
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
 | 260609-lkx | Fix install bug: copy engine into project so installed skills can reach sovereign-tools (+ bare `state save` regenerates MANIFEST) | 2026-06-09 | 78ec6cc | [260609-lkx-fix-install-bug-copy-engine-into-project](./quick/260609-lkx-fix-install-bug-copy-engine-into-project/) |
+| fast | Installer seeds `includeCoAuthoredBy:false` + `attribution` default into project `.claude/settings.json` (kills Claude commit attribution team-wide) | 2026-06-09 | f34c9eb | — (`/gsd:fast`) |
 
 ## Session Continuity
 
-Last session: 2026-06-09T14:39:57.000Z
-Stopped at: Completed quick task 260609-lkx (install-bug fix — engine copied into .claude/sovereign-engine/; $ENGINE refs removed; engine 2.2.0)
+Last session: 2026-06-09T17:19:23.568Z
+Stopped at: Completed 14-01-PLAN.md
 Resume file: None
 Next: `/gsd:plan-phase 14`

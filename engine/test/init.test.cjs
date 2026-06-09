@@ -211,6 +211,40 @@ test('init bridge/adopt/extension are greenfield-safe (empty dir, models {})', (
   }
 });
 
+// ─── M4 workflows: anchor-docs / verify-self (plan 14-01) ────────────────────
+
+test('T10: init anchor-docs returns external_docs_dir path + nested project context', () => {
+  const dir = mkSeededProject({});
+  const blob = buildInit(dir, 'anchor-docs');
+  assert.equal(blob.paths.external_docs_dir, '.sovereign/external-docs');
+  assert.deepEqual(blob.models, {});
+  assert.ok(blob.config && typeof blob.config === 'object');
+  assert.ok(blob.phase && typeof blob.phase === 'object');
+  assert.ok(blob.exists && typeof blob.exists === 'object');
+  assert.equal(blob.project_root, dir);
+  assert.equal(blob.sovereign_version, EXPECTED_VERSION);
+  assert.equal(blob.agents_installed, true);
+});
+
+test('T11: init verify-self surfaces external_docs_dir + unverified_marker_spec path', () => {
+  const dir = mkSeededProject({});
+  const blob = buildInit(dir, 'verify-self');
+  assert.equal(blob.paths.external_docs_dir, '.sovereign/external-docs');
+  assert.equal(blob.paths.unverified_marker_spec, 'references/unverified-marker.md');
+});
+
+test('init anchor-docs/verify-self are greenfield-safe (empty dir, no throw)', () => {
+  const dir = mkEmptyProject();
+  for (const wf of ['anchor-docs', 'verify-self']) {
+    let blob;
+    assert.doesNotThrow(() => {
+      blob = buildInit(dir, wf);
+    }, `${wf} should not throw on a bare dir`);
+    assert.equal(blob.exists.sovereign_dir, false);
+    assert.deepEqual(blob.models, {}, `${wf} models should be {}`);
+  }
+});
+
 // ─── agents_installed / missing_agents (real filesystem check, plan 02-03) ───
 
 test('Test A: council with all required agents present → installed true, missing []', () => {

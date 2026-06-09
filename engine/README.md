@@ -1,6 +1,8 @@
-# sovereign-tools
+# sovereign-cli
 
-The SOVEREIGN engine: a **zero-dependency** CommonJS CLI (Node >= 20, no build step) that every SOVEREIGN skill calls to orient itself and mutate committed `.sovereign/` state. The source *is* the shipped artifact.
+Install with `npx sovereign-cli init`. The package ships two bins: **`sovereign-cli`** (the human installer/launcher) and **`sovereign-tools`** (the engine the skills call).
+
+The SOVEREIGN engine (`sovereign-tools`) is a **zero-dependency** CommonJS CLI (Node >= 20, no build step) that every SOVEREIGN skill calls to orient itself and mutate committed `.sovereign/` state. The source *is* the shipped artifact.
 
 **The load rule:** a skill runs ONE call — `sovereign-tools init <workflow>` — and gets all paths, config, resolved models, and phase status as a single JSON blob. It reads files only when it needs their content. Bookkeeping lives here, in code, not in tokens.
 
@@ -16,6 +18,7 @@ The SOVEREIGN engine: a **zero-dependency** CommonJS CLI (Node >= 20, no build s
 | `commit "<msg>" --files ...` | Commits iff `commit_docs` and not gitignored; sanitizes the message; returns the short hash. |
 | `model <agent>` / `resolve-model <agent>` | Resolves a subagent's model: per-agent override → `omit` → profile table → `sonnet`. |
 | `validate skills [paths...]` | Lints SKILL.md frontmatter (name ≤64, lowercase-hyphen, no `claude`/`anthropic`; description ≤1024). Exits non-zero on violation. |
+| `anchor add\|list\|check` | Anchor external docs under `.sovereign/external-docs/` (URL + `source`/`version`/`date-retrieved`/`re-verify-by` metadata; content opt-in via `--content`); `check` flags anchors past `re-verify-by`. Backs the `anchor-docs` / `verify-self` skills. |
 
 ## Conventions
 
