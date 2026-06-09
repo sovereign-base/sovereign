@@ -50,4 +50,15 @@ Derived from `/SOVEREIGN.md` §6 + the locked v1 designs in `archive/v1/`. Build
 
 ## Traceability
 
-<!-- Filled by roadmapper: REQ-ID → Phase -->
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| ENG-08 | Phase 10 — Engine Additions | Pending |
+| BRIDGE-01 | Phase 11 — Bridge Skill | Pending |
+| BRIDGE-02 | Phase 11 — Bridge Skill | Pending |
+| EXT-01 | Phase 12 — Extension Protocol Skill | Pending |
+| EXT-02 | Phase 12 — Extension Protocol Skill | Pending |
+| ADOPT-01 | Phase 13 — sovereign-adopt Skill | Pending |
+| ADOPT-02 | Phase 13 — sovereign-adopt Skill | Pending |
+| M3-CC | Phases 11, 12, 13 (cross-cutting) | Pending |
+
+**Coverage:** 8/8 M3 requirements mapped. No orphans. M3-CC is cross-cutting (a success criterion of each skill phase 11–13); all others map to exactly one phase.
