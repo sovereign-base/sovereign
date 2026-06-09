@@ -1,17 +1,17 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.3
-milestone_name: M4 — Ground Truth (Anti-Hallucination)
+milestone: v1.4
+milestone_name: M5 — Construction-phase skills (debugging · QA · security depth)
 status: active
-stopped_at: M5 (v1.4) initialized — roadmap approved (phases 17-19). Next: /gsd:plan-phase 17
-last_updated: "2026-06-09T18:45:41.648Z"
-last_activity: 2026-06-09 -- M5 (v1.4) started — diagnose + qa + security depth
+stopped_at: Phase 17 complete (diagnose skill, DIAG-01) — awaiting plan-phase 18
+last_updated: "2026-06-09T21:12:16.801Z"
+last_activity: 2026-06-09 -- Phase 17 complete (diagnose, verified 3/3)
 progress:
   total_phases: 3
-  completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
-  percent: 0
+  completed_phases: 1
+  total_plans: 1
+  completed_plans: 1
+  percent: 33
 ---
 
 # Project State
@@ -21,16 +21,17 @@ progress:
 See: .planning/PROJECT.md (Current Milestone: v1.3 — M4 Ground Truth / Anti-Hallucination)
 
 **Core value:** The engine — a skill orients itself with one CLI call (`sovereign-tools init <workflow>` → one JSON blob), not ten file reads. If the token-efficient engine + committed `.sovereign/` state works, everything else layers on cheaply.
-**Current focus:** M5 (v1.4) — Construction-phase skills: `diagnose` + `qa` + `security-design` depth. Next: `/gsd:plan-phase 17`.
+**Current focus:** Phase 18 — `qa` skill (diagnose ✅ complete). Next: `/gsd:plan-phase 18`.
 
 ## Current Position
 
-Milestone: v1.4 — M5 Construction-phase skills — initialized (roadmap approved)
-Phase: 17 of 19 (diagnose) — Not started
-Status: Roadmap approved (phases 17-19); ready for `/gsd:plan-phase 17`
-Last activity: 2026-06-09 -- M5 started
+Milestone: v1.4 — M5 Construction-phase skills
+Phase: 17 (diagnose-skill) — ✅ COMPLETE (verified 3/3); next Phase 18 (qa)
+Plan: 1 of 1 complete (17-01)
+Status: Phase 17 complete — next: `/gsd:plan-phase 18`
+Last activity: 2026-06-09 -- Phase 17 complete (DIAG-01)
 
-Progress: [░░░░░░░░░░] 0% — M5: Phase 17 ○, Phase 18 ○, Phase 19 ○
+Progress: [███░░░░░░░] 33% — M5: Phase 17 ✓, Phase 18 ○, Phase 19 ○
 
 ## Performance Metrics
 

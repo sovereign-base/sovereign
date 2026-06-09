@@ -21,7 +21,7 @@ Completed milestones are archived (full phase detail + final progress) under `.p
 
 ### Phases
 
-- [ ] **Phase 17: `diagnose` skill** - Stack-agnostic debugging loop (reproduce → isolate → hypothesis → fix → verify) over the engine + `.sovereign/` state; composes with `tdd`/`verify-self`/`sentinel` (DIAG-01, M5-CC)
+- [x] **Phase 17: `diagnose` skill** - Stack-agnostic debugging loop (reproduce → isolate → hypothesis → fix → verify) over the engine + `.sovereign/` state; composes with `tdd`/`verify-self`/`sentinel` (DIAG-01, M5-CC) ✅ 2026-06-09
 - [ ] **Phase 18: `qa` skill** - Relentless repo-wide correctness sweep (static correctness · tests · dep/wiring/import integrity · routing · cross-workspace consistency · API contract) over the project's own toolchain; ✅/❌/⚠️ report with `file:line` (QA-01, M5-CC)
 - [ ] **Phase 19: `security-design` controls enrichment + docs** - Agnostic `security-controls.md` reference (input validation · injection · authz/IDOR · secrets · rate-limiting) the skill consults + per-agent skill-invocation docs note (SEC-01, DOCS-01, M5-CC)
 
@@ -35,7 +35,7 @@ Completed milestones are archived (full phase detail + final progress) under `.p
   1. Running `diagnose` walks reproduce → isolate → hypothesis → fix → verify, recommendation-first, using the project's OWN test/run tooling (stack-agnostic — no hardcoded toolchain).
   2. It orients with a single `sovereign-tools init diagnose` (or generic init) call and composes with the shipped skills (failing test via `tdd`; unconfirmed root cause → `verify-self` marker; standards pass → `sentinel`).
   3. Core-tier thin-orchestrator shape; `disable-model-invocation: true` (doctor auto-budget held at 5); `validate skills` passes.
-**Plans**: 1 (17-01)
+**Plans**: 1 (17-01) — ✅ Complete 2026-06-09 (verified 3/3; doctor 19/5/14, validate passes, 164 engine tests green)
 
 ### Phase 18: `qa` skill
 **Goal**: A user can run `qa` to catch errors, type mismatches, broken imports/wiring, and contract drift across the whole repo before they hit a running build.
@@ -61,6 +61,6 @@ Completed milestones are archived (full phase detail + final progress) under `.p
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 17. `diagnose` skill | 0/? | Not started | - |
+| 17. `diagnose` skill | 1/1 | ✅ Complete | 2026-06-09 |
 | 18. `qa` skill | 0/? | Not started | - |
 | 19. `security-design` enrichment + docs | 0/? | Not started | - |

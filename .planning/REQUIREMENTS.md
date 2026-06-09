@@ -11,7 +11,7 @@ Construction/quality skills flagged during M4 live dogfooding + the locked v1 co
 
 ### diagnose — stack-agnostic debugging
 
-- [ ] **DIAG-01**: A user can run `diagnose` to debug a failure via a recommendation-first loop — **reproduce → isolate → hypothesis → fix → verify** — driven over the engine + committed `.sovereign/` state, **stack-agnostic** (uses the project's own test/run tooling, never a hardcoded toolchain). It composes with the shipped skills: write the failing test via `tdd`, mark an unconfirmed root cause via `verify-self` (`SOVEREIGN:UNVERIFIED`), and hands off to `sentinel` for the standards pass. Records the diagnosis trail so it survives the session.
+- [x] **DIAG-01**: A user can run `diagnose` to debug a failure via a recommendation-first loop — **reproduce → isolate → hypothesis → fix → verify** — driven over the engine + committed `.sovereign/` state, **stack-agnostic** (uses the project's own test/run tooling, never a hardcoded toolchain). It composes with the shipped skills: write the failing test via `tdd`, mark an unconfirmed root cause via `verify-self` (`SOVEREIGN:UNVERIFIED`), and hands off to `sentinel` for the standards pass. Records the diagnosis trail so it survives the session.
 
 ### qa — relentless project correctness sweep
 
@@ -53,7 +53,7 @@ Construction/quality skills flagged during M4 live dogfooding + the locked v1 co
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DIAG-01 | Phase 17 | Pending |
+| DIAG-01 | Phase 17 | Complete |
 | QA-01 | Phase 18 | Pending |
 | SEC-01 | Phase 19 | Pending |
 | DOCS-01 | Phase 19 | Pending |
