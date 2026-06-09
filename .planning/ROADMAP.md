@@ -127,7 +127,10 @@ M2 adds SOVEREIGN's Phase-3 (Architecture) design skills: the conversational, re
   3. `entity-design` offers ADR-worthy modeling choices to `adr-log` rather than re-implementing decision recording (the two skills compose).
   4. Both skills are thin orchestrators: each orients via a single `sovereign-tools init <skill>` call, opens with a plain-language "Why this matters" section, asks recommendation-first one question at a time, and ends with a navigation footer; both set `disable-model-invocation: true`.
   5. `sovereign-tools validate skills` passes for both skills and `sovereign-tools doctor` still reports the auto-trigger listing budget at the 5 Fast Lane skills (neither M2 skill is auto-triggerable).
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 06-01-PLAN.md — Author adr-log skill: 3-condition gate + NNNN numbering + minimal-form write to .sovereign/docs/adr/ (ARCH-01, ARCH-08)
+- [ ] 06-02-PLAN.md — Author entity-design skill: glossary-driven, one-piece-at-a-time, ENTITY_MODEL.md, offers adr-log (ARCH-02, ARCH-08)
 **UI hint**: no
 
 ### Phase 7: API Design
@@ -179,7 +182,7 @@ M2 phases execute in numeric order: 6 → 7 → 8 → 9
 | 3. Council `--standard` | 2/2 | Complete   | 2026-06-08 |
 | 4. Fast Lane Skills | 6/6 | Complete   | 2026-06-08 |
 | 5. Conventions + Per-Skill Docs | 3/3 | Complete   | 2026-06-09 |
-| 6. ADR Log + Entity Design | 0/? | Not started | - |
+| 6. ADR Log + Entity Design | 0/2 | Not started | - |
 | 7. API Design | 0/? | Not started | - |
 | 8. Stack & Scale Design | 0/? | Not started | - |
 | 9. Security & Deploy Design | 0/? | Not started | - |
