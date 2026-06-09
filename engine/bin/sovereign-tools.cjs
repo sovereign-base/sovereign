@@ -289,7 +289,12 @@ async function runCommand(command, args, cwd, raw, pick) {
       } else if (sub === 'save' || sub === 'patch') {
         // Parse positional --field NAME --value V pairs (repeatable, in order).
         const patches = parseFieldValuePairs(args.slice(2));
-        if (patches.length === 0) error('state patch: at least one --field/--value pair required');
+        // Skills call bare `state save` (no pairs) to regenerate MANIFEST;
+        // patchState re-derives MANIFEST regardless of patch count, so that must
+        // succeed. Only `state patch` requires at least one pair.
+        if (sub === 'patch' && patches.length === 0) {
+          error('state patch: at least one --field/--value pair required');
+        }
         cmdStatePatch(cwd, patches, raw);
       } else {
         error(`Unknown state subcommand: ${sub || '(none)'} (expected load|save|patch)`);

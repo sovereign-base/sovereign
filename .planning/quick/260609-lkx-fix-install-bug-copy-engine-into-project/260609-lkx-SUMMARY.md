@@ -69,6 +69,16 @@ Fixed the critical install bug where `npx sovereign-cli init` copied skills + ag
 - **Commit:** `447b529` (folded into Task 1, since it was required for Test B to go GREEN)
 - **Impact:** Init JSON contract untouched (the `sovereign_version` field and `output()`/`@file:` spill are unchanged); zero new runtime dependencies. Pre-existing install + init tests (36) and the full suite (137) remain green.
 
+### Deviation 2 — bare `state save` was rejected by the router (second layered install bug)
+
+**[Rule 1 - Bug] `state save` with no fields errored instead of regenerating MANIFEST**
+- **Found during:** post-fix verification of this same quick task.
+- **Issue:** Now that the engine is reachable (Deviation 1 / the main fix), the persist step still failed: every installed skill calls bare `state save` (no `--field`/`--value`) purely to regenerate MANIFEST, but the router's `state` case required at least one `--field`/`--value` pair for *both* `save` and `patch` and exited 1 on a bare `save`. `state.cjs#patchState` re-derives MANIFEST regardless of patch count (and only errors when STATE.md is absent), so the guard was wrong for `save`.
+- **Fix:** In `sovereign-tools.cjs` the empty-pair guard now fires only for `sub === 'patch'`. Bare `state save` (zero patches) flows through to `cmdStatePatch` → `patchState`, which regenerates MANIFEST and exits 0. `state save --field X --value Y` still works (patches flow through); `state patch` with no pair still exits 1.
+- **Tests:** `installed-engine.test.cjs` Test C rewritten to the real skill contract — bare `state save` via the installed path exits 0, reports `manifest_regenerated`, and regenerates a removed `.sovereign/MANIFEST.md`. New Test C2 locks the asymmetry: bare `state patch` still exits 1. The `$ENGINE` tripwire (Test D) is intact.
+- **Files modified:** `engine/bin/sovereign-tools.cjs`, `engine/test/installed-engine.test.cjs`
+- **Impact:** Init JSON contract, `output()`/`@file:` spill, and `parseFieldValuePairs` untouched; zero new runtime deps. Full suite: 138 tests, 0 fail.
+
 ## Verification
 
 - `cd engine && node --test "test/**/*.test.cjs"` → 137 tests, 137 pass, 0 fail.
