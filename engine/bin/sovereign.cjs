@@ -107,6 +107,8 @@ function renderHuman(r) {
     say('    Already have code? run \x1b[36m/sovereign-adopt\x1b[0m instead.');
   }
   say('');
+  say('  \x1b[2mInvoking: in Claude Code type /skill-name; in other SKILL.md agents (Gemini CLI, …),\x1b[0m');
+  say('  \x1b[2mopen the skill\x27s SKILL.md under .claude/skills/ and invoke it by name.\x1b[0m');
   say('  \x1b[2mDocs: https://github.com/sovereign-base/sovereign  ·  these skills run inside your agent (Claude Code & SKILL.md-compatible tools).\x1b[0m');
   say('');
 }
