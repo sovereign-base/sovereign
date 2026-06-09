@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.3
 milestone_name: M4 — Ground Truth (Anti-Hallucination)
-status: between_milestones
-stopped_at: v1.3 (M4) complete, archived + tagged. Between milestones — run /gsd:new-milestone for the next.
+status: active
+stopped_at: M5 (v1.4) initialized — roadmap approved (phases 17-19). Next: /gsd:plan-phase 17
 last_updated: "2026-06-09T18:45:41.648Z"
-last_activity: 2026-06-09 -- v1.3 (M4) milestone archived (6/6 reqs)
+last_activity: 2026-06-09 -- M5 (v1.4) started — diagnose + qa + security depth
 progress:
   total_phases: 3
-  completed_phases: 3
-  total_plans: 3
-  completed_plans: 3
-  percent: 100
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (Current Milestone: v1.3 — M4 Ground Truth / Anti-Hallucination)
 
 **Core value:** The engine — a skill orients itself with one CLI call (`sovereign-tools init <workflow>` → one JSON blob), not ten file reads. If the token-efficient engine + committed `.sovereign/` state works, everything else layers on cheaply.
-**Current focus:** Between milestones — M4 (v1.3) shipped & archived. Next: `/gsd:new-milestone` (candidates in BACKLOG.md).
+**Current focus:** M5 (v1.4) — Construction-phase skills: `diagnose` + `qa` + `security-design` depth. Next: `/gsd:plan-phase 17`.
 
 ## Current Position
 
-Milestone: v1.3 — M4 Ground Truth — ✅ COMPLETE, archived to milestones/v1.3-*, tagged v1.3
-Phases 14–16: all ✅ verified (6/6 requirements)
-Status: Between milestones — REQUIREMENTS.md cleared; run `/gsd:new-milestone` to scope the next
-Last activity: 2026-06-09 -- v1.3 archived
+Milestone: v1.4 — M5 Construction-phase skills — initialized (roadmap approved)
+Phase: 17 of 19 (diagnose) — Not started
+Status: Roadmap approved (phases 17-19); ready for `/gsd:plan-phase 17`
+Last activity: 2026-06-09 -- M5 started
 
-Progress: [██████████] 100% — M4 complete (14 ✓, 15 ✓, 16 ✓)
+Progress: [░░░░░░░░░░] 0% — M5: Phase 17 ○, Phase 18 ○, Phase 19 ○
 
 ## Performance Metrics
 

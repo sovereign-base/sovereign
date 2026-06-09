@@ -1,0 +1,62 @@
+# SOVEREIGN — Requirements (Milestone M5: Construction-phase skills · v1.4)
+
+Construction/quality skills flagged during M4 live dogfooding + the locked v1 construction-phase designs (`archive/v1/SOVEREIGN_PROJECT.md` §6). Builds on the verified, published M1–M4 (`sovereign-cli@2.3.0`).
+"User" = an engineer or agent using SOVEREIGN inside their own project.
+
+> **M1 (v1.0, 28/28) + M2 (v1.1, 8/8) + M3 (v1.2, 8/8) + M4 (v1.3, 6/6) shipped, verified, published.** This document scopes **M5**.
+
+---
+
+## M5 Requirements
+
+### diagnose — stack-agnostic debugging
+
+- [ ] **DIAG-01**: A user can run `diagnose` to debug a failure via a recommendation-first loop — **reproduce → isolate → hypothesis → fix → verify** — driven over the engine + committed `.sovereign/` state, **stack-agnostic** (uses the project's own test/run tooling, never a hardcoded toolchain). It composes with the shipped skills: write the failing test via `tdd`, mark an unconfirmed root cause via `verify-self` (`SOVEREIGN:UNVERIFIED`), and hands off to `sentinel` for the standards pass. Records the diagnosis trail so it survives the session.
+
+### qa — relentless project correctness sweep
+
+- [ ] **QA-01**: A user can run `qa` to sweep the whole repo for correctness before it fails in a running build — per workspace/module, using **whatever toolchain that module uses**: (1) static correctness (typecheck/compile in check mode, schema validation, lint), (2) unit + integration tests, (3) dependency & wiring integrity (DI/service wiring registered+imported+exported, import resolution, version alignment, example-config ↔ code-read config), (4) navigation/routing targets resolve, (5) cross-workspace consistency (single shared-runtime version, shared/contract types match producers↔consumers, schema↔types, API contract vs `.sovereign/docs/api/API_SPEC.md`). Reports ✅/❌/⚠️ grouped by module then category, ❌ with exact error + `file:line`, ending in a one-line verdict (pass / fail with N blocking). Stack-agnostic; delegates to the project's own `qa` command when present, else the per-module equivalents. Composes with `diagnose` (failures → debug) and complements `sentinel` (mechanical correctness vs standards). *(Source spec preserved at `.planning/research/qa-skill-source-spec.md`.)*
+
+### security depth
+
+- [ ] **SEC-01**: `security-design` drives concrete **security-control coverage** beyond the layered model it already scopes — input validation, injection classes (SQLi/XSS/command), authz/IDOR, secrets handling, rate-limiting — via an agnostic **`security-controls.md` reference** (control *classes* + what-to-verify, NOT framework APIs) the skill consults and offers as a checklist. Re-running `security-design` surfaces uncovered control classes for the current design.
+
+### docs / cross-agent
+
+- [ ] **DOCS-01**: Document per-agent skill invocation differences — Claude Code surfaces skills via `/`-autocomplete; other agents (Gemini CLI, etc.) read `SKILL.md` and invoke by name (no `/skill` menu) — in the README + the `npx sovereign-cli init` output, so non-Claude users know how to run the skills.
+
+### cross-cutting
+
+- [ ] **M5-CC**: New/changed skills follow the core-tier thin-orchestrator shape per `skill-format.md` / ADR-014 — one `sovereign-tools init <skill>` orient call, "Why this matters", recommendation-first where it fits, navigation footer. New skills (`diagnose`, `qa`) set `disable-model-invocation: true` so `sovereign-tools doctor` holds the auto-trigger budget at the 5 Fast Lane skills; `validate skills` passes for every new/changed skill. No/minimal engine work — reuse the shipped engine; a small `init` orient case per new skill is allowed, but flag any deeper engine gap rather than silently expanding scope.
+
+---
+
+## Deferred (M6+)
+
+- `security-review` as a *separate* construction skill (audit existing code against the controls reference, distinct from `sentinel`) — M5 enriches `security-design`; a dedicated review skill can follow.
+- Other v1 §6 construction skills: `vertical-slice`, `zoom-out`, `improve-architecture`, `code-patterns`.
+- Tracks layer (ADR-014 — DSA + database skills home), operations phase, multi-model Council (`--deep`), microservices overlay, IoT/embedded.
+- A pre-flight deploy-gate that BLOCKS on stale anchors / unresolved `SOVEREIGN:UNVERIFIED` markers / failing `qa` (M4/M5 surface only).
+
+---
+
+## Out of Scope
+
+- A built-in test runner / linter / type checker — `qa` and `diagnose` drive the **project's own** toolchain; the engine stays zero-dep and never bundles language tooling.
+- Framework-specific control or check logic — everything stays at the level of *classes* (a control class, a check category), keeping the skills stack-agnostic.
+- Auto-fixing what `qa`/`diagnose` find without the user — they surface + recommend; the user (or a follow-up skill) acts.
+- Monetization — open source only (ADR-001).
+
+---
+
+## Traceability
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| DIAG-01 | Phase 17 | Pending |
+| QA-01 | Phase 18 | Pending |
+| SEC-01 | Phase 19 | Pending |
+| DOCS-01 | Phase 19 | Pending |
+| M5-CC | Phase 17 + 18 + 19 (cross-cutting) | Pending |
+
+**Coverage: 5/5 M5 requirements mapped.** M5-CC is the cross-cutting gate applied to every skill phase (17–19).
