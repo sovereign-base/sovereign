@@ -23,7 +23,7 @@ A **thin orchestrator** — orient once, then run the cycle using the **project'
 
 **1 — Orient (one call).**
 ```bash
-INIT=$(node "$ENGINE/bin/sovereign-tools.cjs" init tdd)
+INIT=$(node ".claude/sovereign-engine/sovereign-tools.cjs" init tdd)
 if [[ "$INIT" == @file:* ]]; then INIT=$(cat "${INIT#@file:}"); fi
 ```
 Parse `context_injection.glossary_path` so test + code names use the project's vocabulary. Detect the project's existing test command (don't introduce a new framework).

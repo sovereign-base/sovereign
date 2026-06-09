@@ -23,7 +23,7 @@ A **thin orchestrator** over the engine — recommendation-first, budget-first. 
 
 **1 — Orient (one call).**
 ```bash
-INIT=$(node "$ENGINE/bin/sovereign-tools.cjs" init deploy-design)
+INIT=$(node ".claude/sovereign-engine/sovereign-tools.cjs" init deploy-design)
 if [[ "$INIT" == @file:* ]]; then INIT=$(cat "${INIT#@file:}"); fi
 ```
 Parse `paths.state` + project context. Read `STACK.md`/`SCALE_STRATEGY.md`/`SECURITY_MODEL.md` by path if present — infra must honor all three.

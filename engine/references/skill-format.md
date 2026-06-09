@@ -25,7 +25,7 @@ v1 used `triggers`, `works-best-with`, `min-model`, `tokens`, and a bare `phase`
 A skill orients with **exactly one** call and reads nothing else to orient:
 
 ```bash
-INIT=$(node "$ENGINE/bin/sovereign-tools.cjs" init <skill-name>)
+INIT=$(node ".claude/sovereign-engine/sovereign-tools.cjs" init <skill-name>)
 if [[ "$INIT" == @file:* ]]; then INIT=$(cat "${INIT#@file:}"); fi
 ```
 

@@ -23,7 +23,7 @@ A **thin orchestrator** — it wraps the engine's `extension` commands (which dr
 
 **1 — Orient (one call).**
 ```bash
-INIT=$(node "$ENGINE/bin/sovereign-tools.cjs" init extension)
+INIT=$(node ".claude/sovereign-engine/sovereign-tools.cjs" init extension)
 if [[ "$INIT" == @file:* ]]; then INIT=$(cat "${INIT#@file:}"); fi
 ```
 Parse the extensions dir (`.sovereign/extensions/`), config, and the project's active tracks / current phase. Zero other orientation reads.

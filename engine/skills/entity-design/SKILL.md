@@ -23,7 +23,7 @@ A **thin orchestrator** over the engine — conversational and recommendation-fi
 
 **1 — Orient (one call).**
 ```bash
-INIT=$(node "$ENGINE/bin/sovereign-tools.cjs" init entity-design)
+INIT=$(node ".claude/sovereign-engine/sovereign-tools.cjs" init entity-design)
 if [[ "$INIT" == @file:* ]]; then INIT=$(cat "${INIT#@file:}"); fi
 ```
 Parse `context_injection.glossary_path` (the `.sovereign/CONTEXT.md` glossary) and `paths.state`. Read the glossary content — its terms are your entity vocabulary.
@@ -41,7 +41,7 @@ Ask one question, give your recommended answer first, wait, then continue.
 
 **5 — Record the model.** Write/update `.sovereign/docs/ENTITY_MODEL.md`: a per-entity block (definition · attributes · relationships), grouped by bounded context, with a short relationships overview. Keep it model-level — no SQL, no migrations, no code.
 
-**6 — Persist.** `node "$ENGINE/bin/sovereign-tools.cjs" state save`, then `node "$ENGINE/bin/sovereign-tools.cjs" commit "entity-design: <area>" --files .sovereign/docs/ENTITY_MODEL.md .sovereign/STATE.md .sovereign/MANIFEST.md`.
+**6 — Persist.** `node ".claude/sovereign-engine/sovereign-tools.cjs" state save`, then `node ".claude/sovereign-engine/sovereign-tools.cjs" commit "entity-design: <area>" --files .sovereign/docs/ENTITY_MODEL.md .sovereign/STATE.md .sovereign/MANIFEST.md`.
 
 ## ENTITY_MODEL.md format
 

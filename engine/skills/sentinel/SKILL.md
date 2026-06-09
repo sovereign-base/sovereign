@@ -23,7 +23,7 @@ A **thin orchestrator** — orient once, dispatch the reviewer, render the verdi
 
 **1 — Orient (one call).**
 ```bash
-INIT=$(node "$ENGINE/bin/sovereign-tools.cjs" init sentinel)
+INIT=$(node ".claude/sovereign-engine/sovereign-tools.cjs" init sentinel)
 if [[ "$INIT" == @file:* ]]; then INIT=$(cat "${INIT#@file:}"); fi
 ```
 Parse `models.*`, `context_injection.relevant_adrs`, the spec paths, and `agents_installed` / `missing_agents`.

@@ -26,7 +26,7 @@ The skill is a **thin orchestrator** — it orients with one engine call and del
 
 **1 — Orient (one call).**
 ```bash
-INIT=$(node "$ENGINE/bin/sovereign-tools.cjs" init ubiquitous-language)
+INIT=$(node ".claude/sovereign-engine/sovereign-tools.cjs" init ubiquitous-language)
 if [[ "$INIT" == @file:* ]]; then INIT=$(cat "${INIT#@file:}"); fi
 ```
 Parse `context_injection.glossary_path` (the `.sovereign/CONTEXT.md` to read/write) and `paths.state`. Read the current glossary content (only now) so you know what's already defined. Perform no other orientation reads.
@@ -39,7 +39,7 @@ Parse `context_injection.glossary_path` (the `.sovereign/CONTEXT.md` to read/wri
 
 Resolve terms one at a time; do not dump a wall of definitions.
 
-**3 — Persist.** After terms are written: `node "$ENGINE/bin/sovereign-tools.cjs" state save` (regenerates MANIFEST), then commit via `sovereign-tools commit` if appropriate. The skill never hand-writes state bookkeeping.
+**3 — Persist.** After terms are written: `node ".claude/sovereign-engine/sovereign-tools.cjs" state save` (regenerates MANIFEST), then commit via `sovereign-tools commit` if appropriate. The skill never hand-writes state bookkeeping.
 
 ## CONTEXT.md format
 

@@ -23,7 +23,7 @@ A **thin orchestrator** over the engine — recommendation-first, by layer. Dele
 
 **1 — Orient (one call).**
 ```bash
-INIT=$(node "$ENGINE/bin/sovereign-tools.cjs" init security-design)
+INIT=$(node ".claude/sovereign-engine/sovereign-tools.cjs" init security-design)
 if [[ "$INIT" == @file:* ]]; then INIT=$(cat "${INIT#@file:}"); fi
 ```
 Parse `paths.state` + project context. Read `ENTITY_MODEL.md`/`STACK.md` by path if present — data sensitivity and attack surface are entity- and stack-shaped.
