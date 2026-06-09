@@ -110,7 +110,7 @@ M2 adds SOVEREIGN's Phase-3 (Architecture) design skills: the conversational, re
 
 ## Phases
 
-- [ ] **Phase 6: ADR Log + Entity Design** - Record decisions to `.sovereign/docs/adr/` (the 3-condition gate) and model the domain one entity at a time — the foundation every later architecture skill builds on
+- [x] **Phase 6: ADR Log + Entity Design** - Record decisions to `.sovereign/docs/adr/` (the 3-condition gate) and model the domain one entity at a time — the foundation every later architecture skill builds on (completed 2026-06-09)
 - [ ] **Phase 7: API Design** - Contract-first, protocol-agnostic API design producing a living `API_SPEC.md` over the Phase-6 entities
 - [ ] **Phase 8: Stack & Scale Design** - Recommendation-first stack selection and a scaling-strategy conversation, each recording ADR-worthy decisions
 - [ ] **Phase 9: Security & Deploy Design** - Layered `SECURITY_MODEL.md` and budget-aware `DEPLOY_MODEL.md` — closing out the Architecture phase
@@ -129,8 +129,8 @@ M2 adds SOVEREIGN's Phase-3 (Architecture) design skills: the conversational, re
   5. `sovereign-tools validate skills` passes for both skills and `sovereign-tools doctor` still reports the auto-trigger listing budget at the 5 Fast Lane skills (neither M2 skill is auto-triggerable).
 **Plans**: 2 plans
 Plans:
-- [ ] 06-01-PLAN.md — Author adr-log skill: 3-condition gate + NNNN numbering + minimal-form write to .sovereign/docs/adr/ (ARCH-01, ARCH-08)
-- [ ] 06-02-PLAN.md — Author entity-design skill: glossary-driven, one-piece-at-a-time, ENTITY_MODEL.md, offers adr-log (ARCH-02, ARCH-08)
+- [x] 06-01-PLAN.md — Author adr-log skill: 3-condition gate + NNNN numbering + minimal-form write to .sovereign/docs/adr/ (ARCH-01, ARCH-08)
+- [x] 06-02-PLAN.md — Author entity-design skill: glossary-driven, one-piece-at-a-time, ENTITY_MODEL.md, offers adr-log (ARCH-02, ARCH-08)
 **UI hint**: no
 
 ### Phase 7: API Design
@@ -182,7 +182,7 @@ M2 phases execute in numeric order: 6 → 7 → 8 → 9
 | 3. Council `--standard` | 2/2 | Complete   | 2026-06-08 |
 | 4. Fast Lane Skills | 6/6 | Complete   | 2026-06-08 |
 | 5. Conventions + Per-Skill Docs | 3/3 | Complete   | 2026-06-09 |
-| 6. ADR Log + Entity Design | 0/2 | Not started | - |
+| 6. ADR Log + Entity Design | 2/2 | Complete   | 2026-06-09 |
 | 7. API Design | 0/? | Not started | - |
 | 8. Stack & Scale Design | 0/? | Not started | - |
 | 9. Security & Deploy Design | 0/? | Not started | - |
