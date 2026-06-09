@@ -76,6 +76,12 @@ None yet.
 - **"Last verified anchor" boundary (MEDIUM):** `verify-self`'s retroactive audit needs a notion of "since the last verified anchor." Decide during Phase 16 planning how that boundary is derived (e.g. from `anchor` metadata dates / git history) — the engine stores the dates; the skill applies the judgment.
 - **ADR-004 copyright warning placement (LOW):** confirm the opt-in full-content path surfaces the copyright warning at the skill layer (judgment) while the engine just stores what it's given.
 
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 260609-lkx | Fix install bug: copy engine into project so installed skills can reach sovereign-tools (+ bare `state save` regenerates MANIFEST) | 2026-06-09 | 78ec6cc | [260609-lkx-fix-install-bug-copy-engine-into-project](./quick/260609-lkx-fix-install-bug-copy-engine-into-project/) |
+
 ## Session Continuity
 
 Last session: 2026-06-09T14:39:57.000Z
