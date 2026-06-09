@@ -83,7 +83,8 @@ M3 extends SOVEREIGN beyond a single fresh project — retrofit it onto an exist
   3. The skill reads and records only — it never modifies the user's source code — and scopes to greenfield-with-code + Type-2 mid-flight (Type-3 legacy stays deferred).
   4. The skill is a thin orchestrator: single `sovereign-tools init adopt` orient call, "Why this matters" section, recommendation-first output, navigation footer, and `disable-model-invocation: true`.
   5. `sovereign-tools validate skills` passes for `sovereign-adopt` and `sovereign-tools doctor` confirms the auto-trigger listing budget remains at the 5 Fast Lane skills after all three M3 skills are installed.
-**Plans**: TBD
+**Plans**: 1 plan
+  - [ ] 13-01-PLAN.md — hand-authored `sovereign-adopt` thin-orchestrator skill: 3-layer archaeology (adopt scan + Layer-3 deep reads) -> scaffold .sovereign/ + retro-ADRs via adr-log + risk-prioritized gap/roadmap to ADOPTION.md (ADOPT-01/02 + M3-CC)
 **UI hint**: no
 
 ## Progress (M3)
@@ -93,4 +94,4 @@ M3 extends SOVEREIGN beyond a single fresh project — retrofit it onto an exist
 | 10. Engine Additions | 5/5 | Complete   | 2026-06-09 |
 | 11. Bridge Skill | 1/1 | Complete   | 2026-06-09 |
 | 12. Extension Protocol Skill | 2/2 | Complete   | 2026-06-09 |
-| 13. sovereign-adopt Skill | 0/TBD | Not started | - |
+| 13. sovereign-adopt Skill | 0/1 | Not started | - |
