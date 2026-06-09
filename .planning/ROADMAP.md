@@ -21,7 +21,7 @@ Completed milestones are archived (full phase detail + final progress) under `.p
 ### Phases
 
 - [x] **Phase 14: Engine `anchor` command + init workflows** - Zero-dep `anchor add|list|check` over `.sovereign/external-docs/` + `init anchor-docs`/`init verify-self` orient blobs, fully `node --test`'d (ENG-09) ✅ 2026-06-09
-- [ ] **Phase 15: `anchor-docs` skill** - Thin orchestrator that wraps the engine `anchor` command to ingest external docs (URL-by-default, content opt-in) and surface stale anchors (ANCHOR-01/02, M4-CC)
+- [x] **Phase 15: `anchor-docs` skill** - Thin orchestrator that wraps the engine `anchor` command to ingest external docs (URL-by-default, content opt-in) and surface stale anchors (ANCHOR-01/02, M4-CC) ✅ 2026-06-09
 - [ ] **Phase 16: `verify-self` skill** - Thin orchestrator: hard-stop + retroactive audit + 3 user choices, composes with `anchor-docs`, emits `SOVEREIGN:UNVERIFIED` markers `sentinel` scans (VERIFY-01/02, M4-CC)
 
 ### Phase Details
@@ -45,7 +45,7 @@ Completed milestones are archived (full phase detail + final progress) under `.p
   1. A user invoking `anchor-docs` ingests external documentation (payment gateways, SDKs, regional/gov APIs) — storing the URL by default, with full content opt-in gated behind a copyright warning (ADR-004) — by delegating to the engine `anchor add` command rather than reimplementing storage.
   2. The skill orients with a single `sovereign-tools init anchor-docs` call (no ten-file reads) and follows the core-tier thin-orchestrator shape: "Why this matters", recommendation-first, navigation footer.
   3. The skill sets `disable-model-invocation: true`, so `sovereign-tools doctor` still reports the auto-trigger budget at the 5 Fast Lane skills (budget held at 5), and `sovereign-tools validate skills` passes for it.
-**Plans**: 1 (15-01)
+**Plans**: 1 (15-01) — ✅ Complete 2026-06-09 (verified 3/3; doctor auto_count=5, validate passes, 164 engine tests green)
 
 ### Phase 16: `verify-self` skill
 **Goal**: When the agent (or user) hits a low-confidence signal, `verify-self` hard-stops, audits recent unverified work, and forces a deliberate resolution before more wrong code ships.

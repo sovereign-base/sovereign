@@ -11,7 +11,7 @@ Derived from `/SOVEREIGN.md` §6 + the locked Ground Truth System design in `arc
 
 ### anchor-docs — anchor implementation to current external docs
 
-- [ ] **ANCHOR-01**: A user can run `anchor-docs` to ingest external documentation the agent's training may be stale on (payment gateways, SDKs, regional/gov APIs). It stores the **URL by default** (full content opt-in, with a copyright warning, per ADR-004) under `.sovereign/external-docs/<slug>.md` with metadata headers: `source`, `version`, `date-retrieved`, `re-verify-by`.
+- [x] **ANCHOR-01**: A user can run `anchor-docs` to ingest external documentation the agent's training may be stale on (payment gateways, SDKs, regional/gov APIs). It stores the **URL by default** (full content opt-in, with a copyright warning, per ADR-004) under `.sovereign/external-docs/<slug>.md` with metadata headers: `source`, `version`, `date-retrieved`, `re-verify-by`.
 - [ ] **ANCHOR-02**: `anchor-docs` lists anchored docs and **flags stale anchors** (those past `re-verify-by`) so the user knows what needs re-checking before relying on it. (Pre-flight deploy-gate *blocking* on stale anchors stays deferred — M4 surfaces, like bridge staleness.)
 
 ### verify-self — catch the agent's own uncertainty
@@ -48,7 +48,7 @@ Derived from `/SOVEREIGN.md` §6 + the locked Ground Truth System design in `arc
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | ENG-09 | Phase 14 | Complete |
-| ANCHOR-01 | Phase 15 | Pending |
+| ANCHOR-01 | Phase 15 | Complete |
 | ANCHOR-02 | Phase 16 | Pending |
 | VERIFY-01 | Phase 16 | Pending |
 | VERIFY-02 | Phase 16 | Pending |
