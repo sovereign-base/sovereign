@@ -35,7 +35,7 @@ Completed milestones are archived (full phase detail + final progress) under `.p
   1. Running `diagnose` walks reproduce → isolate → hypothesis → fix → verify, recommendation-first, using the project's OWN test/run tooling (stack-agnostic — no hardcoded toolchain).
   2. It orients with a single `sovereign-tools init diagnose` (or generic init) call and composes with the shipped skills (failing test via `tdd`; unconfirmed root cause → `verify-self` marker; standards pass → `sentinel`).
   3. Core-tier thin-orchestrator shape; `disable-model-invocation: true` (doctor auto-budget held at 5); `validate skills` passes.
-**Plans**: TBD
+**Plans**: 1 (17-01)
 
 ### Phase 18: `qa` skill
 **Goal**: A user can run `qa` to catch errors, type mismatches, broken imports/wiring, and contract drift across the whole repo before they hit a running build.
