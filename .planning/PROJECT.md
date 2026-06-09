@@ -24,25 +24,19 @@ It is for engineers and agents who want to build properly — and refuse to let 
 - ✓ `council --standard` (5 parallel advisors + anonymous peer review + chairman verdict) + 4 subagents — M1
 - ✓ Conventions (skill-format, adr-format, commenting, unverified-marker, listing-budget) + per-skill docs — M1
 
-**Shipped:** **v1.0 (M1)** + **v1.1 (M2)** + **v1.2 (M3)**, all complete, verified, tagged, and **PUBLISHED** — `sovereign-cli@2.0.0` is live on npm and `main` reflects the release. 16 skills + 4 subagents + 5 references + 15 engine lib modules; 129 tests; listing budget held at 5 auto-triggerable. `/council`, the `npx skills` extension protocol, and the published `npx sovereign-cli init` are all proven live. Milestone detail archived under `.planning/milestones/`.
+**Shipped:** **v1.0 (M1)** + **v1.1 (M2)** + **v1.2 (M3)** + **v1.3 (M4)**, all complete and verified. M1–M3 published as `sovereign-cli@2.0.0`; the **2.2.0 install fix** (engine copied into `.claude/sovereign-engine/`, `state save`, version) is merged to `main`; **M4 is verified but not yet published** (would ship as 2.3.0). **18 skills** + 4 subagents + 5 references + 16 engine lib modules; **164 engine tests; listing budget held at 5 auto-triggerable across all four milestones.** `/council`, the `npx skills` extension protocol, and the published `npx sovereign-cli init` are proven live (Claude Code + Gemini CLI). The anti-hallucination loop is closed: `anchor-docs` → `verify-self` → `sentinel`. Milestone detail archived under `.planning/milestones/`.
 
-## Current Milestone: v1.3 — M4 Ground Truth (anti-hallucination)
+## Current State: between milestones (M4 shipped)
 
-**Goal:** Close the anti-hallucination loop the architecture/construction skills already flag — give SOVEREIGN a way to anchor implementation to *current* external documentation and to catch its own uncertainty before it ships wrong code. Modest zero-dep engine surface + two hand-authored skills.
+**v1.3 — M4 Ground Truth (anti-hallucination) is complete & verified (2026-06-09).** The anti-hallucination loop the architecture/construction skills flagged is now closed. Validated this milestone:
 
-**Target capabilities:** `anchor-docs` (ingest/version external docs) · `verify-self` (self-interrogation + the 3-step retroactive audit + `SOVEREIGN:UNVERIFIED` generation).
+- ✓ `anchor-docs` — ingests external documentation (payment gateways, SDKs, regional/gov APIs); stores URLs by default (full content opt-in behind a copyright warning, ADR-004) in `.sovereign/external-docs/` with `source`/`version`/`date-retrieved`/`re-verify-by` headers; surfaces stale anchors. — **v1.3** (ANCHOR-01/02)
+- ✓ `verify-self` — hard-stop on low confidence → retroactive audit of code since the last verified anchor → 3-way decision (provide docs via `anchor-docs` / mark `SOVEREIGN:UNVERIFIED` / discard+restart); emits the markers `sentinel` scans. — **v1.3** (VERIFY-01/02)
+- ✓ Zero-dep engine `anchor add|list|check` command + `init anchor-docs`/`init verify-self` workflows; both skills are core-tier thin orchestrators (`disable-model-invocation: true`) that compose. — **v1.3** (ENG-09, M4-CC)
 
-### Active
+### Next milestone candidates (parked in BACKLOG.md)
 
-<!-- M4 — Ground Truth (anti-hallucination). -->
-
-- [ ] `anchor-docs` — ingest external documentation the agent's training may be stale on (payment gateways, SDKs, regional/gov APIs); store URLs by default (full content opt-in with a copyright warning, ADR-004) in `.sovereign/external-docs/` with `source`/`version`/`date-retrieved`/`re-verify-by` headers; flag stale anchors.
-- [ ] `verify-self` — agent self-interrogation on low-confidence signals: hard-stop → retroactive audit of code since the last verified anchor → user decision (provide docs via `anchor-docs` / mark `SOVEREIGN:UNVERIFIED` / discard+restart); generates the `SOVEREIGN:UNVERIFIED` markers (spec shipped M1, scanned by `sentinel`).
-- [ ] Modest zero-dep engine `anchor` command (store/list/check-stale external-doc metadata in `.sovereign/external-docs/`) + `init` workflows; both skills are core-tier thin orchestrators (`disable-model-invocation`, per ADR-014) that compose (`verify-self` → `anchor-docs`).
-
-### Deferred to a later milestone
-
-- Tracks layer (ADR-014 — DSA + database skills home), operations phase, multi-model Council (`--deep`), microservices overlay, IoT/embedded — M5+.
+- A `diagnose`/debugging skill (live-use demand); `security-design` enrichment (input validation, injection, authz, secrets); the tracks layer (ADR-014 — DSA + database skills home); operations phase; multi-model Council (`--deep`); IoT/embedded — start with `/gsd:new-milestone` (or `/gsd:review-backlog`).
 
 ### Out of Scope
 
@@ -94,4 +88,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-06-08 after initialization*
+*Last updated: 2026-06-09 after v1.3 (M4 — Ground Truth) milestone*

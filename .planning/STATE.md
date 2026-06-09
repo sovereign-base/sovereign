@@ -2,10 +2,10 @@
 gsd_state_version: 1.0
 milestone: v1.3
 milestone_name: M4 — Ground Truth (Anti-Hallucination)
-status: milestone_complete
-stopped_at: M4 complete — all 3 phases verified (ENG-09, ANCHOR-01/02, VERIFY-01/02, M4-CC). Ready for /gsd:complete-milestone v1.3
+status: between_milestones
+stopped_at: v1.3 (M4) complete, archived + tagged. Between milestones — run /gsd:new-milestone for the next.
 last_updated: "2026-06-09T18:45:41.648Z"
-last_activity: 2026-06-09 -- Phase 16 complete (verify-self); M4 done 3/3
+last_activity: 2026-06-09 -- v1.3 (M4) milestone archived (6/6 reqs)
 progress:
   total_phases: 3
   completed_phases: 3
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (Current Milestone: v1.3 — M4 Ground Truth / Anti-Hallucination)
 
 **Core value:** The engine — a skill orients itself with one CLI call (`sovereign-tools init <workflow>` → one JSON blob), not ten file reads. If the token-efficient engine + committed `.sovereign/` state works, everything else layers on cheaply.
-**Current focus:** M4 complete — ready to archive (`/gsd:complete-milestone v1.3`)
+**Current focus:** Between milestones — M4 (v1.3) shipped & archived. Next: `/gsd:new-milestone` (candidates in BACKLOG.md).
 
 ## Current Position
 
-Phase: 16 (verify-self-skill) — ✅ COMPLETE (verified 4/4) — M4 capstone
-Plan: 1 of 1 complete (16-01)
-Status: ✅ M4 (Ground Truth) COMPLETE — all 3 phases verified, 6/6 requirements
-Last activity: 2026-06-09 -- Phase 16 complete; M4 done
+Milestone: v1.3 — M4 Ground Truth — ✅ COMPLETE, archived to milestones/v1.3-*, tagged v1.3
+Phases 14–16: all ✅ verified (6/6 requirements)
+Status: Between milestones — REQUIREMENTS.md cleared; run `/gsd:new-milestone` to scope the next
+Last activity: 2026-06-09 -- v1.3 archived
 
-Progress: [██████████] 100% — M4: Phase 14 ✓, Phase 15 ✓, Phase 16 ✓
+Progress: [██████████] 100% — M4 complete (14 ✓, 15 ✓, 16 ✓)
 
 ## Performance Metrics
 
