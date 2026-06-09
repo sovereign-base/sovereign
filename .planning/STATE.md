@@ -2,10 +2,10 @@
 gsd_state_version: 1.0
 milestone: v1.4
 milestone_name: M5 — Construction-phase skills (debugging · QA · security depth)
-status: milestone_complete
-stopped_at: M5 complete — all 3 phases verified (DIAG-01, QA-01, SEC-01, DOCS-01, M5-CC). Ready for /gsd:complete-milestone v1.4
+status: between_milestones
+stopped_at: v1.4 (M5) complete, archived + tagged; staged for 2.4.0 publish. Between milestones — /gsd:new-milestone for the next.
 last_updated: "2026-06-09T22:26:04.835Z"
-last_activity: 2026-06-09 -- Phase 19 complete; M5 done 3/3
+last_activity: 2026-06-09 -- v1.4 (M5) milestone archived (5/5 reqs)
 progress:
   total_phases: 3
   completed_phases: 3
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (Current Milestone: v1.3 — M4 Ground Truth / Anti-Hallucination)
 
 **Core value:** The engine — a skill orients itself with one CLI call (`sovereign-tools init <workflow>` → one JSON blob), not ten file reads. If the token-efficient engine + committed `.sovereign/` state works, everything else layers on cheaply.
-**Current focus:** M5 complete — ready to archive (`/gsd:complete-milestone v1.4`), then publish 2.4.0.
+**Current focus:** Between milestones — M5 (v1.4) shipped & archived, staged for 2.4.0. Next: `/gsd:new-milestone` (candidates in BACKLOG.md).
 
 ## Current Position
 
-Milestone: v1.4 — M5 Construction-phase skills — ✅ COMPLETE (all 3 phases verified, 5/5 requirements)
-Phases 17–19: all ✅ verified
-Status: ✅ M5 COMPLETE — next: `/gsd:complete-milestone v1.4`
-Last activity: 2026-06-09 -- M5 done (diagnose + qa + security-controls)
+Milestone: v1.4 — M5 Construction-phase skills — ✅ COMPLETE, archived to milestones/v1.4-*, tagged v1.4
+Phases 17–19: all ✅ verified (5/5 requirements)
+Status: Between milestones — REQUIREMENTS.md cleared; engine staged at 2.4.0; run `/gsd:new-milestone` to scope the next
+Last activity: 2026-06-09 -- v1.4 archived
 
-Progress: [██████████] 100% — M5: Phase 17 ✓, Phase 18 ✓, Phase 19 ✓
+Progress: [██████████] 100% — M5 complete (17 ✓, 18 ✓, 19 ✓)
 
 ## Performance Metrics
 

@@ -24,18 +24,20 @@ It is for engineers and agents who want to build properly — and refuse to let 
 - ✓ `council --standard` (5 parallel advisors + anonymous peer review + chairman verdict) + 4 subagents — M1
 - ✓ Conventions (skill-format, adr-format, commenting, unverified-marker, listing-budget) + per-skill docs — M1
 
-**Shipped:** **v1.0 (M1)** + **v1.1 (M2)** + **v1.2 (M3)** + **v1.3 (M4)**, all complete and verified. M1–M3 published as `sovereign-cli@2.0.0`; the **2.2.0 install fix** (engine copied into `.claude/sovereign-engine/`, `state save`, version) is merged to `main`; **M4 is verified but not yet published** (would ship as 2.3.0). **18 skills** + 4 subagents + 5 references + 16 engine lib modules; **164 engine tests; listing budget held at 5 auto-triggerable across all four milestones.** `/council`, the `npx skills` extension protocol, and the published `npx sovereign-cli init` are proven live (Claude Code + Gemini CLI). The anti-hallucination loop is closed: `anchor-docs` → `verify-self` → `sentinel`. Milestone detail archived under `.planning/milestones/`.
+**Shipped:** **v1.0 (M1)** + **v1.1 (M2)** + **v1.2 (M3)** + **v1.3 (M4)** + **v1.4 (M5)**, all complete and verified. M1–M3 published as `sovereign-cli@2.0.0`; the **2.2.0 install fix** is live; **M4 + M5 ship as 2.4.0** (M4 = anti-hallucination loop; M5 = construction/quality skills). **20 skills** + 4 subagents + 6 references + 16 engine lib modules; **164 engine tests; listing budget held at 5 auto-triggerable across all five milestones.** `/council`, the `npx skills` extension protocol, and the published `npx sovereign-cli init` are proven live (Claude Code + Gemini CLI). Milestone detail archived under `.planning/milestones/`.
 
-## Current Milestone: v1.4 — M5 Construction-phase skills (debugging · QA · security depth)
+## Current State: between milestones (M5 shipped)
 
-**Goal:** Give the build phase the quality skills users flagged in live M4 dogfooding — a stack-agnostic debugging loop, a relentless project-wide correctness sweep, and concrete security-control coverage — keeping the thin-orchestrator discipline and the 5-skill auto-budget.
+**v1.4 — M5 Construction-phase skills is complete & verified (2026-06-09).** SOVEREIGN now covers the full arc — ideate → align → architect → build → review → ground-truth → adopt/bridge/extend. Validated this milestone:
 
-**Target features:**
-- `diagnose` — stack-agnostic debugging loop (reproduce → isolate → hypothesis → fix → verify) over the engine + `.sovereign/` state; composes with `tdd`/`verify-self`/`sentinel`. (DIAG-01)
-- `qa` — relentless repo-wide correctness sweep (static correctness, tests, dep/wiring/import integrity, routing, cross-workspace consistency, API contract) over the project's own toolchain; reports ✅/❌/⚠️ with `file:line`. (QA-01)
-- `security-design` enrichment — concrete security-control coverage via an agnostic `security-controls.md` reference (input validation, injection, authz/IDOR, secrets, rate-limiting). (SEC-01)
-- Docs: per-agent skill-invocation differences (Claude `/`-autocomplete vs read-SKILL.md). (DOCS-01)
-- Cross-cutting (M5-CC): thin-orchestrator shape, `disable-model-invocation: true` on new skills, doctor auto-budget held at 5, `validate skills` clean. No/minimal engine work.
+- ✓ `diagnose` — stack-agnostic debugging loop (reproduce → isolate → hypothesis → fix → verify) composing with `tdd`/`verify-self`/`sentinel`. — **v1.4** (DIAG-01)
+- ✓ `qa` — relentless repo-wide correctness sweep (5 categories) over the project's own toolchain; ✅/❌/⚠️ report with `file:line`. — **v1.4** (QA-01)
+- ✓ `security-design` enrichment + agnostic `security-controls.md` reference (control-class coverage). — **v1.4** (SEC-01)
+- ✓ Per-agent skill-invocation docs (Claude `/`-autocomplete vs read-SKILL.md). — **v1.4** (DOCS-01)
+
+### Next milestone candidates (parked in BACKLOG.md)
+
+- A `security-review` skill (audit existing code against `security-controls.md`); more v1 §6 construction skills (`vertical-slice`, `zoom-out`, `improve-architecture`, `code-patterns`); the tracks layer (ADR-014); an operations phase; multi-model Council (`--deep`) — start with `/gsd:new-milestone`.
 
 **Shipped previously (validated):**
 
@@ -92,4 +94,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-06-09 after v1.3 (M4 — Ground Truth) milestone*
+*Last updated: 2026-06-09 after v1.4 (M5 — Construction-phase skills) milestone*

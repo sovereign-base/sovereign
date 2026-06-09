@@ -53,7 +53,7 @@ What you get: SOVEREIGN's skills + subagents copied into `.claude/`, and a scaff
 
 > **New project?** Follow the flow below top to bottom. **Existing code?** Jump to [Adopting an existing project](#adopting-an-existing-project) first, then rejoin wherever the gaps are.
 
-You don't run all 16 skills every time — you reach for the right one at the right moment. Here's the natural arc of a project:
+You don't run all 20 skills every time — you reach for the right one at the right moment. Here's the natural arc of a project:
 
 ### 1. Decide if it should exist — `/council`
 Before building anything expensive-to-undo (a product bet, a big architecture call, a stack choice), run:

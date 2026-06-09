@@ -1,6 +1,6 @@
 {
   "name": "sovereign-cli",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "SOVEREIGN — the engineering system for agents and the humans who work with them. Zero-dependency CommonJS engine.",
   "license": "MIT",
   "engines": {
