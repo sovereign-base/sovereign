@@ -24,24 +24,27 @@ It is for engineers and agents who want to build properly — and refuse to let 
 - ✓ `council --standard` (5 parallel advisors + anonymous peer review + chairman verdict) + 4 subagents — M1
 - ✓ Conventions (skill-format, adr-format, commenting, unverified-marker, listing-budget) + per-skill docs — M1
 
-## Current State (between milestones)
+**Shipped:** **v1.0 (M1 — Foundation)** + **v1.1 (M2 — Architecture)**, both complete, verified, tagged. SOVEREIGN ships a zero-dependency engine + `npx sovereign-cli init` installer + **13 skills** (5 Fast Lane auto-triggerable; Council + 7 architecture skills phase-gated) + 4 subagents + 5 references. 77 engine tests; listing budget held at 5 auto-triggerable. The flagship `/council` is proven live end-to-end. Milestone detail archived under `.planning/milestones/`.
 
-**Shipped:** **v1.0 (M1 — Foundation)** + **v1.1 (M2 — Architecture)**, both complete and verified. SOVEREIGN now ships a zero-dependency engine + `npx sovereign-cli init` installer + **13 skills** (5 Fast Lane auto-triggerable; Council + 7 architecture skills phase-gated) + 4 subagents + 5 references. 77 engine tests pass; the skill-listing budget held at 5 auto-triggerable across all 13. Milestone detail archived under `.planning/milestones/`.
+## Current Milestone: v1.2 — M3 Adoption, Bridging & Extensions
 
-- ✓ **M2 (v1.1):** `adr-log`, `entity-design`, `api-design` (→ API_SPEC.md), `stack-select`, `scale-design`, `security-design` (→ SECURITY_MODEL.md), `deploy-design` (→ DEPLOY_MODEL.md) — all hand-authored thin orchestrators, `disable-model-invocation`, composing with `adr-log`.
+**Goal:** Extend SOVEREIGN beyond a single fresh project — retrofit it onto existing codebases, hand off context between projects, and safely pull in third-party skills. **Unlike M2 (pure skill authoring), M3 may add modest engine surface** (a bridge-hash/registry command, an extension install+vet command, an adopt scan helper).
 
-### Next Milestone Goals (M3 candidate — not yet scoped)
-
-- `sovereign-adopt` — retrofit SOVEREIGN onto an existing codebase (3-layer archaeology).
-- `bridge` — cross-project handoff (BRIDGE.md + staleness detection).
-- Extension protocol — wrap `npx skills` (find/add) + a vetting layer.
-- `anchor-docs` / `verify-self` — the anti-hallucination skills the architecture skills already flag the need for.
-
-Run `/gsd:new-milestone` to scope M3 (requirements → roadmap).
+**Target capabilities:** `sovereign-adopt` · `bridge` (+ staleness) · extension protocol (wrap `npx skills` + vetting).
 
 ### Active
 
-_None — between milestones._
+<!-- M3 — Adoption, Bridging & Extensions. -->
+
+- [ ] `sovereign-adopt` — retrofit onto an existing codebase via 3-layer archaeology (config files → structure scan → targeted deep reads) → retroactive ADRs + gap analysis + adoption roadmap; greenfield + Type-2 mid-flight scope.
+- [ ] `bridge` — generate a `BRIDGE.md` for a consuming project (API contracts, auth, glossary, decisions-already-made) + **staleness detection** (hash the source files; flag when the bridge is stale).
+- [ ] extension protocol — wrap `npx skills` (find/add) with a SOVEREIGN vetting layer: necessity check, conflict check, security audit, recommendation, logged decision.
+- [ ] Modest engine additions as needed (e.g. `bridge`/hash + registry, `extension` install+vet, `adopt` scan helper) — scoped during planning; keep zero-dependency.
+
+### Deferred to a later milestone
+
+- `anchor-docs` / `verify-self` (construction-phase anti-hallucination the architecture skills flag) — M4.
+- Operations phase, multi-model Council, microservices overlay, IoT/embedded — M4+.
 
 ### Out of Scope
 
