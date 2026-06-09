@@ -156,7 +156,10 @@ Plans:
   2. Running `scale-design` walks the user through expected load, read/write ratio, caching, queues, and data-layer bottlenecks, producing a recorded scaling strategy plus ADRs.
   3. Both skills compose with `adr-log` (offer decisions, do not re-implement recording) and draw project context from the `init` JSON rather than re-reading files.
   4. Both skills are thin orchestrators: single `init` orient call, "Why this matters" section, recommendation-first questioning, navigation footer, and `disable-model-invocation: true`; `validate skills` passes for both and the doctor budget stays at the 5 Fast Lane skills.
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 08-01-PLAN.md — Author stack-select skill: recommendation-first (NOT trend-following) stack choice by project type/scale/budget/constraints, per-layer recommendations, STACK.md, currency-honesty flag, offers adr-log (ARCH-04, ARCH-08)
+- [ ] 08-02-PLAN.md — Author scale-design skill: real scaling conversation (load, read/write ratio, caching, queues, DB bottlenecks, scaling triggers), concrete recommendations, SCALE_STRATEGY.md, offers adr-log (ARCH-05, ARCH-08)
 **UI hint**: no
 
 ### Phase 9: Security & Deploy Design
@@ -186,5 +189,5 @@ M2 phases execute in numeric order: 6 → 7 → 8 → 9
 | 5. Conventions + Per-Skill Docs | 3/3 | Complete   | 2026-06-09 |
 | 6. ADR Log + Entity Design | 2/2 | Complete   | 2026-06-09 |
 | 7. API Design | 1/1 | Complete   | 2026-06-09 |
-| 8. Stack & Scale Design | 0/? | Not started | - |
+| 8. Stack & Scale Design | 0/2 | Not started | - |
 | 9. Security & Deploy Design | 0/? | Not started | - |
