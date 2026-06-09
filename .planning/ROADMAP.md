@@ -55,7 +55,7 @@ Completed milestones are archived (full phase detail + final progress) under `.p
   1. A new agnostic `engine/references/security-controls.md` enumerates control *classes* (input validation, injection SQLi/XSS/command, authz/IDOR, secrets, rate-limiting) + what-to-verify per class — NOT framework APIs; `security-design` consults it and offers the checklist, surfacing uncovered classes on re-run.
   2. Per-agent skill-invocation differences (Claude `/`-autocomplete vs other agents read SKILL.md / invoke by name) are documented in the README + `npx sovereign-cli init` output.
   3. `security-design` keeps the thin-orchestrator shape + `disable-model-invocation: true`; `validate skills` passes; doctor auto-budget held at 5.
-**Plans**: TBD
+**Plans**: 1 (19-01)
 
 ### M5 Progress
 
