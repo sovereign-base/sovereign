@@ -22,7 +22,7 @@ M3 extends SOVEREIGN beyond a single fresh project — retrofit it onto an exist
 - [x] **Phase 10: Engine Additions** - Zero-dep `bridge.cjs` (SHA-256 + registry diff), `extension.cjs` (exit-code-driven `npx skills` wrapper), `adopt.cjs` (Layers 1+2 scan), `scanSkillContent()` in `security.cjs`, and `init` bridge/adopt/extension workflows — all `node --test`'d (completed 2026-06-09)
 - [x] **Phase 11: Bridge Skill** - A thin `bridge` skill that assembles `BRIDGE.md` from existing `.sovereign/` artifacts and detects staleness via the Phase-10 hash registry (completed 2026-06-09)
 - [x] **Phase 12: Extension Protocol Skill** - A thin extension skill that wraps `npx skills` find/use/add with the five-gate vetting layer (necessity, conflict, security audit, recommendation, logged decision) (completed 2026-06-09)
-- [ ] **Phase 13: sovereign-adopt Skill** - A thin `sovereign-adopt` skill that drives the Phase-10 scan through 3-layer archaeology → scaffolds `.sovereign/`, retro-ADRs (via adr-log), and a gap analysis + adoption roadmap
+- [x] **Phase 13: sovereign-adopt Skill** - A thin `sovereign-adopt` skill that drives the Phase-10 scan through 3-layer archaeology → scaffolds `.sovereign/`, retro-ADRs (via adr-log), and a gap analysis + adoption roadmap (completed 2026-06-09)
 
 ## Phase Details
 
@@ -84,7 +84,7 @@ M3 extends SOVEREIGN beyond a single fresh project — retrofit it onto an exist
   4. The skill is a thin orchestrator: single `sovereign-tools init adopt` orient call, "Why this matters" section, recommendation-first output, navigation footer, and `disable-model-invocation: true`.
   5. `sovereign-tools validate skills` passes for `sovereign-adopt` and `sovereign-tools doctor` confirms the auto-trigger listing budget remains at the 5 Fast Lane skills after all three M3 skills are installed.
 **Plans**: 1 plan
-  - [ ] 13-01-PLAN.md — hand-authored `sovereign-adopt` thin-orchestrator skill: 3-layer archaeology (adopt scan + Layer-3 deep reads) -> scaffold .sovereign/ + retro-ADRs via adr-log + risk-prioritized gap/roadmap to ADOPTION.md (ADOPT-01/02 + M3-CC)
+  - [x] 13-01-PLAN.md — hand-authored `sovereign-adopt` thin-orchestrator skill: 3-layer archaeology (adopt scan + Layer-3 deep reads) -> scaffold .sovereign/ + retro-ADRs via adr-log + risk-prioritized gap/roadmap to ADOPTION.md (ADOPT-01/02 + M3-CC)
 **UI hint**: no
 
 ## Progress (M3)
@@ -94,4 +94,4 @@ M3 extends SOVEREIGN beyond a single fresh project — retrofit it onto an exist
 | 10. Engine Additions | 5/5 | Complete   | 2026-06-09 |
 | 11. Bridge Skill | 1/1 | Complete   | 2026-06-09 |
 | 12. Extension Protocol Skill | 2/2 | Complete   | 2026-06-09 |
-| 13. sovereign-adopt Skill | 0/1 | Not started | - |
+| 13. sovereign-adopt Skill | 1/1 | Complete   | 2026-06-09 |

@@ -11,8 +11,8 @@ Derived from `/SOVEREIGN.md` §6 + the locked v1 designs in `archive/v1/`. Build
 
 ### sovereign-adopt — retrofit onto an existing codebase
 
-- [ ] **ADOPT-01**: A user can run `sovereign-adopt` on an existing project and the skill performs **3-layer archaeology** — Layer 1 config/manifest files (near-zero tokens), Layer 2 structure scan (folders + filenames, no contents), Layer 3 a handful of targeted deep reads (router/auth/base-model/config) — to reverse-engineer the decisions already baked into the code.
-- [ ] **ADOPT-02**: From that archaeology, `sovereign-adopt` scaffolds `.sovereign/`, generates **retroactive ADRs** (via `adr-log`) for discovered decisions, and produces a **gap analysis + adoption roadmap** (what's missing, prioritized by risk). Scope: greenfield-with-code + Type-2 mid-flight (Type-3 legacy deferred).
+- [x] **ADOPT-01**: A user can run `sovereign-adopt` on an existing project and the skill performs **3-layer archaeology** — Layer 1 config/manifest files (near-zero tokens), Layer 2 structure scan (folders + filenames, no contents), Layer 3 a handful of targeted deep reads (router/auth/base-model/config) — to reverse-engineer the decisions already baked into the code.
+- [x] **ADOPT-02**: From that archaeology, `sovereign-adopt` scaffolds `.sovereign/`, generates **retroactive ADRs** (via `adr-log`) for discovered decisions, and produces a **gap analysis + adoption roadmap** (what's missing, prioritized by risk). Scope: greenfield-with-code + Type-2 mid-flight (Type-3 legacy deferred).
 
 ### bridge — cross-project handoff
 
@@ -27,7 +27,7 @@ Derived from `/SOVEREIGN.md` §6 + the locked v1 designs in `archive/v1/`. Build
 ### Engine & cross-cutting
 
 - [x] **ENG-08**: The modest engine additions M3 needs are implemented **zero-dependency** in `sovereign-tools` and tested (`node --test`) — candidates: a `bridge` hash/registry helper, an `extension` install+vet wrapper around `npx skills`, and an `adopt` scan helper. (Exact command surface scoped during planning; `init` gains `bridge`/`adopt`/`extension` workflows.)
-- [ ] **M3-CC**: Every M3 skill is a thin orchestrator per `skill-format.md` — one `sovereign-tools init <skill>` orient call, "Why this matters", recommendation-first, navigation footer — and is **user-invoked** (`disable-model-invocation: true`, like Council/architecture skills), so `sovereign-tools doctor` still reports the auto-trigger budget at the 5 Fast Lane skills. `validate skills` passes for all.
+- [x] **M3-CC**: Every M3 skill is a thin orchestrator per `skill-format.md` — one `sovereign-tools init <skill>` orient call, "Why this matters", recommendation-first, navigation footer — and is **user-invoked** (`disable-model-invocation: true`, like Council/architecture skills), so `sovereign-tools doctor` still reports the auto-trigger budget at the 5 Fast Lane skills. `validate skills` passes for all.
 
 ---
 
@@ -57,8 +57,8 @@ Derived from `/SOVEREIGN.md` §6 + the locked v1 designs in `archive/v1/`. Build
 | BRIDGE-02 | Phase 11 — Bridge Skill | Complete |
 | EXT-01 | Phase 12 — Extension Protocol Skill | Complete |
 | EXT-02 | Phase 12 — Extension Protocol Skill | Complete |
-| ADOPT-01 | Phase 13 — sovereign-adopt Skill | Pending |
-| ADOPT-02 | Phase 13 — sovereign-adopt Skill | Pending |
-| M3-CC | Phases 11, 12, 13 (cross-cutting) | Pending |
+| ADOPT-01 | Phase 13 — sovereign-adopt Skill | Complete |
+| ADOPT-02 | Phase 13 — sovereign-adopt Skill | Complete |
+| M3-CC | Phases 11, 12, 13 (cross-cutting) | Complete |
 
 **Coverage:** 8/8 M3 requirements mapped. No orphans. M3-CC is cross-cutting (a success criterion of each skill phase 11–13); all others map to exactly one phase.
