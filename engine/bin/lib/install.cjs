@@ -107,6 +107,8 @@ function listAgentNames(dir) {
  * @property {'installed'|'updated'|'up_to_date'} status
  * @property {string[]} skills_copied
  * @property {string[]} agents_copied
+ * @property {boolean} engine_copied
+ * @property {string} engine_path
  * @property {boolean} sovereign_scaffolded
  */
 
@@ -175,6 +177,33 @@ function runInstall(opts) {
     }
   }
 
+  // ── Engine ─────────────────────────────────────────────────────────────────
+  // Copy the engine itself into .claude/sovereign-engine/ so every installed
+  // skill can reach the binary via the literal cwd-stable path
+  // `.claude/sovereign-engine/sovereign-tools.cjs` (this is the core fix — without
+  // the engine present, the whole installed system is dead on arrival). Runs on
+  // EVERY install/update and OVERWRITES (like skills/agents) — NOT version-gated,
+  // NOT subject to the non-destructive .sovereign/ rule. Guard: skip gracefully
+  // if the source bin dir is absent.
+  const pkgBinDir = path.join(packageRoot, 'bin');
+  let engineCopied = false;
+  if (isDir(pkgBinDir)) {
+    const destEngine = path.join(installRoot, 'sovereign-engine');
+    // Copy the CONTENTS-as-tree → destEngine/sovereign-tools.cjs + destEngine/lib/*.cjs.
+    copyDirRecursive(pkgBinDir, destEngine);
+    // Ship VERSION alongside the flattened bin/ so the installed engine can
+    // self-report sovereign_version (init.cjs readVersion resolves ../VERSION
+    // from lib/ in the installed layout). Source-tree VERSION sits above bin/,
+    // so it must be copied explicitly here.
+    const srcVersion = path.join(packageRoot, 'VERSION');
+    if (fs.existsSync(srcVersion)) {
+      fs.copyFileSync(srcVersion, path.join(destEngine, 'VERSION'));
+    }
+    engineCopied = true;
+  }
+  // The project-root-relative path the skills depend on (the default project case).
+  const enginePath = '.claude/sovereign-engine';
+
   // ── Scaffold .sovereign/ (only when absent — non-destructive) ──────────────
   const sovereignDir = path.join(cwd, '.sovereign');
   let sovereignScaffolded = false;
@@ -201,6 +230,8 @@ function runInstall(opts) {
     status,
     skills_copied: skillsCopied,
     agents_copied: agentsCopied,
+    engine_copied: engineCopied,
+    engine_path: enginePath,
     sovereign_scaffolded: sovereignScaffolded,
   };
 }

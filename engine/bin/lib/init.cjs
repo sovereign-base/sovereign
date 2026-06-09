@@ -39,11 +39,20 @@ const { readField } = require('./state.cjs');
 /**
  * Read the engine's shipped VERSION file (sovereign_version). Falls back to the
  * pinned 2.0.0 if the file is unreadable (defensive — VERSION is in the package).
+ *
+ * Resolves two layouts:
+ *   - source tree:     engine/bin/lib/init.cjs → ../../VERSION = engine/VERSION
+ *   - installed engine: .claude/sovereign-engine/lib/init.cjs → ../VERSION
+ *     = .claude/sovereign-engine/VERSION (install.cjs copies VERSION alongside
+ *     the flattened bin/ contents so the installed engine can self-report).
  * @returns {string}
  */
 function readVersion() {
-  const v = safeReadFile(path.join(__dirname, '..', '..', 'VERSION'));
-  return v ? v.trim() : '2.0.0';
+  const sourceV = safeReadFile(path.join(__dirname, '..', '..', 'VERSION'));
+  if (sourceV) return sourceV.trim();
+  const installedV = safeReadFile(path.join(__dirname, '..', 'VERSION'));
+  if (installedV) return installedV.trim();
+  return '2.0.0';
 }
 
 /**
