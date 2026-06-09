@@ -68,7 +68,9 @@ M3 extends SOVEREIGN beyond a single fresh project — retrofit it onto an exist
   3. The decision record (timestamp, source, hashes, audit findings, verdict, rationale) is written to `.sovereign/extensions/<date>-<skill>.md` and committed via the engine `commit` path; the security audit drives on the engine's `scanSkillContent` findings rather than ad-hoc skill-side scanning.
   4. The skill is a thin orchestrator: single `sovereign-tools init extension` orient call, "Why this matters" section, recommendation-first output, navigation footer, and `disable-model-invocation: true`.
   5. `sovereign-tools validate skills` passes for the extension skill and `sovereign-tools doctor` still reports the auto-trigger listing budget at the 5 Fast Lane skills.
-**Plans**: TBD
+**Plans**: 2 plans
+  - [ ] 12-01-PLAN.md — extension.cjs correction: preview → bare `skills use`, audit scans `skills use` stdout via scanSkillContent (+ updated tests) (EXT-01/02 substrate)
+  - [ ] 12-02-PLAN.md — hand-authored `import-skill` thin-orchestrator skill: five-gate vetting (necessity/conflict/audit/recommendation/logged decision) wrapping `extension list|audit|install` (EXT-01/02 + M3-CC)
 **UI hint**: no
 
 ### Phase 13: sovereign-adopt Skill
@@ -90,5 +92,5 @@ M3 extends SOVEREIGN beyond a single fresh project — retrofit it onto an exist
 |-------|----------------|--------|-----------|
 | 10. Engine Additions | 5/5 | Complete   | 2026-06-09 |
 | 11. Bridge Skill | 1/1 | Complete   | 2026-06-09 |
-| 12. Extension Protocol Skill | 0/TBD | Not started | - |
+| 12. Extension Protocol Skill | 0/2 | Planned | - |
 | 13. sovereign-adopt Skill | 0/TBD | Not started | - |
