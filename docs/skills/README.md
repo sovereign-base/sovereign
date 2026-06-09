@@ -2,7 +2,7 @@
 
 The skills SOVEREIGN ships in the Foundation milestone. Each runs as a thin orchestrator over the `sovereign-tools` engine and reads/writes the committed `.sovereign/` state.
 
-`npx sovereign init --quick` installs the **Fast Lane** (the five daily-use skills); `npx sovereign init --full` adds **Council**.
+`npx sovereign-cli init --quick` installs the **Fast Lane** (the five daily-use skills); `npx sovereign-cli init --full` adds **Council**.
 
 ## Council
 

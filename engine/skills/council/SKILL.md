@@ -53,7 +53,7 @@ if [[ "$INIT" == @file:* ]]; then INIT=$(cat "${INIT#@file:}"); fi
 
 Parse from the blob: `models.advisor` / `models.chairman` / `models.peer_reviewer`; `context_injection.manifest_path` / `.glossary_path` / `.constitution_path` / `.relevant_adrs[]`; `paths.transcript` / `paths.council_dir` / `paths.state` / `paths.manifest`; `config.commit_docs`; `phase.current` / `phase.gate_status`; `agents_installed` / `missing_agents`. **The skill performs zero other orientation reads** — `init` already resolved models, config, phase, and paths in one process.
 
-**2 — Agents guard (hard error, no fallback).** If `agents_installed` is `false`, STOP. Print the `missing_agents` names and the fix: `npx sovereign init --full`. **Never** silently fall back to a general-purpose agent — a Council without its advisors is not a Council.
+**2 — Agents guard (hard error, no fallback).** If `agents_installed` is `false`, STOP. Print the `missing_agents` names and the fix: `npx sovereign-cli init --full`. **Never** silently fall back to a general-purpose agent — a Council without its advisors is not a Council.
 
 **3 — Inject context + neutralize the question.** Only now, read the *content* of `context_injection.manifest_path`, `context_injection.glossary_path`, and any `context_injection.relevant_adrs` — because the advisors need grounding in this specific project, not generic advice. Strip loaded language and implied answers from the user's decision to get a **neutral** framing. Print the convening header:
 

@@ -6,7 +6,7 @@
 
 A universal, project-agnostic system that guides any software project from the first thought to live production — gated phases, living documents, and guardrails that refuse to let the answer to *"how do we build this?"* be **vibes**.
 
-`npx sovereign init` · MIT · works best with Claude, compatible with any `SKILL.md` agent
+`npx sovereign-cli init` · MIT · works best with Claude, compatible with any `SKILL.md` agent
 
 **Status:** v2 · Milestone 1 (Foundation) complete & verified · [the north star →](./SOVEREIGN.md)
 
@@ -27,8 +27,8 @@ Software fails in predictable ways: misalignment before a line is written, twelv
 ## Quick start
 
 ```bash
-npx sovereign init --quick     # the Fast Lane: 5 daily-use skills + .sovereign/ state
-npx sovereign init --full      # everything in Milestone 1, including the Council
+npx sovereign-cli init --quick     # the Fast Lane: 5 daily-use skills + .sovereign/ state
+npx sovereign-cli init --full      # everything in Milestone 1, including the Council
 ```
 
 Then, in your agent:

@@ -27,4 +27,4 @@ A thin orchestrator: it orients with one `sovereign-tools init council` call (mo
 - **After a PASS:** `/grill-with-docs` to sharpen the decision into a spec.
 - **After CONDITIONAL PASS / BLOCKED:** resolve the listed conditions/concerns first.
 
-Installed by `npx sovereign init --full` (it's a `--full` skill, user-invoked only).
+Installed by `npx sovereign-cli init --full` (it's a `--full` skill, user-invoked only).

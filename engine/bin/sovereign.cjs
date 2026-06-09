@@ -6,7 +6,7 @@
  * sovereign — the user-facing launcher / installer entry point (`npx sovereign`).
  *
  * Zero-dependency CommonJS (ADR-002, ADR-009). As of plan 02-01 this is the REAL
- * installer (no longer a Phase-1 stub): `npx sovereign init [--quick|--full|--global]`
+ * installer (no longer a Phase-1 stub): `npx sovereign-cli init [--quick|--full|--global]`
  * copies SOVEREIGN's packaged skills + agents into `.claude/` (or `~/.claude/`
  * with --global) and scaffolds `.sovereign/` from the shipped templates,
  * idempotently and version-aware.

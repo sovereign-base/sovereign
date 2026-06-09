@@ -59,7 +59,7 @@ test('npm pack clean-install runs `sovereign-tools init council` end-to-end', { 
       encoding: 'utf8',
     });
 
-    const installedPkg = path.join(tmpDir, 'node_modules', 'sovereign');
+    const installedPkg = path.join(tmpDir, 'node_modules', 'sovereign-cli');
     const installedBin = path.join(installedPkg, 'bin', 'sovereign-tools.cjs');
 
     // 3. A SOVEREIGN project to orient against (scaffold from the shipped templates).

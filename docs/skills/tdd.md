@@ -23,4 +23,4 @@ A thin orchestrator: one `sovereign-tools init tdd` call hands it the glossary p
 - **Before:** `/grill-with-docs` (build against an unambiguous plan).
 - **After:** `/sentinel` to review the change against standards + spec; `/handoff` if pausing.
 
-Part of the Fast Lane — installed by `npx sovereign init --quick`.
+Part of the Fast Lane — installed by `npx sovereign-cli init --quick`.

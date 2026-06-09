@@ -24,4 +24,4 @@ A thin orchestrator: one `sovereign-tools init sentinel` call resolves models, s
 - **CONDITIONAL PASS:** address the listed follow-ups (incl. any UNVERIFIED markers).
 - **BLOCKED:** fix the failing criteria / ADR conflicts, then re-run `/sentinel`.
 
-Part of the Fast Lane — installed by `npx sovereign init --quick`.
+Part of the Fast Lane — installed by `npx sovereign-cli init --quick`.

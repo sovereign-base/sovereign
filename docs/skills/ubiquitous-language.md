@@ -22,4 +22,4 @@ A thin orchestrator: one `sovereign-tools init ubiquitous-language` call hands i
 
 - **After:** `/grill-with-docs` to interrogate a plan against the sharpened vocabulary, or `/council` with the language injected.
 
-Part of the Fast Lane — installed by `npx sovereign init --quick`.
+Part of the Fast Lane — installed by `npx sovereign-cli init --quick`.

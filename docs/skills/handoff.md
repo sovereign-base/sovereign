@@ -23,4 +23,4 @@ A thin orchestrator: one `sovereign-tools init handoff` call gives it the handof
 - **After writing:** safe to `/clear` — the next session reads `HANDOFF.md` and resumes from "Next action".
 - Clear or overwrite `HANDOFF.md` once the next session has absorbed it.
 
-Part of the Fast Lane — installed by `npx sovereign init --quick`.
+Part of the Fast Lane — installed by `npx sovereign-cli init --quick`.

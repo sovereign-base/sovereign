@@ -28,7 +28,7 @@ if [[ "$INIT" == @file:* ]]; then INIT=$(cat "${INIT#@file:}"); fi
 ```
 Parse `models.*`, `context_injection.relevant_adrs`, the spec paths, and `agents_installed` / `missing_agents`.
 
-**2 — Agents guard.** If `agents_installed` is false, STOP and print `missing_agents` + the fix (`npx sovereign init --full`). Do not silently skip the review.
+**2 — Agents guard.** If `agents_installed` is false, STOP and print `missing_agents` + the fix (`npx sovereign-cli init --full`). Do not silently skip the review.
 
 **3 — Run the four native checks** (dispatch the `sovereign-sentinel` agent for the heavier reads — it returns structured JSON; or run inline for a small diff):
 - **(a) `SOVEREIGN:UNVERIFIED` scan.** Grep the changed files for the literal token per `engine/references/unverified-marker.md`. Report each as `file:line — reason` (one `unverified_markers` entry each). These are **findings**, surfaced not blocking, in M1.

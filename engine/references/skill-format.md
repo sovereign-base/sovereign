@@ -48,7 +48,7 @@ Auto-triggerable skills (no `disable-model-invocation`) count against Claude Cod
 
 ## Where skills live
 
-Author at `engine/skills/<name>/SKILL.md` (shipped via the package `files` allowlist; `npx sovereign init` copies them to `.claude/skills/`). Author each command as a **skill directory**, never a bare command file — the skill wins on a name clash and gets a supporting-files dir for progressive disclosure.
+Author at `engine/skills/<name>/SKILL.md` (shipped via the package `files` allowlist; `npx sovereign-cli init` copies them to `.claude/skills/`). Author each command as a **skill directory**, never a bare command file — the skill wins on a name clash and gets a supporting-files dir for progressive disclosure.
 
 ## Authoring checklist
 

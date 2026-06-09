@@ -23,4 +23,4 @@ A thin orchestrator: one `sovereign-tools init grill-with-docs` call hands it th
 - **Before:** `/ubiquitous-language` (sharpen the vocabulary first).
 - **After:** `/tdd` to build the now-unambiguous plan test-first; or `/council` if a remaining decision is irreversible.
 
-Part of the Fast Lane — installed by `npx sovereign init --quick`.
+Part of the Fast Lane — installed by `npx sovereign-cli init --quick`.

@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Suite for the `npx sovereign init` installer (plan 02-01, INIT-01/02/03).
+ * Suite for the `npx sovereign-cli init` installer (plan 02-01, INIT-01/02/03).
  *
  * runInstall(opts) is the pure install core: target resolution (.claude vs
  * ~/.claude), recursive copy of packaged skills+agents, non-destructive

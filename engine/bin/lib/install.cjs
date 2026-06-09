@@ -2,7 +2,7 @@
 'use strict';
 
 /**
- * install — the `npx sovereign init` installer (plan 02-01, INIT-01/02/03).
+ * install — the `npx sovereign-cli init` installer (plan 02-01, INIT-01/02/03).
  *
  * The user front door. Phase 1 built the engine; this is what gets it into a
  * user's project in one command. It:

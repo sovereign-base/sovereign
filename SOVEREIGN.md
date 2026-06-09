@@ -2,8 +2,8 @@
 
 ### The Engineering System for Agents and the Humans Who Work With Them
 
-**Repo:** `github.com/sovereign-base/sovereign` · **CLI:** `npx sovereign` · **License:** MIT
-**Status:** v2 rebuild — architecture locked, engine not yet built
+**Repo:** `github.com/sovereign-base/sovereign` · **npm:** `sovereign-cli` · **CLI:** `npx sovereign-cli init` · **License:** MIT
+**Status:** v2 · Milestone 1 (Foundation) complete & verified (28/28); M2 next
 **This document is the north star.** Any agent or contributor starts here. It supersedes `archive/v1/SOVEREIGN_PROJECT.md`.
 
 ---
@@ -98,7 +98,7 @@ sovereign-tools commit "<msg>" --files ...   # commit_docs + gitignore aware
 sovereign-tools model <agent>       # resolve model profile for a subagent
 ```
 
-`npx sovereign init [--quick|--full]` is the install/bootstrap entry point.
+`npx sovereign-cli init [--quick|--full]` is the install/bootstrap entry point.
 
 ---
 
