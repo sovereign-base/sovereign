@@ -171,7 +171,10 @@ Plans:
   2. Running `deploy-design` produces a budget-aware plan (self-hosted vs managed, container strategy, IaC, CI/CD, environments, DR) recorded to `.sovereign/docs/infra/DEPLOY_MODEL.md`.
   3. Both skills offer their consequential choices to `adr-log` and update their respective docs in place on re-run.
   4. Both skills are thin orchestrators: single `init` orient call, "Why this matters" section, recommendation-first questioning, navigation footer, and `disable-model-invocation: true`; `validate skills` passes for both and `doctor` confirms the auto-trigger budget remains at the 5 Fast Lane skills after all 7 M2 skills are installed.
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 09-01-PLAN.md — Author security-design skill: layered model (auth/authz, data classification, app/OWASP, infra, agent/prompt-injection), per-layer classification, SECURITY_MODEL.md (in-place update), offers adr-log (ARCH-06, ARCH-08)
+- [ ] 09-02-PLAN.md — Author deploy-design skill: budget-aware (asks budget first), self-hosted vs managed + platform, containers, IaC, CI/CD, environments, DR, DEPLOY_MODEL.md (in-place update), offers adr-log, closes ARCH-08 (ARCH-07, ARCH-08)
 **UI hint**: no
 
 ## Progress
@@ -190,4 +193,4 @@ M2 phases execute in numeric order: 6 → 7 → 8 → 9
 | 6. ADR Log + Entity Design | 2/2 | Complete   | 2026-06-09 |
 | 7. API Design | 1/1 | Complete   | 2026-06-09 |
 | 8. Stack & Scale Design | 2/2 | Complete   | 2026-06-09 |
-| 9. Security & Deploy Design | 0/? | Not started | - |
+| 9. Security & Deploy Design | 0/2 | Not started | - |
