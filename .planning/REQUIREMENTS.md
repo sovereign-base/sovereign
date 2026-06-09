@@ -21,8 +21,8 @@ Derived from `/SOVEREIGN.md` §6 + the locked v1 designs in `archive/v1/`. Build
 
 ### extension protocol — wrap `npx skills` + vetting
 
-- [ ] **EXT-01**: A user can discover and install third-party skills through SOVEREIGN by wrapping `npx skills find` / `npx skills add` (find-skills ecosystem) — SOVEREIGN does not reinvent the registry (R-003).
-- [ ] **EXT-02**: Before a skill is adopted, SOVEREIGN runs a **vetting layer**: necessity check (vs active tracks/phase), conflict check (vs existing skills/ADRs), a security audit (data-exfiltration / overbroad-permission / prompt-injection patterns), a clear recommendation, and a **logged decision** (in `.sovereign/extensions/`).
+- [x] **EXT-01**: A user can discover and install third-party skills through SOVEREIGN by wrapping `npx skills find` / `npx skills add` (find-skills ecosystem) — SOVEREIGN does not reinvent the registry (R-003).
+- [x] **EXT-02**: Before a skill is adopted, SOVEREIGN runs a **vetting layer**: necessity check (vs active tracks/phase), conflict check (vs existing skills/ADRs), a security audit (data-exfiltration / overbroad-permission / prompt-injection patterns), a clear recommendation, and a **logged decision** (in `.sovereign/extensions/`).
 
 ### Engine & cross-cutting
 
@@ -55,8 +55,8 @@ Derived from `/SOVEREIGN.md` §6 + the locked v1 designs in `archive/v1/`. Build
 | ENG-08 | Phase 10 — Engine Additions | In Progress (bridge.cjs in 10-01; scanSkillContent in 10-02) |
 | BRIDGE-01 | Phase 11 — Bridge Skill | Complete |
 | BRIDGE-02 | Phase 11 — Bridge Skill | Complete |
-| EXT-01 | Phase 12 — Extension Protocol Skill | Pending |
-| EXT-02 | Phase 12 — Extension Protocol Skill | Pending |
+| EXT-01 | Phase 12 — Extension Protocol Skill | Complete |
+| EXT-02 | Phase 12 — Extension Protocol Skill | Complete |
 | ADOPT-01 | Phase 13 — sovereign-adopt Skill | Pending |
 | ADOPT-02 | Phase 13 — sovereign-adopt Skill | Pending |
 | M3-CC | Phases 11, 12, 13 (cross-cutting) | Pending |
