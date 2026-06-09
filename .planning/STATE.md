@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: — M3
 status: executing
-stopped_at: Completed 10-04-PLAN.md
-last_updated: "2026-06-09T09:16:47.621Z"
+stopped_at: Completed 10-05-PLAN.md
+last_updated: "2026-06-09T09:21:27.053Z"
 last_activity: 2026-06-09
 progress:
   total_phases: 4
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 5
-  completed_plans: 4
+  completed_plans: 5
 ---
 
 # Project State
@@ -25,7 +25,7 @@ See: .planning/PROJECT.md (Current Milestone: v1.2 — M3 Adoption, Bridging & E
 ## Current Position
 
 Phase: 10 of 13 (Engine Additions) — M3 phase 1 of 4
-Plan: 4 of 5 complete (10-01 done; bridge.cjs hashing substrate)
+Plan: 5 of 5 complete (10-01 done; bridge.cjs hashing substrate)
 Status: Ready to execute
 Last activity: 2026-06-09
 
@@ -55,6 +55,7 @@ Progress: [██░░░░░░░░] Phase 10: 1/5 plans complete; M3 phas
 | Phase 10 P02 | 4 | 2 tasks | 2 files |
 | Phase 10 P03 | 2 | 2 tasks | 2 files |
 | Phase 10 P04 | 2 | 2 tasks | 2 files |
+| Phase 10 P05 | 3 | 3 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -73,6 +74,7 @@ M3-relevant standing decisions:
 - [Phase 10]: [Phase 10] OWASP pages offline at authoring; grounded scanSkillContent categories against LLM01/02/06 + Agentic taxonomy, documented fallback in JSDoc, re-verify+extend later
 - [Phase 10]: adopt.cjs scanProject = pure read-only Layers-1+2 scan emitting M3-NOTES §3 contract; gitignore-aware via git ls-files (repo) / bounded SKIP_DIRS walk (non-git); MAX_TREE=2000 cap+truncated; deep_read_candidates heuristic (entrypoint/auth/base-model/config, ≤10); read-only invariant test-asserted via dir snapshot
 - [Phase 10]: extension.cjs: exit-code-driven npx skills wrapper; preview=skills use (materialize-for-audit BEFORE add), install=skills add --copy -y, list; source as single discrete argv element (no shell injection); audit runs scanSkillContent → {findings,verdict}, ok=verdict!=='block', no_content greenfield-safe; runSkills injectable for network-free tests; zero deps
+- [Phase 10]: 10-05: bridge/extension/adopt wired into the public router via existing array-arg helpers (no commander); init bridge|adopt|extension orient blobs added (adopt carries detected.in_git probe); full suite 130 green, deps still {}. ENG-08 COMPLETE.
 
 ### Pending Todos
 
@@ -88,7 +90,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-09T09:16:41.454Z
-Stopped at: Completed 10-04-PLAN.md
+Last session: 2026-06-09T09:21:20.852Z
+Stopped at: Completed 10-05-PLAN.md
 Resume file: None
 Next: `/gsd:plan-phase 10`

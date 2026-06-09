@@ -26,7 +26,7 @@ Derived from `/SOVEREIGN.md` §6 + the locked v1 designs in `archive/v1/`. Build
 
 ### Engine & cross-cutting
 
-- [ ] **ENG-08**: The modest engine additions M3 needs are implemented **zero-dependency** in `sovereign-tools` and tested (`node --test`) — candidates: a `bridge` hash/registry helper, an `extension` install+vet wrapper around `npx skills`, and an `adopt` scan helper. (Exact command surface scoped during planning; `init` gains `bridge`/`adopt`/`extension` workflows.)
+- [x] **ENG-08**: The modest engine additions M3 needs are implemented **zero-dependency** in `sovereign-tools` and tested (`node --test`) — candidates: a `bridge` hash/registry helper, an `extension` install+vet wrapper around `npx skills`, and an `adopt` scan helper. (Exact command surface scoped during planning; `init` gains `bridge`/`adopt`/`extension` workflows.)
 - [ ] **M3-CC**: Every M3 skill is a thin orchestrator per `skill-format.md` — one `sovereign-tools init <skill>` orient call, "Why this matters", recommendation-first, navigation footer — and is **user-invoked** (`disable-model-invocation: true`, like Council/architecture skills), so `sovereign-tools doctor` still reports the auto-trigger budget at the 5 Fast Lane skills. `validate skills` passes for all.
 
 ---
