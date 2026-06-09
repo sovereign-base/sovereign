@@ -54,7 +54,8 @@ M3 extends SOVEREIGN beyond a single fresh project — retrofit it onto an exist
   3. The skill assembles BRIDGE.md *prose* itself but delegates all hashing and registry I/O to the Phase-10 engine commands (it does not reimplement crypto or registry diffing).
   4. `bridge` is a thin orchestrator: single `sovereign-tools init bridge` orient call, a plain-language "Why this matters" section, recommendation-first output, and a navigation footer; it sets `disable-model-invocation: true`.
   5. `sovereign-tools validate skills` passes for `bridge` and `sovereign-tools doctor` still reports the auto-trigger listing budget at the 5 Fast Lane skills.
-**Plans**: TBD
+**Plans**: 1 plan
+  - [ ] 11-01-PLAN.md — hand-authored `bridge` thin-orchestrator skill: assembles BRIDGE.md from .sovereign/ artifacts, wraps `bridge check`/`bridge hash`, writes the registry, delegates state/commit (BRIDGE-01/02 + M3-CC)
 **UI hint**: no
 
 ### Phase 12: Extension Protocol Skill
@@ -88,6 +89,6 @@ M3 extends SOVEREIGN beyond a single fresh project — retrofit it onto an exist
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 10. Engine Additions | 5/5 | Complete   | 2026-06-09 |
-| 11. Bridge Skill | 0/TBD | Not started | - |
+| 11. Bridge Skill | 0/1 | Planned | - |
 | 12. Extension Protocol Skill | 0/TBD | Not started | - |
 | 13. sovereign-adopt Skill | 0/TBD | Not started | - |
