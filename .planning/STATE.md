@@ -78,7 +78,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-09T14:00:00.000Z
-Stopped at: M4 roadmap created (phases 14-16); REQUIREMENTS traceability filled; STATE reset
+Last session: 2026-06-09T14:39:57.000Z
+Stopped at: Completed quick task 260609-lkx (install-bug fix — engine copied into .claude/sovereign-engine/; $ENGINE refs removed; engine 2.2.0)
 Resume file: None
 Next: `/gsd:plan-phase 14`
