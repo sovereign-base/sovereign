@@ -1,16 +1,16 @@
 ---
 gsd_state_version: 1.0
 milestone: v1.2
-milestone_name: M3 — Adoption, Bridging & Extensions
-status: active
-stopped_at: Completed 10-01-PLAN.md
-last_updated: "2026-06-09T09:00:12.567Z"
+milestone_name: — M3
+status: executing
+stopped_at: Completed 10-02-PLAN.md
+last_updated: "2026-06-09T09:07:14.736Z"
 last_activity: 2026-06-09
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 5
-  completed_plans: 1
+  completed_plans: 2
 ---
 
 # Project State
@@ -25,8 +25,8 @@ See: .planning/PROJECT.md (Current Milestone: v1.2 — M3 Adoption, Bridging & E
 ## Current Position
 
 Phase: 10 of 13 (Engine Additions) — M3 phase 1 of 4
-Plan: 1 of 5 complete (10-01 done; bridge.cjs hashing substrate)
-Status: Phase 10 in progress — next plan 10-02
+Plan: 2 of 5 complete (10-01 done; bridge.cjs hashing substrate)
+Status: Ready to execute
 Last activity: 2026-06-09
 
 Progress: [██░░░░░░░░] Phase 10: 1/5 plans complete; M3 phase 0/4 complete
@@ -52,6 +52,7 @@ Progress: [██░░░░░░░░] Phase 10: 1/5 plans complete; M3 phas
 
 *Updated after each plan completion*
 | Phase 10 P01 | 3 | 2 tasks | 2 files |
+| Phase 10 P02 | 4 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -66,6 +67,8 @@ M3-relevant standing decisions:
 - **M3-CC is cross-cutting** across the three skill phases (11–13): each skill is a thin orchestrator (single `init` orient, "Why this matters", recommendation-first, nav footer), `disable-model-invocation: true`, so the doctor auto-trigger budget stays at the 5 Fast Lane skills; `validate skills` passes for all.
 - **Scope guards (from REQUIREMENTS):** `sovereign-adopt` reads + records only, never refactors source; Type-3 legacy deferred. Bridge ships LOCAL hash staleness only (no deploy-gate/GitHub-issue). Extensions never auto-installed without vetting + logged decision. Wrap `npx skills`, never reinvent the registry (R-003).
 - [Phase 10]: bridge.cjs combined hash = sha256 of sorted path:sha256 lines (order-independent, fast equality); cmdBridgeCheck greenfield-safe (no_registry) and flags byte-changed + now-missing recorded sources
+- [Phase 10]: [Phase 10] scanSkillContent: data-driven SKILL_SCAN_PATTERNS table; verdict escalation high->block, medium->review, none->clean; low findings reported but stay clean; reuses sanitizeForPrompt markers; zero deps
+- [Phase 10]: [Phase 10] OWASP pages offline at authoring; grounded scanSkillContent categories against LLM01/02/06 + Agentic taxonomy, documented fallback in JSDoc, re-verify+extend later
 
 ### Pending Todos
 
@@ -81,7 +84,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-09T08:59:52.720Z
-Stopped at: Completed 10-01-PLAN.md
+Last session: 2026-06-09T09:07:07.901Z
+Stopped at: Completed 10-02-PLAN.md
 Resume file: None
 Next: `/gsd:plan-phase 10`

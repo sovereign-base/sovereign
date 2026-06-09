@@ -52,7 +52,7 @@ Derived from `/SOVEREIGN.md` §6 + the locked v1 designs in `archive/v1/`. Build
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| ENG-08 | Phase 10 — Engine Additions | In Progress (bridge.cjs done in 10-01) |
+| ENG-08 | Phase 10 — Engine Additions | In Progress (bridge.cjs in 10-01; scanSkillContent in 10-02) |
 | BRIDGE-01 | Phase 11 — Bridge Skill | Pending |
 | BRIDGE-02 | Phase 11 — Bridge Skill | Pending |
 | EXT-01 | Phase 12 — Extension Protocol Skill | Pending |
