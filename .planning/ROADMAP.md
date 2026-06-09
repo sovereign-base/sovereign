@@ -142,7 +142,9 @@ Plans:
   2. The skill produces a living `.sovereign/docs/api/API_SPEC.md` covering endpoints/messages, auth, versioning, errors, and pagination, and updates it in place on re-run rather than duplicating.
   3. Protocol and contract decisions that meet the three-condition gate are offered to `adr-log`.
   4. The skill is a thin orchestrator: single `init` orient call, "Why this matters" section, recommendation-first questioning, navigation footer, and `disable-model-invocation: true`; `validate skills` passes and the doctor budget stays at the 5 Fast Lane skills.
-**Plans**: TBD
+**Plans**: 1 plan
+Plans:
+- [ ] 07-01-PLAN.md — Author api-design skill: contract-first protocol-agnostic, reads ENTITY_MODEL.md, walks decisions one at a time, living API_SPEC.md (in-place update), offers adr-log (ARCH-03, ARCH-08)
 **UI hint**: no
 
 ### Phase 8: Stack & Scale Design
