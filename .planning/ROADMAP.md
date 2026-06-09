@@ -45,7 +45,7 @@ Completed milestones are archived (full phase detail + final progress) under `.p
   1. `qa` sweeps each workspace/module using its OWN toolchain across: static correctness (typecheck/compile-check, schema, lint), tests, dependency & wiring integrity (DI/wiring, import resolution, version alignment, example-config↔code), navigation/routing, and cross-workspace consistency (single shared-runtime version, shared/contract types, schema↔types, API contract vs `.sovereign/docs/api/API_SPEC.md`).
   2. It reports ✅/❌/⚠️ grouped by module then category, ❌ with exact error + `file:line`, ending in a one-line verdict (pass / fail with N blocking); delegates to the project's own `qa` command when present, else per-module equivalents — stack-agnostic.
   3. Core-tier thin-orchestrator shape; `disable-model-invocation: true` (doctor auto-budget held at 5); `validate skills` passes; composes with `diagnose` (failures → debug) and complements `sentinel`.
-**Plans**: TBD
+**Plans**: 1 (18-01)
 
 ### Phase 19: `security-design` controls enrichment + docs
 **Goal**: `security-design` drives concrete security-control coverage, and non-Claude users know how to invoke SOVEREIGN's skills.
