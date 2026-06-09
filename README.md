@@ -1,136 +1,87 @@
+<div align="center">
+
 # SOVEREIGN
 
-**The engineering system for agents and the humans who work with them.**
+### The engineering system for agents and the humans who work with them
+
+A universal, project-agnostic system that guides any software project from the first thought to live production — gated phases, living documents, and guardrails that refuse to let the answer to *"how do we build this?"* be **vibes**.
+
+`npx sovereign-cli init` · MIT · works best with Claude, compatible with any `SKILL.md` agent
+
+**Status:** v2 · Milestone 1 (Foundation) complete & verified · [the north star →](./SOVEREIGN.md)
+
+</div>
+
+---
+
+## What it is
+
+SOVEREIGN is a small **engine** with **skills** layered on top. The engine (`sovereign-tools`, zero-dependency Node) keeps the project's engineering memory in a committed `.sovereign/` directory and hands every skill its full context in **one call**. The skills are thin orchestrators — they reason, the engine remembers.
+
+No language lock-in. No stack opinion. No domain constraint. It works for web, mobile, IoT, data, AI — anything engineers build.
+
+## The problem it solves
+
+Software fails in predictable ways: misalignment before a line is written, twelve words for one concept, decisions made in chat threads and forgotten, scale cliffs nobody designed for, security bolted on last, context lost every new session. SOVEREIGN encodes the practices that prevent each — as skills that are fast to run and hard to skip.
+
+## Quick start
 
 ```bash
-npx sovereign init
+npx sovereign-cli init --quick     # the Fast Lane: 5 daily-use skills + .sovereign/ state
+npx sovereign-cli init --full      # everything in Milestone 1, including the Council
 ```
 
----
-
-SOVEREIGN is a collection of agent skills, structured phases, and living
-documents that guide any software project from the first thought to live
-production — without derailing, without skipping, without ambiguity.
-
-Not a framework. Not a boilerplate. Not tied to any language, stack, or domain.
-
-The system that answers: _"How do we build this properly?"_
-
----
-
-## Quick Start
-
-**Fast lane — immediate value, two minutes:**
-
-```bash
-npx sovereign init --quick
-```
-
-Installs five skills that fix the five most common agent failure modes:
-misalignment, vocabulary drift, untested code, undetected problems, lost context.
-
-**Full system — all six phases, all guardrails:**
-
-```bash
-npx sovereign init --full
-```
-
----
-
-## What You Get
+Then, in your agent:
 
 ```
-PHASE 1 — IDEATION      Does this deserve to exist?
-PHASE 2 — SPECIFICATION What exactly are we building?
-PHASE 3 — ARCHITECTURE  How are we building it?
-PHASE 4 — CONSTRUCTION  Build it right, one slice at a time.
-PHASE 5 — DEPLOYMENT    Ship it safely.
-PHASE 6 — OPERATIONS    The product's living manual. Runs forever.
+/ubiquitous-language   lock the project's vocabulary
+/grill-with-docs       stress-test a plan before building
+/council               make five advisors argue a decision, then get a verdict
+/tdd                   red-green-refactor, behavior at the interface
+/sentinel              review work against your own standards
+/handoff               never lose context between sessions
 ```
 
-Every phase has a gate. Every gate must pass. Every decision gets recorded.
-No cold starts. No lost context. No silent failures.
+## What's in Milestone 1
 
----
+| | |
+|---|---|
+| **Engine** | `sovereign-tools` — `init <workflow>` → one JSON blob; committed `.sovereign/` state with an always-current MANIFEST; append-only phase gates; gitignore-aware commits; model profiles; skill-format + budget linting |
+| **Council** | Five advisors (Skeptic, Architect, Builder, Outsider, Risk Officer) argue in parallel, an anonymous peer-review round catches what each missed, a chairman returns a binding verdict — saved to `.sovereign/council/` |
+| **Fast Lane** | `ubiquitous-language`, `grill-with-docs`, `handoff`, `sentinel`, `tdd` |
+| **Guardrails** | recommendation-first, a navigation footer on every skill, a plain-language *"why this matters"*, and the `SOVEREIGN:UNVERIFIED` anti-hallucination marker |
 
-## The Council
+Per-skill docs: [`docs/skills/`](./docs/skills/). Authoring standards: [`engine/references/`](./engine/references/).
 
-Before anything gets built, the Council convenes.
+## Architecture
 
-Five advisor personas argue your idea from different angles. Their responses
-are anonymised and peer-reviewed — advisors critique each other without
-knowing who wrote what. A chairman synthesises the verdict.
+Five layers — a deterministic engine at the bottom, thin orchestrators on top:
 
 ```
-/council --express    Fast. Single synthesized voice.
-/council --standard   Default. Five advisors. Peer review. Chairman verdict.
-/council --deep       Multi-model. Maximum scrutiny. High-stakes decisions only.
+Extensions   →  wrap `npx skills` + vet           (later milestone)
+Skills       →  thin orchestrators, one per command
+Subagents    →  the reasoning (Council advisors, sentinel, chairman)
+Engine       →  sovereign-tools: init <workflow> → ONE json blob
+State        →  .sovereign/, committed to git, MANIFEST loads first
 ```
 
----
+A skill never reads ten files to orient — it makes one CLI call. Bookkeeping lives in code, not tokens. Full design in [`SOVEREIGN.md`](./SOVEREIGN.md).
 
-## Works With Any Agent
+## How it's built
 
-SOVEREIGN skills are standard `SKILL.md` format. Compatible with Claude Code,
-Cursor, Codex CLI, Gemini CLI, GitHub Copilot, and 30+ others.
+SOVEREIGN is **dogfooded**: it was built using a phased, spec-driven loop (research → plan → verify → execute → verify), one gated phase at a time, with atomic test-driven commits. The build plan lives in [`.planning/`](./.planning/). The engine is zero-dependency `.cjs` — the shipped artifact *is* the source, instantly `npx`-runnable, no build step. **77 tests, zero runtime dependencies.**
 
-Works best with Claude.
+Inspired by Matt Pocock's skills, GSD, gstack, and the open agent-skills ecosystem — see [`SOVEREIGN.md`](./SOVEREIGN.md) §2.
 
----
+## Status & roadmap
 
-## Existing Projects
+- **M1 — Foundation** ✅ engine · installer · Council · Fast Lane · conventions *(complete, verified)*
+- **M2 — Architecture** entity / api / scale / security / deploy design · ADR log
+- **M3 — Adopt & Bridge** retrofit existing codebases · cross-project handoff · extension protocol
+- **M4+** operations phase · multi-model Council · microservices · IoT/embedded tracks
 
-Already have a codebase? SOVEREIGN retrofits without breaking anything.
+## License
 
-```bash
-npx sovereign init --adopt
-```
+MIT.
 
-Three-layer archaeology reads your existing decisions from config files,
-folder structure, and surgical file reads. Produces a prioritised gap
-analysis and custom adoption roadmap.
-
----
-
-## The Extension Protocol
-
-Add any community skill to your SOVEREIGN setup:
-
-```bash
-npx sovereign import <skill>
-```
-
-The agent reads the skill, checks necessity, checks for conflicts, runs a
-security audit, and gives you its recommendation before installing anything.
-
----
-
-## Documentation
-
-Full docs at [sovereign-base.github.io/sovereign](https://sovereign-base.github.io/sovereign)
-
-- [Quick Start Guide](docs/guides/quick-start.md)
-- [Full System Guide](docs/guides/full-guide.md)
-- [Adopting an Existing Project](docs/guides/adopting-existing.md)
-- [Writing a Skill](docs/standards/SKILL_FORMAT.md)
-- [Contributing](CONTRIBUTING.md)
-
----
-
-## Contributing
-
-SOVEREIGN is open source (MIT). Contributions welcome.
-
-- **Core skills** — strict review by maintainers
-- **Extensions** — open registry, community rated
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the full guide.
-
----
-
-> Not vibe coded. Sovereign built.
-
----
-
-_Built by [sovereign-base](https://github.com/sovereign-base)_  
-_Inspired by Matt Pocock's skills, GitHub Spec Kit, and Domain-Driven Design_
+> Not vibe coded. **Sovereign built.**

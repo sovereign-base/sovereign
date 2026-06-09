@@ -1,0 +1,8 @@
+{
+  "model_profile": "balanced",
+  "commit_docs": true,
+  "parallelization": true,
+  "council_mode_default": "standard",
+  "resolve_model_ids": false,
+  "context_window": 200000
+}

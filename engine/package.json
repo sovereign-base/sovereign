@@ -1,0 +1,26 @@
+{
+  "name": "sovereign-cli",
+  "version": "2.0.0",
+  "description": "SOVEREIGN — the engineering system for agents and the humans who work with them. Zero-dependency CommonJS engine.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "sovereign-cli": "bin/sovereign.cjs",
+    "sovereign-tools": "bin/sovereign-tools.cjs"
+  },
+  "files": [
+    "bin",
+    "templates",
+    "agents",
+    "skills",
+    "references",
+    "VERSION"
+  ],
+  "scripts": {
+    "test": "node --test \"test/**/*.test.cjs\""
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
