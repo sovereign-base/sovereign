@@ -111,7 +111,7 @@ M2 adds SOVEREIGN's Phase-3 (Architecture) design skills: the conversational, re
 ## Phases
 
 - [x] **Phase 6: ADR Log + Entity Design** - Record decisions to `.sovereign/docs/adr/` (the 3-condition gate) and model the domain one entity at a time — the foundation every later architecture skill builds on (completed 2026-06-09)
-- [ ] **Phase 7: API Design** - Contract-first, protocol-agnostic API design producing a living `API_SPEC.md` over the Phase-6 entities
+- [x] **Phase 7: API Design** - Contract-first, protocol-agnostic API design producing a living `API_SPEC.md` over the Phase-6 entities (completed 2026-06-09)
 - [ ] **Phase 8: Stack & Scale Design** - Recommendation-first stack selection and a scaling-strategy conversation, each recording ADR-worthy decisions
 - [ ] **Phase 9: Security & Deploy Design** - Layered `SECURITY_MODEL.md` and budget-aware `DEPLOY_MODEL.md` — closing out the Architecture phase
 
@@ -144,7 +144,7 @@ Plans:
   4. The skill is a thin orchestrator: single `init` orient call, "Why this matters" section, recommendation-first questioning, navigation footer, and `disable-model-invocation: true`; `validate skills` passes and the doctor budget stays at the 5 Fast Lane skills.
 **Plans**: 1 plan
 Plans:
-- [ ] 07-01-PLAN.md — Author api-design skill: contract-first protocol-agnostic, reads ENTITY_MODEL.md, walks decisions one at a time, living API_SPEC.md (in-place update), offers adr-log (ARCH-03, ARCH-08)
+- [x] 07-01-PLAN.md — Author api-design skill: contract-first protocol-agnostic, reads ENTITY_MODEL.md, walks decisions one at a time, living API_SPEC.md (in-place update), offers adr-log (ARCH-03, ARCH-08)
 **UI hint**: no
 
 ### Phase 8: Stack & Scale Design
@@ -185,6 +185,6 @@ M2 phases execute in numeric order: 6 → 7 → 8 → 9
 | 4. Fast Lane Skills | 6/6 | Complete   | 2026-06-08 |
 | 5. Conventions + Per-Skill Docs | 3/3 | Complete   | 2026-06-09 |
 | 6. ADR Log + Entity Design | 2/2 | Complete   | 2026-06-09 |
-| 7. API Design | 0/? | Not started | - |
+| 7. API Design | 1/1 | Complete   | 2026-06-09 |
 | 8. Stack & Scale Design | 0/? | Not started | - |
 | 9. Security & Deploy Design | 0/? | Not started | - |
