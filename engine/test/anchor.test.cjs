@@ -317,6 +317,100 @@ test('T9: anchor check greenfield-safe → {anchors:[], stale_count:0}', () => {
   assert.deepEqual(res, { anchors: [], stale_count: 0 });
 });
 
+// ─── router integration via BIN (SC4) ────────────────────────────────────────
+
+/** Resolve an @file: spill prefix to the underlying JSON, then parse. */
+function parseStdout(out) {
+  let jsonStr = out;
+  if (jsonStr.startsWith('@file:')) {
+    jsonStr = fs.readFileSync(jsonStr.slice('@file:'.length), 'utf-8');
+  }
+  return JSON.parse(jsonStr);
+}
+
+test('CLI: anchor add via BIN writes the file and prints parseable JSON', () => {
+  const dir = mkProject();
+  const res = spawnSync(
+    process.execPath,
+    [
+      BIN, 'anchor', 'add',
+      '--id', 'cli-doc',
+      '--source', 'https://cli.example',
+      '--date-retrieved', '2026-01-01',
+      '--re-verify-by', '2026-04-01',
+      '--cwd', dir,
+    ],
+    { encoding: 'utf-8' }
+  );
+  assert.equal(res.status, 0);
+  const obj = parseStdout(res.stdout);
+  assert.equal(obj.id, 'cli-doc');
+  assert.equal(obj.source, 'https://cli.example');
+  assert.ok(fs.existsSync(path.join(docsDir(dir), 'cli-doc.md')));
+});
+
+test('CLI: anchor list via BIN exits 0 and parses to an array', () => {
+  const dir = mkProject();
+  seedAnchor(dir, 'one', {
+    source: 'https://one.example',
+    version: 'unknown',
+    dateRetrieved: '2026-01-01',
+    reVerifyBy: '2099-01-01',
+    contentStored: 'false',
+  });
+  const res = spawnSync(process.execPath, [BIN, 'anchor', 'list', '--cwd', dir], { encoding: 'utf-8' });
+  assert.equal(res.status, 0);
+  const arr = parseStdout(res.stdout);
+  assert.ok(Array.isArray(arr));
+  assert.equal(arr[0].id, 'one');
+});
+
+test('CLI: anchor check via BIN exits 0 and parses to {anchors, stale_count}', () => {
+  const dir = mkProject();
+  const res = spawnSync(process.execPath, [BIN, 'anchor', 'check', '--cwd', dir], { encoding: 'utf-8' });
+  assert.equal(res.status, 0);
+  const obj = parseStdout(res.stdout);
+  assert.deepEqual(obj, { anchors: [], stale_count: 0 });
+});
+
+test('CLI: anchor add without --source exits non-zero (required-arg via error())', () => {
+  const dir = mkProject();
+  const res = spawnSync(process.execPath, [BIN, 'anchor', 'add', '--id', 'x', '--cwd', dir], {
+    encoding: 'utf-8',
+  });
+  assert.notEqual(res.status, 0);
+});
+
+test('CLI: unknown anchor subcommand exits non-zero', () => {
+  const dir = mkProject();
+  const res = spawnSync(process.execPath, [BIN, 'anchor', 'bogus', '--cwd', dir], { encoding: 'utf-8' });
+  assert.notEqual(res.status, 0);
+});
+
+test('CLI: anchor add --content @file round-trips the body through the BIN', () => {
+  const dir = mkProject();
+  const bodyFile = path.join(dir, 'excerpt.txt');
+  const body = 'Round-trip body line 1.\nLine 2.';
+  fs.writeFileSync(bodyFile, body, 'utf-8');
+  const res = spawnSync(
+    process.execPath,
+    [
+      BIN, 'anchor', 'add',
+      '--id', 'rt',
+      '--source', 'https://rt.example',
+      '--date-retrieved', '2026-01-01',
+      '--re-verify-by', '2026-04-01',
+      '--content', '@' + bodyFile,
+      '--cwd', dir,
+    ],
+    { encoding: 'utf-8' }
+  );
+  assert.equal(res.status, 0);
+  const stored = fs.readFileSync(path.join(docsDir(dir), 'rt.md'), 'utf-8');
+  assert.match(stored, /\*\*content-stored:\*\* true/);
+  assert.ok(stored.includes(body), 'body round-tripped through the BIN');
+});
+
 // ─── deps regression guard (SC4) ──────────────────────────────────────────────
 
 test('T12: engine package.json dependencies and devDependencies stay {}', () => {

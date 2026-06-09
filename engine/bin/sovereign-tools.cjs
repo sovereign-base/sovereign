@@ -37,6 +37,7 @@ const {
   cmdExtensionAudit,
 } = require('./lib/extension.cjs');
 const { cmdAdoptScan } = require('./lib/adopt.cjs');
+const { cmdAnchorAdd, cmdAnchorList, cmdAnchorCheck } = require('./lib/anchor.cjs');
 
 // ─── Arg parsing helpers ──────────────────────────────────────────────────────
 
@@ -217,7 +218,8 @@ async function main() {
       'Usage: sovereign-tools <command> [args] [--raw] [--pick <field>] [--cwd <path>]\n' +
         'Commands: version, state (load|save|patch), gate (open|pass), ' +
         'commit, resolve-model, model, validate (skills), init <workflow>, doctor, ' +
-        'bridge (hash|check), extension (preview|install|list|audit), adopt (scan)'
+        'bridge (hash|check), extension (preview|install|list|audit), adopt (scan), ' +
+        'anchor (add|list|check)'
     );
   }
 
@@ -402,6 +404,26 @@ async function runCommand(command, args, cwd, raw, pick) {
         cmdAdoptScan(cwd, raw);
       } else {
         error(`Unknown adopt subcommand: ${sub || '(none)'} (expected scan)`);
+      }
+      break;
+    }
+
+    case 'anchor': {
+      // ENG-09 external-doc anchoring substrate. Subcommands mirror bridge/adopt.
+      const sub = args[1];
+      if (sub === 'add') {
+        const f = parseNamedArgs(
+          args.slice(2),
+          ['id', 'source', 'version', 'date-retrieved', 're-verify-by', 'content'],
+          ['store-content']
+        );
+        cmdAnchorAdd(cwd, f, raw);
+      } else if (sub === 'list') {
+        cmdAnchorList(cwd, raw);
+      } else if (sub === 'check') {
+        cmdAnchorCheck(cwd, raw);
+      } else {
+        error(`Unknown anchor subcommand: ${sub || '(none)'} (expected add|list|check)`);
       }
       break;
     }
