@@ -1,41 +1,41 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.0
-milestone_name: milestone
-status: verifying
-stopped_at: Completed 02-03-PLAN.md
-last_updated: "2026-06-08T18:05:22.606Z"
-last_activity: 2026-06-08
+milestone: v1.1
+milestone_name: M2 — Architecture
+status: planning
+stopped_at: M2 roadmap created — ready to plan Phase 6
+last_updated: "2026-06-09T00:00:00.000Z"
+last_activity: 2026-06-09
 progress:
-  total_phases: 5
-  completed_phases: 2
-  total_plans: 8
-  completed_plans: 8
+  total_phases: 4
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-06-08)
+See: .planning/PROJECT.md (Current Milestone: v1.1 — M2 Architecture phase skills)
 
 **Core value:** The engine — a skill orients itself with one CLI call (`sovereign-tools init <workflow>` → one JSON blob), not ten file reads. If the token-efficient engine + committed `.sovereign/` state works, everything else layers on cheaply.
-**Current focus:** Phase 1 — Engine Foundation
+**Current focus:** Phase 6 — ADR Log + Entity Design (first M2 phase)
 
 ## Current Position
 
-Phase: 1 of 5 (Engine Foundation)
-Plan: 5 of 5 in current phase
-Status: Phase complete — ready for verification
-Last activity: 2026-06-08
+Phase: 6 of 9 (ADR Log + Entity Design) — M2 phase 1 of 4
+Plan: none yet (phase not planned)
+Status: M2 roadmap created — ready to plan Phase 6
+Last activity: 2026-06-09
 
-Progress: [██░░░░░░░░] phase 1/5 complete
+Progress: [░░░░] M2 phase 0/4 complete
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 0
+- Total plans completed (M2): 0
 - Average duration: — min
 - Total execution time: 0.0 hours
 
@@ -47,39 +47,23 @@ Progress: [██░░░░░░░░] phase 1/5 complete
 
 **Recent Trend:**
 
-- Last 5 plans: none yet
+- Last 5 plans: none yet for M2
 - Trend: —
 
 *Updated after each plan completion*
-| Phase 01 P01 | 4 | 3 tasks | 20 files |
-| Phase 01 P02 | 4 | 4 tasks | 4 files |
-| Phase 01 P03 | 9min | 3 tasks | 6 files |
-| Phase 01 P04 | 6min | 3 tasks | 9 files |
-| Phase 02 P01 | 3min | 2 tasks | 4 files |
-| Phase 02 P02 | 6 | 2 tasks | 5 files |
-| Phase 02 P03 | 5min | 2 tasks | 9 files |
 
 ## Accumulated Context
 
 ### Decisions
 
 Decisions are logged in PROJECT.md Key Decisions table.
-Recent decisions affecting current work:
+M2-relevant standing decisions:
 
-- Locked (R-002): Engine before skills — no skill is thin before `init` returns its JSON.
-- Locked (R-001 / ADR-002): Engine = zero-dep Node `.cjs`, lift GSD patterns not code; `npx` works out of the box.
-- Locked (ADR-003): `.sovereign/` committed to git by default; engine skips commits when gitignored.
-
-Phase 1 ADRs to lock before code: (a) zero-dep `.cjs`; (b) CJS packaging, `engines.node >= 20`; (c) commands authored as skill directories; (d) drop v1 non-standard frontmatter; (e) MANIFEST engine-derived.
-
-- [Phase 01]: Engine test script uses glob 'test/**/*.test.cjs' (Node 23 cannot resolve bare 'test/' dir)
-- [Phase 01]: Six Phase-1 ADRs (002,009,010,011,012,013) locked before engine code; subagent JSON schema pinned
-- [Phase 01]: Engine layer A: zero-dep router (--cwd/--raw/--pick), output() @file: 50KB spill, loadConfig 3-layer deep-merge, model-profiles table (reasoning agents = opus under quality)
-- [Phase 01]: Engine layer B: field-level STATE.md patch (stateReplaceField bold-then-plain), derived MANIFEST regenerated on every save under code-enforced ~500-token chars/4 budget (SOVEREIGN's one extension over GSD), append-only gate open/pass to SOVEREIGN.md
-- [Phase 01]: Engine layer B (commands): doubly-gated (commit_docs + gitignore) prompt-injection-sanitized commit returning short hash; GSD-verbatim model resolution (override->omit->profile->sonnet); validate skills SKILL.md frontmatter linter (name<=64/lowercase-hyphen/no claude|anthropic; desc<=1024) exits non-zero on violation
-- [Phase 02]: Installer = copy not symlink into .claude/; version stamp at .sovereign/.sovereign-version makes init idempotent + version-aware; bare init defaults to --full
-- [Phase 02]: Plan 02-02: 4 M1-dispatched subagents (advisor lens-shell/chairman/peer-reviewer/sentinel) defined with real Agent Skills frontmatter + pinned ok:boolean JSON schemas (JSON only); planner/researcher deferred (no M1 caller); model:inherit (engine resolves via model-profiles)
-- [Phase 02]: Plan 02-03: real agents_installed check (probe .claude/agents then ~/.claude/agents per workflow's required subagents; no silent general-purpose fallback) replaces the Phase-1 stub; sovereign-tools doctor enforces AUTO_MAX=7 + ~2000-token listing budget counting only auto-triggerable skills; disable-model-invocation convention documented at engine/references/listing-budget.md (CONV-01)
+- M2 is PURE SKILL AUTHORING — hand-authored thin orchestrators over the existing M1 engine. No engine changes, no new subagents.
+- Build order is content-dependency driven: `adr-log` first (others offer ADRs through it / `adr-format.md`); `entity-design` before `api-design` (API exposes the entities); `stack-select`/`scale-design`/`security-design`/`deploy-design` mutually independent after that.
+- ARCH-08 is cross-cutting: every M2 skill is a thin orchestrator (single `init` orient, recommendation-first, one-question-at-a-time, "Why this matters", nav footer), `disable-model-invocation: true`, so the doctor auto-trigger budget stays at the 5 Fast Lane skills.
+- Each M2 skill is a `--full` install (not Fast Lane / `--quick`).
+- Skills write durable docs to `.sovereign/docs/{,/adr,/api,/security,/infra}`; `validate skills` must pass for all.
 
 ### Pending Todos
 
@@ -87,12 +71,12 @@ None yet.
 
 ### Blockers/Concerns
 
-- Phase 3 (Council): anonymized peer-review round has no GSD analog — needs a design spike (anonymization mechanism + chairman prompt) before implementation.
-- Phase 4 (sentinel): `SOVEREIGN:UNVERIFIED` marker spec is net-new — define as a mini-ADR before implementing the skill.
-- Recurring meta-risk: skill-listing token budget (~7 auto-triggerable skills max; orchestrator-only skills use `disable-model-invocation`). Re-check via `/doctor` after Phases 2 and 4.
+- Recurring meta-risk: skill-listing token budget. M2 skills MUST set `disable-model-invocation: true` so the auto-trigger count stays at the 5 Fast Lane skills — re-verify via `sovereign-tools doctor` at the end of every M2 phase (especially Phase 9, after all 7 M2 skills installed).
+- Acceptance for M2 phases is grep-verifiable against authored SKILL.md files + `validate skills` + `doctor`.
 
 ## Session Continuity
 
-Last session: 2026-06-08T18:05:08.850Z
-Stopped at: Completed 02-03-PLAN.md
+Last session: 2026-06-09
+Stopped at: M2 roadmap created (phases 6–9 appended; REQUIREMENTS traceability filled)
 Resume file: None
+Next: `/gsd:plan-phase 6`

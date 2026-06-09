@@ -100,10 +100,77 @@ Plans:
   4. Each M1 skill has one documentation page (what it does, when to use, an example, navigation, and token cost).
 **Plans**: TBD
 
+---
+
+# Milestone v1.1 — M2 (Architecture)
+
+## Overview
+
+M2 adds SOVEREIGN's Phase-3 (Architecture) design skills: the conversational, recommendation-first skills that turn a grilled idea into a *recorded* architecture. This is **pure skill authoring** — every skill is a hand-authored thin orchestrator over the M1 engine, with no engine changes and no new subagents. Each skill orients via one `sovereign-tools init <skill>` call, asks recommendation-first one question at a time, and writes durable docs under `.sovereign/docs/{,/adr,/api,/security,/infra}`. Build order is dictated by content dependency: `adr-log` lands first because every later skill *offers* ADRs through it (the `adr-format.md` 3-condition gate); `entity-design` precedes `api-design` because the API exposes the entities; `stack-select`, `scale-design`, `security-design`, and `deploy-design` are mutually independent after that and are grouped by affinity at standard granularity. ARCH-08 (the thin-orchestrator shape: `disable-model-invocation`, "Why this matters", nav footer, `validate skills` clean, doctor budget held at the 5 Fast Lane skills) is **cross-cutting** — it is a success criterion of every M2 phase, not a phase of its own.
+
+## Phases
+
+- [ ] **Phase 6: ADR Log + Entity Design** - Record decisions to `.sovereign/docs/adr/` (the 3-condition gate) and model the domain one entity at a time — the foundation every later architecture skill builds on
+- [ ] **Phase 7: API Design** - Contract-first, protocol-agnostic API design producing a living `API_SPEC.md` over the Phase-6 entities
+- [ ] **Phase 8: Stack & Scale Design** - Recommendation-first stack selection and a scaling-strategy conversation, each recording ADR-worthy decisions
+- [ ] **Phase 9: Security & Deploy Design** - Layered `SECURITY_MODEL.md` and budget-aware `DEPLOY_MODEL.md` — closing out the Architecture phase
+
+## Phase Details
+
+### Phase 6: ADR Log + Entity Design
+**Goal**: A user can record architectural decisions through a gated `adr-log` skill and model their domain through `entity-design` — establishing the two artifacts (ADRs + entities) that every subsequent M2 skill references.
+**Depends on**: Phase 5 (M1 complete: engine, `validate skills`, doctor, `skill-format.md`/`adr-format.md` conventions)
+**Requirements**: ARCH-01, ARCH-02, ARCH-08
+**Success Criteria** (what must be TRUE):
+  1. Running `adr-log` records a decision to `.sovereign/docs/adr/NNNN-slug.md` — sequentially numbered, in the minimal `adr-format.md` form — and the skill applies the three-condition gate (hard-to-reverse + surprising + a real trade-off), declining to log decisions that fail it.
+  2. Running `entity-design` walks the user through entities, relationships, and bounded contexts one piece at a time, drawing terms from the `CONTEXT.md` glossary and recording the domain model to `.sovereign/docs/`.
+  3. `entity-design` offers ADR-worthy modeling choices to `adr-log` rather than re-implementing decision recording (the two skills compose).
+  4. Both skills are thin orchestrators: each orients via a single `sovereign-tools init <skill>` call, opens with a plain-language "Why this matters" section, asks recommendation-first one question at a time, and ends with a navigation footer; both set `disable-model-invocation: true`.
+  5. `sovereign-tools validate skills` passes for both skills and `sovereign-tools doctor` still reports the auto-trigger listing budget at the 5 Fast Lane skills (neither M2 skill is auto-triggerable).
+**Plans**: TBD
+**UI hint**: no
+
+### Phase 7: API Design
+**Goal**: A user can design a contract-first API over their domain model and walk away with a living `API_SPEC.md` that downstream construction can implement against.
+**Depends on**: Phase 6 (the API exposes the entities from `entity-design`; ADR-worthy choices route through `adr-log`)
+**Requirements**: ARCH-03, ARCH-08
+**Success Criteria** (what must be TRUE):
+  1. Running `api-design` guides the user through a protocol-agnostic contract (REST / GraphQL / gRPC / events), recommendation-first, one decision at a time, referencing the Phase-6 entities.
+  2. The skill produces a living `.sovereign/docs/api/API_SPEC.md` covering endpoints/messages, auth, versioning, errors, and pagination, and updates it in place on re-run rather than duplicating.
+  3. Protocol and contract decisions that meet the three-condition gate are offered to `adr-log`.
+  4. The skill is a thin orchestrator: single `init` orient call, "Why this matters" section, recommendation-first questioning, navigation footer, and `disable-model-invocation: true`; `validate skills` passes and the doctor budget stays at the 5 Fast Lane skills.
+**Plans**: TBD
+**UI hint**: no
+
+### Phase 8: Stack & Scale Design
+**Goal**: A user gets a guided, recommendation-first technology-stack selection and a scaling-strategy conversation — each grounded in their project's real constraints and each recording its consequential choices as ADRs.
+**Depends on**: Phase 6 (decisions route through `adr-log`; independent of Phase 7)
+**Requirements**: ARCH-04, ARCH-05, ARCH-08
+**Success Criteria** (what must be TRUE):
+  1. Running `stack-select` produces a recommendation-first stack choice driven by project type, scale, budget, and constraints (explicitly not trend-following), with its rationale recorded and ADR-worthy choices offered to `adr-log`.
+  2. Running `scale-design` walks the user through expected load, read/write ratio, caching, queues, and data-layer bottlenecks, producing a recorded scaling strategy plus ADRs.
+  3. Both skills compose with `adr-log` (offer decisions, do not re-implement recording) and draw project context from the `init` JSON rather than re-reading files.
+  4. Both skills are thin orchestrators: single `init` orient call, "Why this matters" section, recommendation-first questioning, navigation footer, and `disable-model-invocation: true`; `validate skills` passes for both and the doctor budget stays at the 5 Fast Lane skills.
+**Plans**: TBD
+**UI hint**: no
+
+### Phase 9: Security & Deploy Design
+**Goal**: A user designs a layered security model and a budget-aware deployment plan, recording each as a durable doc — closing out SOVEREIGN's Architecture phase so a project enters Construction with its architecture fully captured.
+**Depends on**: Phase 6 (decisions route through `adr-log`; independent of Phases 7 and 8)
+**Requirements**: ARCH-06, ARCH-07, ARCH-08
+**Success Criteria** (what must be TRUE):
+  1. Running `security-design` walks the user through a layered model (auth/authz, data classification, app/OWASP, infra, agent/prompt-injection) and records it to `.sovereign/docs/security/SECURITY_MODEL.md`.
+  2. Running `deploy-design` produces a budget-aware plan (self-hosted vs managed, container strategy, IaC, CI/CD, environments, DR) recorded to `.sovereign/docs/infra/DEPLOY_MODEL.md`.
+  3. Both skills offer their consequential choices to `adr-log` and update their respective docs in place on re-run.
+  4. Both skills are thin orchestrators: single `init` orient call, "Why this matters" section, recommendation-first questioning, navigation footer, and `disable-model-invocation: true`; `validate skills` passes for both and `doctor` confirms the auto-trigger budget remains at the 5 Fast Lane skills after all 7 M2 skills are installed.
+**Plans**: TBD
+**UI hint**: no
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
+M1 phases (complete) executed in numeric order: 1 → 2 → 3 → 4 → 5
+M2 phases execute in numeric order: 6 → 7 → 8 → 9
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -112,3 +179,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 3. Council `--standard` | 2/2 | Complete   | 2026-06-08 |
 | 4. Fast Lane Skills | 6/6 | Complete   | 2026-06-08 |
 | 5. Conventions + Per-Skill Docs | 3/3 | Complete   | 2026-06-09 |
+| 6. ADR Log + Entity Design | 0/? | Not started | - |
+| 7. API Design | 0/? | Not started | - |
+| 8. Stack & Scale Design | 0/? | Not started | - |
+| 9. Security & Deploy Design | 0/? | Not started | - |

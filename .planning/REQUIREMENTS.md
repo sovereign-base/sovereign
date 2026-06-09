@@ -46,4 +46,15 @@ SOVEREIGN's Phase-3 (Architecture) skills: conversational, recommendation-first 
 
 ## Traceability
 
-<!-- Filled by roadmapper: REQ-ID → Phase -->
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| ARCH-01 | Phase 6 | Pending |
+| ARCH-02 | Phase 6 | Pending |
+| ARCH-03 | Phase 7 | Pending |
+| ARCH-04 | Phase 8 | Pending |
+| ARCH-05 | Phase 8 | Pending |
+| ARCH-06 | Phase 9 | Pending |
+| ARCH-07 | Phase 9 | Pending |
+| ARCH-08 | Phases 6, 7, 8, 9 (cross-cutting) | Pending |
+
+**Coverage:** 8/8 M2 requirements mapped. ARCH-08 is cross-cutting (a success criterion of every M2 skill phase); ARCH-01..07 each map to exactly one phase.
