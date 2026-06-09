@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: — M3
-status: executing
-stopped_at: Completed 10-05-PLAN.md
-last_updated: "2026-06-09T09:21:27.053Z"
+status: verifying
+stopped_at: Completed 12-01-PLAN.md
+last_updated: "2026-06-09T12:28:05.069Z"
 last_activity: 2026-06-09
 progress:
   total_phases: 4
-  completed_phases: 1
-  total_plans: 5
-  completed_plans: 5
+  completed_phases: 2
+  total_plans: 8
+  completed_plans: 7
 ---
 
 # Project State
@@ -20,16 +20,16 @@ progress:
 See: .planning/PROJECT.md (Current Milestone: v1.2 — M3 Adoption, Bridging & Extensions)
 
 **Core value:** The engine — a skill orients itself with one CLI call (`sovereign-tools init <workflow>` → one JSON blob), not ten file reads. If the token-efficient engine + committed `.sovereign/` state works, everything else layers on cheaply.
-**Current focus:** Phase 10 — Engine Additions (first M3 phase)
+**Current focus:** Phase 12 — Extension Protocol Skill (M3 phase 3 of 4)
 
 ## Current Position
 
-Phase: 10 of 13 (Engine Additions) — M3 phase 1 of 4
-Plan: 5 of 5 complete (10-01 done; bridge.cjs hashing substrate)
-Status: Ready to execute
+Phase: 12 of 13 (Extension Protocol Skill) — M3 phase 3 of 4
+Plan: 1 of 2 complete (12-01 done; extension.cjs corrected to verified `npx skills` surface)
+Status: In progress — 12-02 (import-skill skill) remaining
 Last activity: 2026-06-09
 
-Progress: [██░░░░░░░░] Phase 10: 1/5 plans complete; M3 phase 0/4 complete
+Progress: [█████████░] 88% — M3: Phase 10 ✓, Phase 11 ✓, Phase 12 1/2
 
 ## Performance Metrics
 
@@ -56,6 +56,7 @@ Progress: [██░░░░░░░░] Phase 10: 1/5 plans complete; M3 phas
 | Phase 10 P03 | 2 | 2 tasks | 2 files |
 | Phase 10 P04 | 2 | 2 tasks | 2 files |
 | Phase 10 P05 | 3 | 3 tasks | 4 files |
+| Phase 12 P01 | 3 | 3 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -75,6 +76,7 @@ M3-relevant standing decisions:
 - [Phase 10]: adopt.cjs scanProject = pure read-only Layers-1+2 scan emitting M3-NOTES §3 contract; gitignore-aware via git ls-files (repo) / bounded SKIP_DIRS walk (non-git); MAX_TREE=2000 cap+truncated; deep_read_candidates heuristic (entrypoint/auth/base-model/config, ≤10); read-only invariant test-asserted via dir snapshot
 - [Phase 10]: extension.cjs: exit-code-driven npx skills wrapper; preview=skills use (materialize-for-audit BEFORE add), install=skills add --copy -y, list; source as single discrete argv element (no shell injection); audit runs scanSkillContent → {findings,verdict}, ok=verdict!=='block', no_content greenfield-safe; runSkills injectable for network-free tests; zero deps
 - [Phase 10]: 10-05: bridge/extension/adopt wired into the public router via existing array-arg helpers (no commander); init bridge|adopt|extension orient blobs added (adopt carries detected.in_git probe); full suite 130 green, deps still {}. ENG-08 COMPLETE.
+- [Phase 12]: 12-01: corrected extension.cjs to verified npx skills surface — preview = bare 'skills use <source>' (no -a/--copy); audit re-runs preview and scans the prompt-wrapped STDOUT via scanSkillContent (no file-path); readMaterializedContent + node:fs/path removed; install/list unchanged; 129 tests green, deps still {}
 
 ### Pending Todos
 
@@ -90,7 +92,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-09T09:21:20.852Z
-Stopped at: Completed 10-05-PLAN.md
+Last session: 2026-06-09T12:27:57.750Z
+Stopped at: Completed 12-01-PLAN.md
 Resume file: None
 Next: `/gsd:plan-phase 10`

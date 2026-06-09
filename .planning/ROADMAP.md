@@ -69,7 +69,7 @@ M3 extends SOVEREIGN beyond a single fresh project — retrofit it onto an exist
   4. The skill is a thin orchestrator: single `sovereign-tools init extension` orient call, "Why this matters" section, recommendation-first output, navigation footer, and `disable-model-invocation: true`.
   5. `sovereign-tools validate skills` passes for the extension skill and `sovereign-tools doctor` still reports the auto-trigger listing budget at the 5 Fast Lane skills.
 **Plans**: 2 plans
-  - [ ] 12-01-PLAN.md — extension.cjs correction: preview → bare `skills use`, audit scans `skills use` stdout via scanSkillContent (+ updated tests) (EXT-01/02 substrate)
+  - [x] 12-01-PLAN.md — extension.cjs correction: preview → bare `skills use`, audit scans `skills use` stdout via scanSkillContent (+ updated tests) (EXT-01/02 substrate)
   - [ ] 12-02-PLAN.md — hand-authored `import-skill` thin-orchestrator skill: five-gate vetting (necessity/conflict/audit/recommendation/logged decision) wrapping `extension list|audit|install` (EXT-01/02 + M3-CC)
 **UI hint**: no
 
@@ -92,5 +92,5 @@ M3 extends SOVEREIGN beyond a single fresh project — retrofit it onto an exist
 |-------|----------------|--------|-----------|
 | 10. Engine Additions | 5/5 | Complete   | 2026-06-09 |
 | 11. Bridge Skill | 1/1 | Complete   | 2026-06-09 |
-| 12. Extension Protocol Skill | 0/2 | Planned | - |
+| 12. Extension Protocol Skill | 1/2 | In Progress|  |
 | 13. sovereign-adopt Skill | 0/TBD | Not started | - |
