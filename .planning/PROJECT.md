@@ -24,23 +24,25 @@ It is for engineers and agents who want to build properly — and refuse to let 
 - ✓ `council --standard` (5 parallel advisors + anonymous peer review + chairman verdict) + 4 subagents — M1
 - ✓ Conventions (skill-format, adr-format, commenting, unverified-marker, listing-budget) + per-skill docs — M1
 
-## Current State (between milestones)
+**Shipped:** **v1.0 (M1)** + **v1.1 (M2)** + **v1.2 (M3)**, all complete, verified, tagged, and **PUBLISHED** — `sovereign-cli@2.0.0` is live on npm and `main` reflects the release. 16 skills + 4 subagents + 5 references + 15 engine lib modules; 129 tests; listing budget held at 5 auto-triggerable. `/council`, the `npx skills` extension protocol, and the published `npx sovereign-cli init` are all proven live. Milestone detail archived under `.planning/milestones/`.
 
-**Shipped:** **v1.0 (M1 — Foundation)** + **v1.1 (M2 — Architecture)** + **v1.2 (M3 — Adoption, Bridging & Extensions)**, all complete, verified, tagged. SOVEREIGN ships a zero-dependency engine + `npx sovereign-cli init` installer + **16 skills** (5 Fast Lane auto-triggerable; Council + 7 architecture + bridge + import-skill + sovereign-adopt phase-gated) + 4 subagents + 5 references + 15 engine lib modules. **129 engine tests; listing budget held at 5 auto-triggerable across all three milestones.** `/council` and the `npx skills` extension protocol are both proven live. Milestone detail archived under `.planning/milestones/`.
+## Current Milestone: v1.3 — M4 Ground Truth (anti-hallucination)
 
-- ✓ **M3 (v1.2):** engine `bridge.cjs`/`extension.cjs`/`adopt.cjs`/`scanSkillContent`; `bridge` (BRIDGE.md + hash staleness), `import-skill` (5-gate vetting over `npx skills`), `sovereign-adopt` (3-layer archaeology → retro-ADRs + ADOPTION.md, read-only).
+**Goal:** Close the anti-hallucination loop the architecture/construction skills already flag — give SOVEREIGN a way to anchor implementation to *current* external documentation and to catch its own uncertainty before it ships wrong code. Modest zero-dep engine surface + two hand-authored skills.
 
-### Next Milestone Goals (M4 candidate — not yet scoped)
-
-- **Anti-hallucination:** `anchor-docs` (ingest + version external docs) + `verify-self` (agent self-interrogation + `SOVEREIGN:UNVERIFIED` generation) — the architecture/construction skills already flag the need.
-- **Tracks layer** (per ADR-014 / BACKLOG) — backend/data/frontend/mobile/iot tracks; the home for the DSA selection skill + the database skills.
-- **Operations phase** (`onboard`/`feature`/`incident`/`health-check`/`deprecate`), multi-model Council (`--deep`), microservices overlay.
-
-Run `/gsd:new-milestone` to scope M4 (requirements → roadmap). Or **publish `sovereign-cli`** (packaging clean; needs go-ahead + credentials + pushing tags).
+**Target capabilities:** `anchor-docs` (ingest/version external docs) · `verify-self` (self-interrogation + the 3-step retroactive audit + `SOVEREIGN:UNVERIFIED` generation).
 
 ### Active
 
-_None — between milestones._
+<!-- M4 — Ground Truth (anti-hallucination). -->
+
+- [ ] `anchor-docs` — ingest external documentation the agent's training may be stale on (payment gateways, SDKs, regional/gov APIs); store URLs by default (full content opt-in with a copyright warning, ADR-004) in `.sovereign/external-docs/` with `source`/`version`/`date-retrieved`/`re-verify-by` headers; flag stale anchors.
+- [ ] `verify-self` — agent self-interrogation on low-confidence signals: hard-stop → retroactive audit of code since the last verified anchor → user decision (provide docs via `anchor-docs` / mark `SOVEREIGN:UNVERIFIED` / discard+restart); generates the `SOVEREIGN:UNVERIFIED` markers (spec shipped M1, scanned by `sentinel`).
+- [ ] Modest zero-dep engine `anchor` command (store/list/check-stale external-doc metadata in `.sovereign/external-docs/`) + `init` workflows; both skills are core-tier thin orchestrators (`disable-model-invocation`, per ADR-014) that compose (`verify-self` → `anchor-docs`).
+
+### Deferred to a later milestone
+
+- Tracks layer (ADR-014 — DSA + database skills home), operations phase, multi-model Council (`--deep`), microservices overlay, IoT/embedded — M5+.
 
 ### Out of Scope
 

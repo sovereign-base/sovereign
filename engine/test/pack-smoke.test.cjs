@@ -20,6 +20,7 @@ const { execFileSync } = require('node:child_process');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
+const EXPECTED_VERSION = require("node:fs").readFileSync(require("node:path").join(__dirname, "..", "VERSION"), "utf8").trim();
 
 const ENGINE_ROOT = path.join(__dirname, '..');
 
@@ -74,7 +75,7 @@ test('npm pack clean-install runs `sovereign-tools init council` end-to-end', { 
     const blob = JSON.parse(out.startsWith('@file:') ? fs.readFileSync(out.slice('@file:'.length).trim(), 'utf8') : out);
 
     // 4a. The nested init contract is intact.
-    assert.equal(blob.sovereign_version, '2.0.0');
+    assert.equal(blob.sovereign_version, EXPECTED_VERSION);
     assert.ok(blob.models && typeof blob.models.advisor === 'string', 'models.advisor present');
     assert.ok(blob.context_injection && blob.context_injection.manifest_path, 'context_injection present');
     assert.ok(blob.paths && blob.paths.council_dir, 'paths present');

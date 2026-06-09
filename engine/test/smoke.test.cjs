@@ -16,6 +16,7 @@ const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const { execFileSync } = require('node:child_process');
 const path = require('node:path');
+const EXPECTED_VERSION = require("node:fs").readFileSync(require("node:path").join(__dirname, "..", "VERSION"), "utf8").trim();
 
 const ENGINE_ROOT = path.join(__dirname, '..');
 const TOOLS_BIN = path.join(ENGINE_ROOT, 'bin', 'sovereign-tools.cjs');
@@ -26,7 +27,7 @@ test('sovereign-tools version loads via shebang/CJS bin and prints the version',
     encoding: 'utf8',
   });
   assert.ok(
-    stdout.includes('2.0.0'),
+    stdout.includes(EXPECTED_VERSION),
     `expected version output to include 2.0.0, got: ${JSON.stringify(stdout)}`
   );
 });

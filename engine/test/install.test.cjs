@@ -197,3 +197,46 @@ test('launcher: unknown command exits non-zero', () => {
   const res = spawnSync(process.execPath, [SOVEREIGN_BIN, 'bogus-cmd'], { encoding: 'utf-8' });
   assert.notEqual(res.status, 0);
 });
+
+// ─── Launcher UX (v2.1: human-readable + interactive + --json escape hatch) ──
+
+test('launcher: init --full prints a human-readable summary (not raw JSON)', () => {
+  const dir = mkProject();
+  try {
+    const res = spawnSync(process.execPath, [SOVEREIGN_BIN, 'init', '--full', '--cwd', dir], { encoding: 'utf-8' });
+    assert.equal(res.status, 0, res.stderr);
+    assert.ok(/SOVEREIGN/.test(res.stdout), 'shows the SOVEREIGN banner');
+    assert.ok(/Next steps/i.test(res.stdout), 'shows Next steps guidance');
+    assert.ok(!res.stdout.trimStart().startsWith('{'), 'is not raw JSON');
+  } finally { rm(dir); }
+});
+
+test('launcher: init --json emits the raw machine-readable result', () => {
+  const dir = mkProject();
+  try {
+    const res = spawnSync(process.execPath, [SOVEREIGN_BIN, 'init', '--full', '--json', '--cwd', dir], { encoding: 'utf-8' });
+    assert.equal(res.status, 0, res.stderr);
+    const obj = JSON.parse(res.stdout);
+    assert.equal(obj.status, 'installed');
+    assert.ok(Array.isArray(obj.skills_copied) && obj.skills_copied.length > 0);
+  } finally { rm(dir); }
+});
+
+test('launcher: init with no mode flag and no TTY defaults to full (never hangs)', () => {
+  const dir = mkProject();
+  try {
+    // spawnSync with no input → stdin is not a TTY → must NOT prompt; defaults to full.
+    const res = spawnSync(process.execPath, [SOVEREIGN_BIN, 'init', '--cwd', dir], { encoding: 'utf-8', timeout: 20000 });
+    assert.equal(res.status, 0, res.stderr);
+    assert.ok(fs.existsSync(path.join(dir, '.sovereign', 'STATE.md')), 'scaffolded .sovereign in non-interactive mode');
+  } finally { rm(dir); }
+});
+
+test('launcher: init --adopt frames next steps around sovereign-adopt', () => {
+  const dir = mkProject();
+  try {
+    const res = spawnSync(process.execPath, [SOVEREIGN_BIN, 'init', '--adopt', '--cwd', dir], { encoding: 'utf-8' });
+    assert.equal(res.status, 0, res.stderr);
+    assert.ok(/sovereign-adopt/.test(res.stdout), 'adopt mode recommends /sovereign-adopt');
+  } finally { rm(dir); }
+});
