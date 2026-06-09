@@ -16,32 +16,42 @@ It is for engineers and agents who want to build properly — and refuse to let 
 
 <!-- Shipped and confirmed valuable. -->
 
-(None yet — ship to validate. The v1 content design exists in `archive/v1/` as reference, not as working software.)
+**M1 — Foundation (v1.0), shipped & verified 28/28:**
+
+- ✓ `.sovereign/` state model + `sovereign-tools` zero-dep engine (`init <workflow>`→one JSON blob, state/gate/commit/model/validate/doctor) — M1
+- ✓ `npx sovereign-cli init` installer (`--quick`/`--full`/`--global`, idempotent, version-aware) — M1
+- ✓ Fast Lane 5: `ubiquitous-language`, `grill-with-docs`, `handoff`, `sentinel`, `tdd` — M1
+- ✓ `council --standard` (5 parallel advisors + anonymous peer review + chairman verdict) + 4 subagents — M1
+- ✓ Conventions (skill-format, adr-format, commenting, unverified-marker, listing-budget) + per-skill docs — M1
+
+## Current Milestone: v1.1 — M2 Architecture phase skills
+
+**Goal:** Add SOVEREIGN's Phase-3 (Architecture) design skills — the conversational, recommendation-first skills that turn a grilled idea into a recorded architecture — as hand-authored thin orchestrators over the existing M1 engine.
+
+**Target skills:** `adr-log`, `entity-design`, `api-design` (+ `API_SPEC.md` output), `stack-select`, `scale-design`, `security-design`, `deploy-design`.
 
 ### Active
 
-<!-- M1 — Foundation milestone. Building toward these. -->
+<!-- M2 — Architecture. Building toward these. -->
 
-- [ ] `.sovereign/` state model — MANIFEST.md (loads first, <500 tokens), SOVEREIGN.md constitution, CONTEXT.md glossary, STATE.md, config.json, docs/ tree
-- [ ] `sovereign-tools` engine (Node/TS) — `init <workflow>`, `state load|save`, `gate open|pass`, `commit`, `model` resolution; returns paths+config as one JSON blob
-- [ ] `sovereign-init` skill — bootstrap a project's `.sovereign/` (`--quick` / `--full`)
-- [ ] Fast Lane skill: `grill-with-docs` (thin orchestrator over the engine)
-- [ ] Fast Lane skill: `ubiquitous-language`
-- [ ] Fast Lane skill: `tdd`
-- [ ] Fast Lane skill: `sentinel` (native tier: commenting/spec-alignment/UNVERIFIED scan/ADR consistency)
-- [ ] Fast Lane skill: `handoff`
-- [ ] `council` skill (`--standard`) — 5 parallel advisor subagents + anonymous peer review + chairman synthesis, with project-context injection from `.sovereign/`
-- [ ] Subagent definitions for council advisors + any reasoning agents
-- [ ] Per-skill docs (one page each), commenting standard, skill-format + ADR-format references
-- [ ] Recommendation-first, navigation footer, and "Why this matters" section conventions enforced across skills
+- [ ] `adr-log` — record an architectural decision to `.sovereign/docs/adr/` per `adr-format.md` (the 3-condition gate)
+- [ ] `entity-design` — domain model / entities / relationships / bounded contexts → `.sovereign/docs/`
+- [ ] `api-design` — contract-first API design (REST/GraphQL/gRPC/events) → `.sovereign/docs/api/API_SPEC.md`
+- [ ] `stack-select` — guided, recommendation-first stack selection (project type/scale/budget/constraints)
+- [ ] `scale-design` — scaling conversation → recorded strategy + ADRs
+- [ ] `security-design` — layered security model → `.sovereign/docs/security/SECURITY_MODEL.md`
+- [ ] `deploy-design` — budget-aware deploy/infra plan → `.sovereign/docs/infra/DEPLOY_MODEL.md`
+- [ ] All M2 skills are phase-gated, user-invoked (`disable-model-invocation: true`) so the auto-trigger listing budget stays at the 5 Fast Lane skills; each is a thin orchestrator over the engine (no engine changes needed) with Why-this-matters + nav footer + recommendation-first, per `skill-format.md`
 
 ### Out of Scope
 
 <!-- Explicit boundaries for this milestone. -->
 
-- Phase 2-6 skills (entity/api/scale/security/deploy-design, operations) — M2+, not M1
+- Operations-phase skills (`onboard`, `feature`, `incident`, `health-check`, `deprecate`) — later
 - `sovereign-adopt`, `bridge`, extension protocol — M3
-- Multi-model Council (`--deep`), microservices overlay, IoT/embedded tracks — M4+
+- `anchor-docs` / `verify-self` (M2 architecture skills flag when current docs are needed, but the anchor skills themselves are M3)
+- Multi-model Council (`--deep`), microservices overlay (`service-design`/`event-catalog`), IoT/embedded tracks — M4+
+- Engine changes — M2 is pure skill authoring; the `init` default case already serves arbitrary skill names
 - Reimplementing what GSD/find-skills already solve (riding GSD's engine, building our own skill registry) — decided against in R-001/R-003
 - Monetization — open source only (ADR-001)
 
