@@ -23,14 +23,14 @@ A **thin orchestrator**: the engine does the mechanical scan (Layers 1+2); this 
 
 **1 — Orient (one call).**
 ```bash
-INIT=$(node "$ENGINE/bin/sovereign-tools.cjs" init adopt)
+INIT=$(node ".claude/sovereign-engine/sovereign-tools.cjs" init adopt)
 if [[ "$INIT" == @file:* ]]; then INIT=$(cat "${INIT#@file:}"); fi
 ```
 Parse project_root, `detected.in_git`, and the `.sovereign/` paths.
 
 **2 — Layers 1+2 (engine, near-zero→low tokens).**
 ```bash
-node "$ENGINE/bin/sovereign-tools.cjs" adopt scan
+node ".claude/sovereign-engine/sovereign-tools.cjs" adopt scan
 ```
 Consume the JSON contract — `manifests`, `detected` (languages/package_managers/dockerfile/ci/tests/monorepo), `structure` (top_level_dirs/file_count/tree/truncated), and `deep_read_candidates`. **Do not re-walk the tree yourself** — the engine already did it gitignore-aware.
 

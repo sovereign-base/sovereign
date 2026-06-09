@@ -23,7 +23,7 @@ A **thin orchestrator** over the engine — recommendation-first, like its sibli
 
 **1 — Orient (one call).**
 ```bash
-INIT=$(node "$ENGINE/bin/sovereign-tools.cjs" init stack-select)
+INIT=$(node ".claude/sovereign-engine/sovereign-tools.cjs" init stack-select)
 if [[ "$INIT" == @file:* ]]; then INIT=$(cat "${INIT#@file:}"); fi
 ```
 Parse `paths.state` + glossary path; draw the project's `phase`/`active_tracks` from the blob rather than re-reading files. Read `ENTITY_MODEL.md`/`API_SPEC.md` by path if present — they inform the choice.

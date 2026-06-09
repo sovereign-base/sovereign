@@ -23,7 +23,7 @@ A **thin orchestrator** over the engine — it owns ADR numbering and the gate; 
 
 **1 — Orient (one call).**
 ```bash
-INIT=$(node "$ENGINE/bin/sovereign-tools.cjs" init adr-log)
+INIT=$(node ".claude/sovereign-engine/sovereign-tools.cjs" init adr-log)
 if [[ "$INIT" == @file:* ]]; then INIT=$(cat "${INIT#@file:}"); fi
 ```
 Parse `paths.state` and the project root. (The default `init` blob does not carry the ADR list — this skill scans the directory itself in step 3.)
@@ -47,7 +47,7 @@ faster in our launch market and webhook signing is simpler to verify. Flutterwav
 stays a documented fallback.
 ```
 
-**5 — Persist.** `node "$ENGINE/bin/sovereign-tools.cjs" state save`, then `node "$ENGINE/bin/sovereign-tools.cjs" commit "adr: NNNN <slug>" --files <the new ADR> .sovereign/STATE.md .sovereign/MANIFEST.md`. The engine handles commit_docs + gitignore.
+**5 — Persist.** `node ".claude/sovereign-engine/sovereign-tools.cjs" state save`, then `node ".claude/sovereign-engine/sovereign-tools.cjs" commit "adr: NNNN <slug>" --files <the new ADR> .sovereign/STATE.md .sovereign/MANIFEST.md`. The engine handles commit_docs + gitignore.
 
 ## What qualifies (and what doesn't)
 

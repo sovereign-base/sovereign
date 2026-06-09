@@ -23,7 +23,7 @@ A **thin orchestrator** — orient once, then interrogate; delegate writes to `s
 
 **1 — Orient (one call).**
 ```bash
-INIT=$(node "$ENGINE/bin/sovereign-tools.cjs" init grill-with-docs)
+INIT=$(node ".claude/sovereign-engine/sovereign-tools.cjs" init grill-with-docs)
 if [[ "$INIT" == @file:* ]]; then INIT=$(cat "${INIT#@file:}"); fi
 ```
 Parse `context_injection.glossary_path` (`.sovereign/CONTEXT.md`), `context_injection.relevant_adrs`, and `paths.state`. Read the glossary + relevant ADRs (only now) so the grilling is grounded in *this* project.
@@ -39,7 +39,7 @@ Parse `context_injection.glossary_path` (`.sovereign/CONTEXT.md`), `context_inje
 
 **4 — Offer ADRs sparingly.** Only propose an ADR when **all three** hold: (a) hard to reverse, (b) surprising without context, (c) the result of a real trade-off. If any is missing, skip it — capture the decision in `CONTEXT.md` or the plan instead. ADRs live in `.sovereign/docs/adr/`, sequentially numbered, one paragraph is enough (what was decided + why).
 
-**5 — Persist.** `node "$ENGINE/bin/sovereign-tools.cjs" state save`, then commit via `sovereign-tools commit` if docs changed.
+**5 — Persist.** `node ".claude/sovereign-engine/sovereign-tools.cjs" state save`, then commit via `sovereign-tools commit` if docs changed.
 
 ## Example
 

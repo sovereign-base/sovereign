@@ -23,7 +23,7 @@ A **thin orchestrator** over the engine — conversational, recommendation-first
 
 **1 — Orient (one call).**
 ```bash
-INIT=$(node "$ENGINE/bin/sovereign-tools.cjs" init api-design)
+INIT=$(node ".claude/sovereign-engine/sovereign-tools.cjs" init api-design)
 if [[ "$INIT" == @file:* ]]; then INIT=$(cat "${INIT#@file:}"); fi
 ```
 Parse `context_injection.glossary_path` and `paths.state`. Read the glossary and the Phase-6 model at `.sovereign/docs/ENTITY_MODEL.md` (by path). If `ENTITY_MODEL.md` is absent, say so and suggest `/entity-design` first — degrade gracefully, don't invent entities.
@@ -40,7 +40,7 @@ Ask one question, give your recommended answer first, wait, then continue.
 
 **4 — Record the contract.** Write/update `.sovereign/docs/api/API_SPEC.md`. **Update in place** on re-run (match on section/endpoint headings — don't duplicate). Keep it contract-level: no handler code.
 
-**5 — Persist.** `node "$ENGINE/bin/sovereign-tools.cjs" state save`, then `node "$ENGINE/bin/sovereign-tools.cjs" commit "api-design: <surface>" --files .sovereign/docs/api/API_SPEC.md .sovereign/STATE.md .sovereign/MANIFEST.md`.
+**5 — Persist.** `node ".claude/sovereign-engine/sovereign-tools.cjs" state save`, then `node ".claude/sovereign-engine/sovereign-tools.cjs" commit "api-design: <surface>" --files .sovereign/docs/api/API_SPEC.md .sovereign/STATE.md .sovereign/MANIFEST.md`.
 
 ## API_SPEC.md format
 

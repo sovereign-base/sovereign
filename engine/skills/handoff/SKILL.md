@@ -24,7 +24,7 @@ A **thin orchestrator** — orient once, write the handoff, delegate state to `s
 
 **1 — Orient (one call).**
 ```bash
-INIT=$(node "$ENGINE/bin/sovereign-tools.cjs" init handoff)
+INIT=$(node ".claude/sovereign-engine/sovereign-tools.cjs" init handoff)
 if [[ "$INIT" == @file:* ]]; then INIT=$(cat "${INIT#@file:}"); fi
 ```
 Parse `paths.state` and the handoff target (`.sovereign/HANDOFF.md`). Skim the current `.sovereign/MANIFEST.md` (path from init) so the handoff aligns with recorded state.
@@ -38,7 +38,7 @@ Parse `paths.state` and the handoff target (`.sovereign/HANDOFF.md`). Skim the c
 
 Be dense. This is a resumption brief, not a transcript. If a decision belongs in an ADR or `CONTEXT.md`, put it there too — `HANDOFF.md` is ephemeral session state.
 
-**3 — Persist.** `node "$ENGINE/bin/sovereign-tools.cjs" state save` (records the stop point + regenerates MANIFEST), then commit via `sovereign-tools commit` if `commit_docs` is on, so the handoff travels with the repo.
+**3 — Persist.** `node ".claude/sovereign-engine/sovereign-tools.cjs" state save` (records the stop point + regenerates MANIFEST), then commit via `sovereign-tools commit` if `commit_docs` is on, so the handoff travels with the repo.
 
 ## HANDOFF.md format
 
