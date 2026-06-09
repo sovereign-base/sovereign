@@ -16,8 +16,8 @@ SOVEREIGN's Phase-3 (Architecture) skills: conversational, recommendation-first 
 - [x] **ARCH-01**: `adr-log` — a user can record an architectural decision to `.sovereign/docs/adr/NNNN-slug.md`, sequentially numbered, in the minimal form, and the skill applies the three-condition gate (hard-to-reverse + surprising + real trade-off) per `adr-format.md`.
 - [x] **ARCH-02**: `entity-design` — a user can define the domain model (entities, relationships, bounded contexts) one piece at a time, using the `CONTEXT.md` glossary, recorded to `.sovereign/docs/`.
 - [x] **ARCH-03**: `api-design` — a user can design a contract-first API (protocol-agnostic: REST/GraphQL/gRPC/events) and the skill produces a living `.sovereign/docs/api/API_SPEC.md` (endpoints/messages, auth, versioning, errors, pagination).
-- [ ] **ARCH-04**: `stack-select` — a user gets a guided, recommendation-first stack selection based on project type, scale, budget, and constraints (not trend-following); the choice is recorded (ADR-worthy decisions offered).
-- [ ] **ARCH-05**: `scale-design` — a user is walked through a scaling conversation (expected load, read/write ratio, caching, queues, data-layer bottlenecks) producing a recorded strategy + ADRs.
+- [x] **ARCH-04**: `stack-select` — a user gets a guided, recommendation-first stack selection based on project type, scale, budget, and constraints (not trend-following); the choice is recorded (ADR-worthy decisions offered).
+- [x] **ARCH-05**: `scale-design` — a user is walked through a scaling conversation (expected load, read/write ratio, caching, queues, data-layer bottlenecks) producing a recorded strategy + ADRs.
 - [ ] **ARCH-06**: `security-design` — a user designs a layered security model (auth/authz, data classification, app/OWASP, infra, agent/prompt-injection) recorded to `.sovereign/docs/security/SECURITY_MODEL.md`.
 - [ ] **ARCH-07**: `deploy-design` — a user designs a budget-aware deployment/infra plan (self-hosted vs managed, container strategy, IaC, CI/CD, environments, DR) recorded to `.sovereign/docs/infra/DEPLOY_MODEL.md`.
 
@@ -51,8 +51,8 @@ SOVEREIGN's Phase-3 (Architecture) skills: conversational, recommendation-first 
 | ARCH-01 | Phase 6 | Complete |
 | ARCH-02 | Phase 6 | Complete |
 | ARCH-03 | Phase 7 | Complete |
-| ARCH-04 | Phase 8 | Pending |
-| ARCH-05 | Phase 8 | Pending |
+| ARCH-04 | Phase 8 | Complete |
+| ARCH-05 | Phase 8 | Complete |
 | ARCH-06 | Phase 9 | Pending |
 | ARCH-07 | Phase 9 | Pending |
 | ARCH-08 | Phases 6, 7, 8, 9 (cross-cutting) | Pending |
