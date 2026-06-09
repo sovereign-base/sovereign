@@ -23,7 +23,7 @@ Completed milestones are archived (full phase detail + final progress) under `.p
 
 - [x] **Phase 17: `diagnose` skill** - Stack-agnostic debugging loop (reproduce → isolate → hypothesis → fix → verify) over the engine + `.sovereign/` state; composes with `tdd`/`verify-self`/`sentinel` (DIAG-01, M5-CC) ✅ 2026-06-09
 - [x] **Phase 18: `qa` skill** - Relentless repo-wide correctness sweep (static correctness · tests · dep/wiring/import integrity · routing · cross-workspace consistency · API contract) over the project's own toolchain; ✅/❌/⚠️ report with `file:line` (QA-01, M5-CC) ✅ 2026-06-09
-- [ ] **Phase 19: `security-design` controls enrichment + docs** - Agnostic `security-controls.md` reference (input validation · injection · authz/IDOR · secrets · rate-limiting) the skill consults + per-agent skill-invocation docs note (SEC-01, DOCS-01, M5-CC)
+- [x] **Phase 19: `security-design` controls enrichment + docs** - Agnostic `security-controls.md` reference (input validation · injection · authz/IDOR · secrets · rate-limiting) the skill consults + per-agent skill-invocation docs note (SEC-01, DOCS-01, M5-CC) ✅ 2026-06-09
 
 ### Phase Details
 
@@ -55,7 +55,7 @@ Completed milestones are archived (full phase detail + final progress) under `.p
   1. A new agnostic `engine/references/security-controls.md` enumerates control *classes* (input validation, injection SQLi/XSS/command, authz/IDOR, secrets, rate-limiting) + what-to-verify per class — NOT framework APIs; `security-design` consults it and offers the checklist, surfacing uncovered classes on re-run.
   2. Per-agent skill-invocation differences (Claude `/`-autocomplete vs other agents read SKILL.md / invoke by name) are documented in the README + `npx sovereign-cli init` output.
   3. `security-design` keeps the thin-orchestrator shape + `disable-model-invocation: true`; `validate skills` passes; doctor auto-budget held at 5.
-**Plans**: 1 (19-01)
+**Plans**: 1 (19-01) — ✅ Complete 2026-06-09 (verified 3/3; doctor 20/5/15, validate passes, 164 engine tests green)
 
 ### M5 Progress
 
@@ -63,4 +63,4 @@ Completed milestones are archived (full phase detail + final progress) under `.p
 |-------|----------------|--------|-----------|
 | 17. `diagnose` skill | 1/1 | ✅ Complete | 2026-06-09 |
 | 18. `qa` skill | 1/1 | ✅ Complete | 2026-06-09 |
-| 19. `security-design` enrichment + docs | 0/? | Not started | - |
+| 19. `security-design` enrichment + docs | 1/1 | ✅ Complete | 2026-06-09 |

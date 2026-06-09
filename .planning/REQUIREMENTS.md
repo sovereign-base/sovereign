@@ -19,15 +19,15 @@ Construction/quality skills flagged during M4 live dogfooding + the locked v1 co
 
 ### security depth
 
-- [ ] **SEC-01**: `security-design` drives concrete **security-control coverage** beyond the layered model it already scopes — input validation, injection classes (SQLi/XSS/command), authz/IDOR, secrets handling, rate-limiting — via an agnostic **`security-controls.md` reference** (control *classes* + what-to-verify, NOT framework APIs) the skill consults and offers as a checklist. Re-running `security-design` surfaces uncovered control classes for the current design.
+- [x] **SEC-01**: `security-design` drives concrete **security-control coverage** beyond the layered model it already scopes — input validation, injection classes (SQLi/XSS/command), authz/IDOR, secrets handling, rate-limiting — via an agnostic **`security-controls.md` reference** (control *classes* + what-to-verify, NOT framework APIs) the skill consults and offers as a checklist. Re-running `security-design` surfaces uncovered control classes for the current design.
 
 ### docs / cross-agent
 
-- [ ] **DOCS-01**: Document per-agent skill invocation differences — Claude Code surfaces skills via `/`-autocomplete; other agents (Gemini CLI, etc.) read `SKILL.md` and invoke by name (no `/skill` menu) — in the README + the `npx sovereign-cli init` output, so non-Claude users know how to run the skills.
+- [x] **DOCS-01**: Document per-agent skill invocation differences — Claude Code surfaces skills via `/`-autocomplete; other agents (Gemini CLI, etc.) read `SKILL.md` and invoke by name (no `/skill` menu) — in the README + the `npx sovereign-cli init` output, so non-Claude users know how to run the skills.
 
 ### cross-cutting
 
-- [ ] **M5-CC**: New/changed skills follow the core-tier thin-orchestrator shape per `skill-format.md` / ADR-014 — one `sovereign-tools init <skill>` orient call, "Why this matters", recommendation-first where it fits, navigation footer. New skills (`diagnose`, `qa`) set `disable-model-invocation: true` so `sovereign-tools doctor` holds the auto-trigger budget at the 5 Fast Lane skills; `validate skills` passes for every new/changed skill. No/minimal engine work — reuse the shipped engine; a small `init` orient case per new skill is allowed, but flag any deeper engine gap rather than silently expanding scope.
+- [x] **M5-CC**: New/changed skills follow the core-tier thin-orchestrator shape per `skill-format.md` / ADR-014 — one `sovereign-tools init <skill>` orient call, "Why this matters", recommendation-first where it fits, navigation footer. New skills (`diagnose`, `qa`) set `disable-model-invocation: true` so `sovereign-tools doctor` holds the auto-trigger budget at the 5 Fast Lane skills; `validate skills` passes for every new/changed skill. No/minimal engine work — reuse the shipped engine; a small `init` orient case per new skill is allowed, but flag any deeper engine gap rather than silently expanding scope.
 
 ---
 
@@ -55,8 +55,8 @@ Construction/quality skills flagged during M4 live dogfooding + the locked v1 co
 |-------------|-------|--------|
 | DIAG-01 | Phase 17 | Complete |
 | QA-01 | Phase 18 | Complete |
-| SEC-01 | Phase 19 | Pending |
-| DOCS-01 | Phase 19 | Pending |
-| M5-CC | Phase 17 + 18 + 19 (cross-cutting) | Pending |
+| SEC-01 | Phase 19 | Complete |
+| DOCS-01 | Phase 19 | Complete |
+| M5-CC | Phase 17 + 18 + 19 (cross-cutting) | Complete |
 
 **Coverage: 5/5 M5 requirements mapped.** M5-CC is the cross-cutting gate applied to every skill phase (17–19).
