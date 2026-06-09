@@ -107,6 +107,8 @@ function renderHuman(r) {
     say('    Already have code? run \x1b[36m/sovereign-adopt\x1b[0m instead.');
   }
   say('');
+  say('  \x1b[2mInvoking: in Claude Code type /skill-name; in other SKILL.md agents (Gemini CLI, …),\x1b[0m');
+  say('  \x1b[2mopen the skill\x27s SKILL.md under .claude/skills/ and invoke it by name.\x1b[0m');
   say('  \x1b[2mDocs: https://github.com/sovereign-base/sovereign  ·  these skills run inside your agent (Claude Code & SKILL.md-compatible tools).\x1b[0m');
   say('');
 }
@@ -125,7 +127,9 @@ function usage() {
   say('    npx sovereign-cli init --json          raw machine-readable result (scripting/CI)');
   say('    npx sovereign-cli --version');
   say('');
-  say('  After install, the skills run \x1b[1minside your agent\x1b[0m (e.g. /council, /tdd). See the docs:');
+  say('  After install, the skills run \x1b[1minside your agent\x1b[0m (e.g. /council, /tdd).');
+  say('  \x1b[2mIn Claude Code, type /skill-name; in other SKILL.md agents (Gemini CLI, …), open the\x1b[0m');
+  say('  \x1b[2mskill\x27s SKILL.md under .claude/skills/ and invoke it by name.\x1b[0m See the docs:');
   say('  https://github.com/sovereign-base/sovereign');
   say('');
 }

@@ -24,19 +24,25 @@ It is for engineers and agents who want to build properly — and refuse to let 
 - ✓ `council --standard` (5 parallel advisors + anonymous peer review + chairman verdict) + 4 subagents — M1
 - ✓ Conventions (skill-format, adr-format, commenting, unverified-marker, listing-budget) + per-skill docs — M1
 
-**Shipped:** **v1.0 (M1)** + **v1.1 (M2)** + **v1.2 (M3)** + **v1.3 (M4)**, all complete and verified. M1–M3 published as `sovereign-cli@2.0.0`; the **2.2.0 install fix** (engine copied into `.claude/sovereign-engine/`, `state save`, version) is merged to `main`; **M4 is verified but not yet published** (would ship as 2.3.0). **18 skills** + 4 subagents + 5 references + 16 engine lib modules; **164 engine tests; listing budget held at 5 auto-triggerable across all four milestones.** `/council`, the `npx skills` extension protocol, and the published `npx sovereign-cli init` are proven live (Claude Code + Gemini CLI). The anti-hallucination loop is closed: `anchor-docs` → `verify-self` → `sentinel`. Milestone detail archived under `.planning/milestones/`.
+**Shipped:** **v1.0 (M1)** + **v1.1 (M2)** + **v1.2 (M3)** + **v1.3 (M4)** + **v1.4 (M5)**, all complete and verified. M1–M3 published as `sovereign-cli@2.0.0`; the **2.2.0 install fix** is live; **M4 + M5 ship as 2.4.0** (M4 = anti-hallucination loop; M5 = construction/quality skills). **20 skills** + 4 subagents + 6 references + 16 engine lib modules; **164 engine tests; listing budget held at 5 auto-triggerable across all five milestones.** `/council`, the `npx skills` extension protocol, and the published `npx sovereign-cli init` are proven live (Claude Code + Gemini CLI). Milestone detail archived under `.planning/milestones/`.
 
-## Current State: between milestones (M4 shipped)
+## Current State: between milestones (M5 shipped)
 
-**v1.3 — M4 Ground Truth (anti-hallucination) is complete & verified (2026-06-09).** The anti-hallucination loop the architecture/construction skills flagged is now closed. Validated this milestone:
+**v1.4 — M5 Construction-phase skills is complete & verified (2026-06-09).** SOVEREIGN now covers the full arc — ideate → align → architect → build → review → ground-truth → adopt/bridge/extend. Validated this milestone:
 
-- ✓ `anchor-docs` — ingests external documentation (payment gateways, SDKs, regional/gov APIs); stores URLs by default (full content opt-in behind a copyright warning, ADR-004) in `.sovereign/external-docs/` with `source`/`version`/`date-retrieved`/`re-verify-by` headers; surfaces stale anchors. — **v1.3** (ANCHOR-01/02)
-- ✓ `verify-self` — hard-stop on low confidence → retroactive audit of code since the last verified anchor → 3-way decision (provide docs via `anchor-docs` / mark `SOVEREIGN:UNVERIFIED` / discard+restart); emits the markers `sentinel` scans. — **v1.3** (VERIFY-01/02)
-- ✓ Zero-dep engine `anchor add|list|check` command + `init anchor-docs`/`init verify-self` workflows; both skills are core-tier thin orchestrators (`disable-model-invocation: true`) that compose. — **v1.3** (ENG-09, M4-CC)
+- ✓ `diagnose` — stack-agnostic debugging loop (reproduce → isolate → hypothesis → fix → verify) composing with `tdd`/`verify-self`/`sentinel`. — **v1.4** (DIAG-01)
+- ✓ `qa` — relentless repo-wide correctness sweep (5 categories) over the project's own toolchain; ✅/❌/⚠️ report with `file:line`. — **v1.4** (QA-01)
+- ✓ `security-design` enrichment + agnostic `security-controls.md` reference (control-class coverage). — **v1.4** (SEC-01)
+- ✓ Per-agent skill-invocation docs (Claude `/`-autocomplete vs read-SKILL.md). — **v1.4** (DOCS-01)
 
 ### Next milestone candidates (parked in BACKLOG.md)
 
-- A `diagnose`/debugging skill (live-use demand); `security-design` enrichment (input validation, injection, authz, secrets); the tracks layer (ADR-014 — DSA + database skills home); operations phase; multi-model Council (`--deep`); IoT/embedded — start with `/gsd:new-milestone` (or `/gsd:review-backlog`).
+- A `security-review` skill (audit existing code against `security-controls.md`); more v1 §6 construction skills (`vertical-slice`, `zoom-out`, `improve-architecture`, `code-patterns`); the tracks layer (ADR-014); an operations phase; multi-model Council (`--deep`) — start with `/gsd:new-milestone`.
+
+**Shipped previously (validated):**
+
+- ✓ M4 (v1.3) `anchor-docs` + `verify-self` + engine `anchor` command + ADR-004 — anti-hallucination loop closed (ANCHOR-01/02, VERIFY-01/02, ENG-09, M4-CC).
+- ✓ M1–M3 (v1.0–v1.2) — engine, installer, Council, Fast Lane, architecture skills, adoption/bridging/extensions.
 
 ### Out of Scope
 
@@ -88,4 +94,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-06-09 after v1.3 (M4 — Ground Truth) milestone*
+*Last updated: 2026-06-09 after v1.4 (M5 — Construction-phase skills) milestone*
