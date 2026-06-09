@@ -48,10 +48,10 @@ Derived from `/SOVEREIGN.md` (gated vision) + `.planning/research/SUMMARY.md`.
 
 ### Conventions & Docs
 
-- [ ] **CONV-01**: A SKILL_FORMAT reference defines SOVEREIGN's standard frontmatter and the thin-body / single-`init`-load rule, explicitly dropping v1's non-standard fields (`triggers`, `works-best-with`, `min-model`, `tokens`).
-- [ ] **CONV-02**: ADR-FORMAT and COMMENTING standard references exist and are referenced by the relevant skills.
+- [x] **CONV-01**: A SKILL_FORMAT reference defines SOVEREIGN's standard frontmatter and the thin-body / single-`init`-load rule, explicitly dropping v1's non-standard fields (`triggers`, `works-best-with`, `min-model`, `tokens`).
+- [x] **CONV-02**: ADR-FORMAT and COMMENTING standard references exist and are referenced by the relevant skills.
 - [x] **CONV-03**: The `SOVEREIGN:UNVERIFIED` marker specification is defined (and consumed by `sentinel`).
-- [ ] **CONV-04**: Each M1 skill has one documentation page (what it does, when to use, example, navigation, token cost).
+- [x] **CONV-04**: Each M1 skill has one documentation page (what it does, when to use, example, navigation, token cost).
 
 ---
 
@@ -108,6 +108,6 @@ REQ-ID → Phase. Coverage: 28/28 M1 requirements mapped, each to exactly one ph
 | SKL-05 | Phase 4 — Fast Lane Skills | Complete |
 | SKL-06 | Phase 4 — Fast Lane Skills | Complete |
 | CONV-03 | Phase 4 — Fast Lane Skills | Complete |
-| CONV-01 | Phase 5 — Conventions + Per-Skill Docs | Pending |
-| CONV-02 | Phase 5 — Conventions + Per-Skill Docs | Pending |
-| CONV-04 | Phase 5 — Conventions + Per-Skill Docs | Pending |
+| CONV-01 | Phase 5 — Conventions + Per-Skill Docs | Complete |
+| CONV-02 | Phase 5 — Conventions + Per-Skill Docs | Complete |
+| CONV-04 | Phase 5 — Conventions + Per-Skill Docs | Complete |

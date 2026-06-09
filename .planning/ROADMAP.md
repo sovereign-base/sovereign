@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: Bootstrap + Subagent Definitions** - `npx sovereign init` scaffolds `.sovereign/`; advisor + reasoning subagents defined; listing-budget held (completed 2026-06-08)
 - [x] **Phase 3: Council `--standard` (Integration Proof)** - 5 parallel advisors + anonymous peer review + chairman verdict exercise every engine primitive end-to-end (completed 2026-06-08)
 - [x] **Phase 4: Fast Lane Skills** - `ubiquitous-language`, `grill-with-docs`, `handoff`, `sentinel`, `tdd` — thin orchestrators over the engine (completed 2026-06-08)
-- [ ] **Phase 5: Conventions + Per-Skill Docs** - SKILL_FORMAT / ADR-FORMAT / commenting standards + one doc page per M1 skill, distilled from what was built
+- [x] **Phase 5: Conventions + Per-Skill Docs** - SKILL_FORMAT / ADR-FORMAT / commenting standards + one doc page per M1 skill, distilled from what was built (completed 2026-06-09)
 
 ## Phase Details
 
@@ -111,4 +111,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 2. Bootstrap + Subagent Definitions | 3/3 | Complete   | 2026-06-08 |
 | 3. Council `--standard` | 2/2 | Complete   | 2026-06-08 |
 | 4. Fast Lane Skills | 6/6 | Complete   | 2026-06-08 |
-| 5. Conventions + Per-Skill Docs | 0/TBD | Not started | - |
+| 5. Conventions + Per-Skill Docs | 3/3 | Complete   | 2026-06-09 |
