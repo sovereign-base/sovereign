@@ -16,8 +16,8 @@ Derived from `/SOVEREIGN.md` §6 + the locked v1 designs in `archive/v1/`. Build
 
 ### bridge — cross-project handoff
 
-- [ ] **BRIDGE-01**: A user can run `bridge` in a source project to generate a `BRIDGE.md` containing what a consuming project needs — API contracts (from `API_SPEC.md`), auth/security summary, shared domain glossary (from `CONTEXT.md`), and decisions-already-made (from ADRs) — that the consuming project imports on init.
-- [ ] **BRIDGE-02**: `bridge` records a content **hash** of the source files it was built from (in a bridge registry) so **staleness** can be detected — re-running flags when the source has changed since the bridge was generated. (Blocking-at-deploy + GitHub-issue notification are deferred; M3 ships local hash-based stale detection.)
+- [x] **BRIDGE-01**: A user can run `bridge` in a source project to generate a `BRIDGE.md` containing what a consuming project needs — API contracts (from `API_SPEC.md`), auth/security summary, shared domain glossary (from `CONTEXT.md`), and decisions-already-made (from ADRs) — that the consuming project imports on init.
+- [x] **BRIDGE-02**: `bridge` records a content **hash** of the source files it was built from (in a bridge registry) so **staleness** can be detected — re-running flags when the source has changed since the bridge was generated. (Blocking-at-deploy + GitHub-issue notification are deferred; M3 ships local hash-based stale detection.)
 
 ### extension protocol — wrap `npx skills` + vetting
 
@@ -53,8 +53,8 @@ Derived from `/SOVEREIGN.md` §6 + the locked v1 designs in `archive/v1/`. Build
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | ENG-08 | Phase 10 — Engine Additions | In Progress (bridge.cjs in 10-01; scanSkillContent in 10-02) |
-| BRIDGE-01 | Phase 11 — Bridge Skill | Pending |
-| BRIDGE-02 | Phase 11 — Bridge Skill | Pending |
+| BRIDGE-01 | Phase 11 — Bridge Skill | Complete |
+| BRIDGE-02 | Phase 11 — Bridge Skill | Complete |
 | EXT-01 | Phase 12 — Extension Protocol Skill | Pending |
 | EXT-02 | Phase 12 — Extension Protocol Skill | Pending |
 | ADOPT-01 | Phase 13 — sovereign-adopt Skill | Pending |

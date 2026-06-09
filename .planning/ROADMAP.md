@@ -20,7 +20,7 @@ M3 extends SOVEREIGN beyond a single fresh project — retrofit it onto an exist
 ### Phases
 
 - [x] **Phase 10: Engine Additions** - Zero-dep `bridge.cjs` (SHA-256 + registry diff), `extension.cjs` (exit-code-driven `npx skills` wrapper), `adopt.cjs` (Layers 1+2 scan), `scanSkillContent()` in `security.cjs`, and `init` bridge/adopt/extension workflows — all `node --test`'d (completed 2026-06-09)
-- [ ] **Phase 11: Bridge Skill** - A thin `bridge` skill that assembles `BRIDGE.md` from existing `.sovereign/` artifacts and detects staleness via the Phase-10 hash registry
+- [x] **Phase 11: Bridge Skill** - A thin `bridge` skill that assembles `BRIDGE.md` from existing `.sovereign/` artifacts and detects staleness via the Phase-10 hash registry (completed 2026-06-09)
 - [ ] **Phase 12: Extension Protocol Skill** - A thin extension skill that wraps `npx skills` find/use/add with the five-gate vetting layer (necessity, conflict, security audit, recommendation, logged decision)
 - [ ] **Phase 13: sovereign-adopt Skill** - A thin `sovereign-adopt` skill that drives the Phase-10 scan through 3-layer archaeology → scaffolds `.sovereign/`, retro-ADRs (via adr-log), and a gap analysis + adoption roadmap
 
@@ -55,7 +55,7 @@ M3 extends SOVEREIGN beyond a single fresh project — retrofit it onto an exist
   4. `bridge` is a thin orchestrator: single `sovereign-tools init bridge` orient call, a plain-language "Why this matters" section, recommendation-first output, and a navigation footer; it sets `disable-model-invocation: true`.
   5. `sovereign-tools validate skills` passes for `bridge` and `sovereign-tools doctor` still reports the auto-trigger listing budget at the 5 Fast Lane skills.
 **Plans**: 1 plan
-  - [ ] 11-01-PLAN.md — hand-authored `bridge` thin-orchestrator skill: assembles BRIDGE.md from .sovereign/ artifacts, wraps `bridge check`/`bridge hash`, writes the registry, delegates state/commit (BRIDGE-01/02 + M3-CC)
+  - [x] 11-01-PLAN.md — hand-authored `bridge` thin-orchestrator skill: assembles BRIDGE.md from .sovereign/ artifacts, wraps `bridge check`/`bridge hash`, writes the registry, delegates state/commit (BRIDGE-01/02 + M3-CC)
 **UI hint**: no
 
 ### Phase 12: Extension Protocol Skill
@@ -89,6 +89,6 @@ M3 extends SOVEREIGN beyond a single fresh project — retrofit it onto an exist
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 10. Engine Additions | 5/5 | Complete   | 2026-06-09 |
-| 11. Bridge Skill | 0/1 | Planned | - |
+| 11. Bridge Skill | 1/1 | Complete   | 2026-06-09 |
 | 12. Extension Protocol Skill | 0/TBD | Not started | - |
 | 13. sovereign-adopt Skill | 0/TBD | Not started | - |
