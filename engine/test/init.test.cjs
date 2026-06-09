@@ -173,6 +173,43 @@ test('phase block derives current/name/gate_status from STATE.md when present', 
   assert.equal(blob.phase.gate_status, 'In progress');
 });
 
+// ─── M3 workflows: bridge / adopt / extension (plan 10-05) ───────────────────
+
+test('init bridge returns the registry + source-doc paths with project context', () => {
+  const dir = mkSeededProject({});
+  const blob = buildInit(dir, 'bridge');
+  assert.equal(blob.paths.registry, '.sovereign/bridges/registry.json');
+  assert.ok(blob.paths.api_spec, 'paths.api_spec present');
+  assert.ok(blob.paths.bridge_dir, 'paths.bridge_dir present');
+  assert.equal(blob.project_root, dir);
+  assert.equal(blob.sovereign_version, '2.0.0');
+});
+
+test('init adopt returns detected.in_git boolean + sovereign_dir path', () => {
+  const dir = mkSeededProject({});
+  const blob = buildInit(dir, 'adopt');
+  assert.equal(typeof blob.detected.in_git, 'boolean');
+  assert.ok(blob.paths.sovereign_dir, 'paths.sovereign_dir present');
+});
+
+test('init extension returns the .sovereign/extensions dir', () => {
+  const dir = mkSeededProject({});
+  const blob = buildInit(dir, 'extension');
+  assert.equal(blob.paths.extensions_dir, '.sovereign/extensions');
+});
+
+test('init bridge/adopt/extension are greenfield-safe (empty dir, models {})', () => {
+  const dir = mkEmptyProject();
+  for (const wf of ['bridge', 'adopt', 'extension']) {
+    let blob;
+    assert.doesNotThrow(() => {
+      blob = buildInit(dir, wf);
+    }, `${wf} should not throw on a bare dir`);
+    assert.deepEqual(blob.models, {}, `${wf} models should be {}`);
+    assert.equal(blob.exists.sovereign_dir, false);
+  }
+});
+
 // ─── agents_installed / missing_agents (real filesystem check, plan 02-03) ───
 
 test('Test A: council with all required agents present → installed true, missing []', () => {
