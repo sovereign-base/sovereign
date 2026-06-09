@@ -30,7 +30,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const os = require('node:os');
 
-const { output, error, loadConfig, safeReadFile } = require('./core.cjs');
+const { output, error, loadConfig, safeReadFile, execGit } = require('./core.cjs');
 const { resolveModelInternal } = require('./model.cjs');
 const { readField } = require('./state.cjs');
 
@@ -290,6 +290,70 @@ function buildInit(cwd, workflow) {
           constitution: '.sovereign/SOVEREIGN.md',
           glossary: '.sovereign/CONTEXT.md',
           config: '.sovereign/config.json',
+        },
+        exists,
+      };
+      break;
+    }
+
+    case 'bridge': {
+      // BRIDGE-02 orientation — the bridgeable source docs the Phase-11 skill
+      // diffs (API_SPEC/SECURITY_MODEL/CONTEXT + ADRs via context_injection) plus
+      // the registry/bridge-dir paths the hashing substrate reads/writes.
+      // Greenfield-safe: every path is a string regardless of what exists on disk.
+      blob = {
+        models: {},
+        config: orientationConfig,
+        phase,
+        context_injection: contextInjection(cwd),
+        paths: {
+          bridge_dir: '.sovereign/bridges',
+          registry: '.sovereign/bridges/registry.json',
+          bridge_doc: '.sovereign/BRIDGE.md',
+          api_spec: '.sovereign/API_SPEC.md',
+          security_model: '.sovereign/SECURITY_MODEL.md',
+          glossary: '.sovereign/CONTEXT.md',
+          state: '.sovereign/STATE.md',
+        },
+        exists,
+      };
+      break;
+    }
+
+    case 'adopt': {
+      // ADOPT-01 orientation — project_root (from withProjectContext) + the git
+      // presence probe that drives the scanner's ls-files-vs-walk choice + the
+      // record-only target paths. execGit never throws, so this is greenfield-safe
+      // even in a non-git dir (exitCode !== 0 → in_git false).
+      const inGit = execGit(cwd, ['rev-parse', '--is-inside-work-tree']).exitCode === 0;
+      blob = {
+        models: {},
+        config: orientationConfig,
+        phase,
+        context_injection: contextInjection(cwd),
+        paths: {
+          state: '.sovereign/STATE.md',
+          manifest: '.sovereign/MANIFEST.md',
+          sovereign_dir: '.sovereign',
+        },
+        detected: { in_git: inGit },
+        exists,
+      };
+      break;
+    }
+
+    case 'extension': {
+      // EXT orientation — the per-decision extension log dir + the manifest/state
+      // the Phase-12 skill records vetted installs into. Greenfield-safe.
+      blob = {
+        models: {},
+        config: orientationConfig,
+        phase,
+        context_injection: contextInjection(cwd),
+        paths: {
+          extensions_dir: '.sovereign/extensions',
+          state: '.sovereign/STATE.md',
+          manifest: '.sovereign/MANIFEST.md',
         },
         exists,
       };

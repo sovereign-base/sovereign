@@ -29,6 +29,14 @@ const { cmdResolveModel } = require('./lib/model.cjs');
 const { cmdValidateSkills } = require('./lib/validate.cjs');
 const { cmdInit } = require('./lib/init.cjs');
 const { cmdDoctor } = require('./lib/doctor.cjs');
+const { cmdBridgeHash, cmdBridgeCheck } = require('./lib/bridge.cjs');
+const {
+  cmdExtensionPreview,
+  cmdExtensionInstall,
+  cmdExtensionList,
+  cmdExtensionAudit,
+} = require('./lib/extension.cjs');
+const { cmdAdoptScan } = require('./lib/adopt.cjs');
 
 // ─── Arg parsing helpers ──────────────────────────────────────────────────────
 
@@ -208,7 +216,8 @@ async function main() {
     error(
       'Usage: sovereign-tools <command> [args] [--raw] [--pick <field>] [--cwd <path>]\n' +
         'Commands: version, state (load|save|patch), gate (open|pass), ' +
-        'commit, resolve-model, model, validate (skills), init <workflow>, doctor'
+        'commit, resolve-model, model, validate (skills), init <workflow>, doctor, ' +
+        'bridge (hash|check), extension (preview|install|list|audit), adopt (scan)'
     );
   }
 
@@ -342,6 +351,53 @@ async function runCommand(command, args, cwd, raw, pick) {
       // Skill-listing budget check (SKL-07). Flows through output() so --pick
       // works for free; exits non-zero only when the budget is breached.
       cmdDoctor(cwd, raw);
+      break;
+    }
+
+    case 'bridge': {
+      // BRIDGE-02 staleness substrate. Subcommands mirror the gate/validate shape.
+      const sub = args[1];
+      if (sub === 'hash') {
+        // files: --files a b c (array of repo-relative source paths).
+        const files = parseListArg(args, 'files');
+        cmdBridgeHash(cwd, files, raw);
+      } else if (sub === 'check') {
+        // optional positional bridge id (args[2]); null → the single/first entry.
+        const bridgeId = args[2] && !args[2].startsWith('--') ? args[2] : null;
+        cmdBridgeCheck(cwd, bridgeId, raw);
+      } else {
+        error(`Unknown bridge subcommand: ${sub || '(none)'} (expected hash|check)`);
+      }
+      break;
+    }
+
+    case 'extension': {
+      // EXT substrate — exit-code-driven `npx skills` wrapper + content audit.
+      const sub = args[1];
+      // single positional source/path (args[2]); null when absent or a flag.
+      const arg = args[2] && !args[2].startsWith('--') ? args[2] : null;
+      if (sub === 'preview') {
+        cmdExtensionPreview(cwd, arg, raw);
+      } else if (sub === 'install') {
+        cmdExtensionInstall(cwd, arg, raw);
+      } else if (sub === 'list') {
+        cmdExtensionList(cwd, raw);
+      } else if (sub === 'audit') {
+        cmdExtensionAudit(cwd, arg, raw);
+      } else {
+        error(`Unknown extension subcommand: ${sub || '(none)'} (expected preview|install|list|audit)`);
+      }
+      break;
+    }
+
+    case 'adopt': {
+      // ADOPT-01 read-only Layers-1+2 archaeology scan.
+      const sub = args[1];
+      if (sub === 'scan') {
+        cmdAdoptScan(cwd, raw);
+      } else {
+        error(`Unknown adopt subcommand: ${sub || '(none)'} (expected scan)`);
+      }
       break;
     }
 
