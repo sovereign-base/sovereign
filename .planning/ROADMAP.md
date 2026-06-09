@@ -45,7 +45,7 @@ Completed milestones are archived (full phase detail + final progress) under `.p
   1. A user invoking `anchor-docs` ingests external documentation (payment gateways, SDKs, regional/gov APIs) — storing the URL by default, with full content opt-in gated behind a copyright warning (ADR-004) — by delegating to the engine `anchor add` command rather than reimplementing storage.
   2. The skill orients with a single `sovereign-tools init anchor-docs` call (no ten-file reads) and follows the core-tier thin-orchestrator shape: "Why this matters", recommendation-first, navigation footer.
   3. The skill sets `disable-model-invocation: true`, so `sovereign-tools doctor` still reports the auto-trigger budget at the 5 Fast Lane skills (budget held at 5), and `sovereign-tools validate skills` passes for it.
-**Plans**: TBD
+**Plans**: 1 (15-01)
 
 ### Phase 16: `verify-self` skill
 **Goal**: When the agent (or user) hits a low-confidence signal, `verify-self` hard-stops, audits recent unverified work, and forces a deliberate resolution before more wrong code ships.
