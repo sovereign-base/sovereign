@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: M3 — Adoption, Bridging & Extensions
 status: active
-stopped_at: M3 roadmap created (phases 10–13 appended; REQUIREMENTS traceability filled)
-last_updated: "2026-06-09T12:00:00.000Z"
+stopped_at: Completed 10-01-PLAN.md
+last_updated: "2026-06-09T09:00:12.567Z"
 last_activity: 2026-06-09
 progress:
   total_phases: 4
   completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
+  total_plans: 5
+  completed_plans: 1
 ---
 
 # Project State
@@ -25,11 +25,11 @@ See: .planning/PROJECT.md (Current Milestone: v1.2 — M3 Adoption, Bridging & E
 ## Current Position
 
 Phase: 10 of 13 (Engine Additions) — M3 phase 1 of 4
-Plan: none yet (phase not planned)
-Status: M3 roadmap created — ready to plan Phase 10
+Plan: 1 of 5 complete (10-01 done; bridge.cjs hashing substrate)
+Status: Phase 10 in progress — next plan 10-02
 Last activity: 2026-06-09
 
-Progress: [░░░░] M3 phase 0/4 complete
+Progress: [██░░░░░░░░] Phase 10: 1/5 plans complete; M3 phase 0/4 complete
 
 ## Performance Metrics
 
@@ -51,6 +51,7 @@ Progress: [░░░░] M3 phase 0/4 complete
 - Trend: —
 
 *Updated after each plan completion*
+| Phase 10 P01 | 3 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -64,6 +65,7 @@ M3-relevant standing decisions:
 - **Engine additions (Phase 10):** `bridge.cjs` (SHA-256 per-file + combined hash via `node:crypto`, registry diff in `.sovereign/bridges/registry.json`); `extension.cjs` (`spawnSync('npx', ['skills', ...])` array args, drives on EXIT CODE — there is NO `--json`; use `skills use` to fetch content for audit BEFORE `add`); `adopt.cjs` (`adopt scan` → Layers-1+2 JSON contract via `git ls-files`/walk); `scanSkillContent()` extending `security.cjs` (reuse `sanitizeForPrompt` regex toolkit). `init` gains `bridge`/`adopt`/`extension` workflows. Zero deps; emit via `output()`/`@file:` spill (never reimplement spill).
 - **M3-CC is cross-cutting** across the three skill phases (11–13): each skill is a thin orchestrator (single `init` orient, "Why this matters", recommendation-first, nav footer), `disable-model-invocation: true`, so the doctor auto-trigger budget stays at the 5 Fast Lane skills; `validate skills` passes for all.
 - **Scope guards (from REQUIREMENTS):** `sovereign-adopt` reads + records only, never refactors source; Type-3 legacy deferred. Bridge ships LOCAL hash staleness only (no deploy-gate/GitHub-issue). Extensions never auto-installed without vetting + logged decision. Wrap `npx skills`, never reinvent the registry (R-003).
+- [Phase 10]: bridge.cjs combined hash = sha256 of sorted path:sha256 lines (order-independent, fast equality); cmdBridgeCheck greenfield-safe (no_registry) and flags byte-changed + now-missing recorded sources
 
 ### Pending Todos
 
@@ -79,7 +81,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-06-09
-Stopped at: M3 roadmap created (phases 10–13 appended; REQUIREMENTS traceability filled; STATE reset to Phase 10)
+Last session: 2026-06-09T08:59:52.720Z
+Stopped at: Completed 10-01-PLAN.md
 Resume file: None
 Next: `/gsd:plan-phase 10`
