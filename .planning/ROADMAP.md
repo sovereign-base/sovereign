@@ -22,7 +22,7 @@ Completed milestones are archived (full phase detail + final progress) under `.p
 ### Phases
 
 - [x] **Phase 17: `diagnose` skill** - Stack-agnostic debugging loop (reproduce → isolate → hypothesis → fix → verify) over the engine + `.sovereign/` state; composes with `tdd`/`verify-self`/`sentinel` (DIAG-01, M5-CC) ✅ 2026-06-09
-- [ ] **Phase 18: `qa` skill** - Relentless repo-wide correctness sweep (static correctness · tests · dep/wiring/import integrity · routing · cross-workspace consistency · API contract) over the project's own toolchain; ✅/❌/⚠️ report with `file:line` (QA-01, M5-CC)
+- [x] **Phase 18: `qa` skill** - Relentless repo-wide correctness sweep (static correctness · tests · dep/wiring/import integrity · routing · cross-workspace consistency · API contract) over the project's own toolchain; ✅/❌/⚠️ report with `file:line` (QA-01, M5-CC) ✅ 2026-06-09
 - [ ] **Phase 19: `security-design` controls enrichment + docs** - Agnostic `security-controls.md` reference (input validation · injection · authz/IDOR · secrets · rate-limiting) the skill consults + per-agent skill-invocation docs note (SEC-01, DOCS-01, M5-CC)
 
 ### Phase Details
@@ -45,7 +45,7 @@ Completed milestones are archived (full phase detail + final progress) under `.p
   1. `qa` sweeps each workspace/module using its OWN toolchain across: static correctness (typecheck/compile-check, schema, lint), tests, dependency & wiring integrity (DI/wiring, import resolution, version alignment, example-config↔code), navigation/routing, and cross-workspace consistency (single shared-runtime version, shared/contract types, schema↔types, API contract vs `.sovereign/docs/api/API_SPEC.md`).
   2. It reports ✅/❌/⚠️ grouped by module then category, ❌ with exact error + `file:line`, ending in a one-line verdict (pass / fail with N blocking); delegates to the project's own `qa` command when present, else per-module equivalents — stack-agnostic.
   3. Core-tier thin-orchestrator shape; `disable-model-invocation: true` (doctor auto-budget held at 5); `validate skills` passes; composes with `diagnose` (failures → debug) and complements `sentinel`.
-**Plans**: 1 (18-01)
+**Plans**: 1 (18-01) — ✅ Complete 2026-06-09 (verified 3/3; doctor 20/5/15, validate passes, 164 engine tests green)
 
 ### Phase 19: `security-design` controls enrichment + docs
 **Goal**: `security-design` drives concrete security-control coverage, and non-Claude users know how to invoke SOVEREIGN's skills.
@@ -62,5 +62,5 @@ Completed milestones are archived (full phase detail + final progress) under `.p
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 17. `diagnose` skill | 1/1 | ✅ Complete | 2026-06-09 |
-| 18. `qa` skill | 0/? | Not started | - |
+| 18. `qa` skill | 1/1 | ✅ Complete | 2026-06-09 |
 | 19. `security-design` enrichment + docs | 0/? | Not started | - |

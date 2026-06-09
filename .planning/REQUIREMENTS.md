@@ -15,7 +15,7 @@ Construction/quality skills flagged during M4 live dogfooding + the locked v1 co
 
 ### qa — relentless project correctness sweep
 
-- [ ] **QA-01**: A user can run `qa` to sweep the whole repo for correctness before it fails in a running build — per workspace/module, using **whatever toolchain that module uses**: (1) static correctness (typecheck/compile in check mode, schema validation, lint), (2) unit + integration tests, (3) dependency & wiring integrity (DI/service wiring registered+imported+exported, import resolution, version alignment, example-config ↔ code-read config), (4) navigation/routing targets resolve, (5) cross-workspace consistency (single shared-runtime version, shared/contract types match producers↔consumers, schema↔types, API contract vs `.sovereign/docs/api/API_SPEC.md`). Reports ✅/❌/⚠️ grouped by module then category, ❌ with exact error + `file:line`, ending in a one-line verdict (pass / fail with N blocking). Stack-agnostic; delegates to the project's own `qa` command when present, else the per-module equivalents. Composes with `diagnose` (failures → debug) and complements `sentinel` (mechanical correctness vs standards). *(Source spec preserved at `.planning/research/qa-skill-source-spec.md`.)*
+- [x] **QA-01**: A user can run `qa` to sweep the whole repo for correctness before it fails in a running build — per workspace/module, using **whatever toolchain that module uses**: (1) static correctness (typecheck/compile in check mode, schema validation, lint), (2) unit + integration tests, (3) dependency & wiring integrity (DI/service wiring registered+imported+exported, import resolution, version alignment, example-config ↔ code-read config), (4) navigation/routing targets resolve, (5) cross-workspace consistency (single shared-runtime version, shared/contract types match producers↔consumers, schema↔types, API contract vs `.sovereign/docs/api/API_SPEC.md`). Reports ✅/❌/⚠️ grouped by module then category, ❌ with exact error + `file:line`, ending in a one-line verdict (pass / fail with N blocking). Stack-agnostic; delegates to the project's own `qa` command when present, else the per-module equivalents. Composes with `diagnose` (failures → debug) and complements `sentinel` (mechanical correctness vs standards). *(Source spec preserved at `.planning/research/qa-skill-source-spec.md`.)*
 
 ### security depth
 
@@ -54,7 +54,7 @@ Construction/quality skills flagged during M4 live dogfooding + the locked v1 co
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | DIAG-01 | Phase 17 | Complete |
-| QA-01 | Phase 18 | Pending |
+| QA-01 | Phase 18 | Complete |
 | SEC-01 | Phase 19 | Pending |
 | DOCS-01 | Phase 19 | Pending |
 | M5-CC | Phase 17 + 18 + 19 (cross-cutting) | Pending |
