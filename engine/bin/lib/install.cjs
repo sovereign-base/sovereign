@@ -290,6 +290,46 @@ function runInstall(opts) {
   };
 }
 
+// ─── Upgrade core ─────────────────────────────────────────────────────────────
+
+/**
+ * UpgradeResult is an InstallResult plus the additional `status: 'not_installed'`
+ * variant (a minimal object carrying ok:false, target, installed_version).
+ * @typedef {InstallResult | {
+ *   ok: false,
+ *   status: 'not_installed',
+ *   target: 'project'|'global',
+ *   installed_version: string
+ * }} UpgradeResult
+ */
+
+/**
+ * Upgrade an EXISTING SOVEREIGN install to the packaged version. Unlike init,
+ * this refuses to fresh-install: if there is no `.sovereign/.sovereign-version`
+ * stamp it does nothing and reports `not_installed`. When a stamp is present it
+ * delegates wholesale to runInstall — which is already non-destructive (preserves
+ * `.sovereign/`), re-copies skills/agents/engine, and re-stamps VERSION.
+ * @param {Object} opts
+ * @param {string} opts.cwd
+ * @param {'project'|'global'} opts.target
+ * @param {'quick'|'full'} opts.mode
+ * @param {string} opts.packageRoot
+ * @returns {UpgradeResult}
+ */
+function runUpgrade(opts) {
+  const stampPath = path.join(opts.cwd, '.sovereign', '.sovereign-version');
+  const stamp = (safeReadFile(stampPath) || '').trim();
+  if (!stamp) {
+    return {
+      ok: false,
+      status: 'not_installed',
+      target: opts.target,
+      installed_version: (safeReadFile(path.join(opts.packageRoot, 'VERSION')) || '').trim(),
+    };
+  }
+  return runInstall(opts);
+}
+
 // ─── CLI entry ──────────────────────────────────────────────────────────────
 
 /**
@@ -321,4 +361,4 @@ function cmdInstall(cwd, flags, raw) {
   output(result, raw, result.status);
 }
 
-module.exports = { runInstall, cmdInstall, FAST_LANE };
+module.exports = { runInstall, runUpgrade, cmdInstall, FAST_LANE };
