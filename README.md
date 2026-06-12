@@ -45,6 +45,8 @@ It asks how you want to start:
 
 Non-interactive? `npx sovereign-cli init --quick|--full|--adopt` (and `--global` for `~/.claude`, `--json` for scripts). It's **idempotent** — re-run any time to update; your `.sovereign/` content is never clobbered.
 
+**Upgrading?** `npx sovereign-cli@latest upgrade` moves an existing project to the newest version — it refreshes the skills, subagents, and engine while preserving your `.sovereign/` content. (Run `init` first if the project has never been set up.)
+
 What you get: SOVEREIGN's skills + subagents copied into `.claude/`, and a scaffolded **`.sovereign/`** folder — your project's committed engineering memory. **Commit `.sovereign/`**; it travels with the repo so every teammate and every future session shares the same context.
 
 ---
