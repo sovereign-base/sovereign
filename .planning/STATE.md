@@ -85,6 +85,7 @@ None yet.
 |---|-------------|------|--------|-----------|
 | 260609-lkx | Fix install bug: copy engine into project so installed skills can reach sovereign-tools (+ bare `state save` regenerates MANIFEST) | 2026-06-09 | 78ec6cc | [260609-lkx-fix-install-bug-copy-engine-into-project](./quick/260609-lkx-fix-install-bug-copy-engine-into-project/) |
 | fast | Installer seeds `includeCoAuthoredBy:false` + `attribution` default into project `.claude/settings.json` (kills Claude commit attribution team-wide) | 2026-06-09 | f34c9eb | — (`/gsd:fast`) |
+| 260612-k4h | Add `upgrade` command to sovereign-cli launcher (upgrade existing install, preserve .sovereign/) | 2026-06-12 | c3fd362 | [260612-k4h-add-upgrade-command-to-sovereign-cli-lau](./quick/260612-k4h-add-upgrade-command-to-sovereign-cli-lau/) |
 
 ## Session Continuity
 
