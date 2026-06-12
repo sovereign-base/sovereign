@@ -26,7 +26,9 @@ A **thin orchestrator** — orient once, then interrogate; delegate writes to `s
 INIT=$(node ".claude/sovereign-engine/sovereign-tools.cjs" init grill-with-docs)
 if [[ "$INIT" == @file:* ]]; then INIT=$(cat "${INIT#@file:}"); fi
 ```
-Parse `context_injection.glossary_path` (`.sovereign/CONTEXT.md`), `context_injection.relevant_adrs`, and `paths.state`. Read the glossary + relevant ADRs (only now) so the grilling is grounded in *this* project.
+Parse `context_injection.glossary_path` (`.sovereign/CONTEXT.md`), `context_injection.relevant_adrs`, `paths.state`, and `mcp.available`. Read the glossary + relevant ADRs (only now) so the grilling is grounded in *this* project.
+
+**MCP-aware:** when a question turns on a current external fact (an API shape, a version, a pricing tier), and `mcp.available` lists a docs server, prefer its `mcp__<id>__*` tools to settle it rather than asserting from memory; if none is attached, flag the uncertainty (and `/anchor-docs` or `/mcp-attach`) instead of guessing.
 
 **2 — Interrogate, one question at a time.** Walk the design tree, resolving dependencies between decisions one by one. For each question:
 - **Recommendation-first.** State your recommended answer with reasoning *before* waiting. The user confirms or redirects.

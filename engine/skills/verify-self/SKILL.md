@@ -32,7 +32,9 @@ A **thin orchestrator** — the engine surfaces the dates and the marker spec; t
 INIT=$(node ".claude/sovereign-engine/sovereign-tools.cjs" init verify-self)
 if [[ "$INIT" == @file:* ]]; then INIT=$(cat "${INIT#@file:}"); fi
 ```
-Parse `paths.unverified_marker_spec` (the exact marker form to use in choice B) and `paths.external_docs_dir`.
+Parse `paths.unverified_marker_spec` (the exact marker form to use in choice B), `paths.external_docs_dir`, and `mcp.available`.
+
+**MCP-aware (resolution A):** if `mcp.available` lists a docs server, prefer its `mcp__<id>__*` tools to confirm each unverified claim against the current source. If none is attached, fall back to web/memory and say so explicitly — a claim "confirmed" only from memory stays uncertain (mark it, choice B). Attach a server with `/mcp-attach`.
 
 **3 — Establish the boundary ("since the last verified anchor").**
 ```bash

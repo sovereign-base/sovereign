@@ -26,7 +26,9 @@ A **thin orchestrator** — the engine (`anchor.cjs`) owns all storage, slug-san
 INIT=$(node ".claude/sovereign-engine/sovereign-tools.cjs" init anchor-docs)
 if [[ "$INIT" == @file:* ]]; then INIT=$(cat "${INIT#@file:}"); fi
 ```
-Parse `paths.external_docs_dir` (`.sovereign/external-docs/`) — the only path you need. No other orientation reads.
+Parse `paths.external_docs_dir` (`.sovereign/external-docs/`) and `mcp.available`. No other orientation reads.
+
+**MCP-aware (re-fetch):** if `mcp.available` lists a docs server, prefer its `mcp__<id>__*` tools to fetch the *current* doc you're anchoring (and to re-fetch a stale one) — it's more reliable than a raw URL pull. If none is attached, use the URL/web and say so. Attach one with `/mcp-attach`. (No silent fallback — name which path you took.)
 
 **2 — Surface staleness FIRST.**
 ```bash

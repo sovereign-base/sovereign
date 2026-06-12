@@ -38,6 +38,7 @@ const {
 } = require('./lib/extension.cjs');
 const { cmdAdoptScan } = require('./lib/adopt.cjs');
 const { cmdAnchorAdd, cmdAnchorList, cmdAnchorCheck } = require('./lib/anchor.cjs');
+const { cmdMcpAudit, cmdMcpAdd, cmdMcpList, cmdMcpRemove } = require('./lib/mcp.cjs');
 
 // ─── Arg parsing helpers ──────────────────────────────────────────────────────
 
@@ -219,7 +220,7 @@ async function main() {
         'Commands: version, state (load|save|patch), gate (open|pass), ' +
         'commit, resolve-model, model, validate (skills), init <workflow>, doctor, ' +
         'bridge (hash|check), extension (preview|install|list|audit), adopt (scan), ' +
-        'anchor (add|list|check)'
+        'anchor (add|list|check), mcp (audit|add|list|remove)'
     );
   }
 
@@ -424,6 +425,35 @@ async function runCommand(command, args, cwd, raw, pick) {
         cmdAnchorCheck(cwd, raw);
       } else {
         error(`Unknown anchor subcommand: ${sub || '(none)'} (expected add|list|check)`);
+      }
+      break;
+    }
+
+    case 'mcp': {
+      // MCP-server attachment substrate — vet a launch spec + record it under
+      // mcp_servers[] in the committed project config (surfaced via init).
+      const sub = args[1];
+      const rest = args.slice(2);
+      if (sub === 'audit' || sub === 'add') {
+        const flags = parseNamedArgs(
+          rest,
+          ['id', 'transport', 'command', 'url', 'for', 'description'],
+          ['force']
+        );
+        const argsList = parseListArg(rest, 'args');
+        const envList = parseListArg(rest, 'env');
+        if (sub === 'audit') {
+          cmdMcpAudit(cwd, flags, argsList, envList, raw);
+        } else {
+          cmdMcpAdd(cwd, flags, argsList, envList, raw);
+        }
+      } else if (sub === 'list') {
+        cmdMcpList(cwd, raw);
+      } else if (sub === 'remove') {
+        const flags = parseNamedArgs(rest, ['id'], []);
+        cmdMcpRemove(cwd, flags, raw);
+      } else {
+        error(`Unknown mcp subcommand: ${sub || '(none)'} (expected audit|add|list|remove)`);
       }
       break;
     }

@@ -186,6 +186,31 @@ function loadConfig(cwd) {
   return merged;
 }
 
+/**
+ * Read-modify-write the PROJECT `.sovereign/config.json` in place.
+ *
+ * Unlike {@link loadConfig} (which returns the deep-merged view of defaults +
+ * global + project), this touches ONLY the project file — it never folds in
+ * defaults or `~/.sovereign/defaults.json`, so a mutation cannot accidentally
+ * persist an inherited value. The mutator receives the parsed project object
+ * (`{}` when the file is absent or unparseable) and returns the object to write;
+ * unrelated keys are preserved. Writes 2-space JSON with a trailing newline
+ * (matching the seeded template). Creates `.sovereign/` if needed.
+ *
+ * @param {string} cwd - project root
+ * @param {(config: Record<string, *>) => Record<string, *>} mutator
+ * @returns {Record<string, *>} the object that was written
+ */
+function patchConfig(cwd, mutator) {
+  const dir = path.join(cwd, '.sovereign');
+  const file = path.join(dir, 'config.json');
+  const current = readJsonLayer(file) || {};
+  const next = mutator({ ...current });
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(file, JSON.stringify(next, null, 2) + '\n', 'utf-8');
+  return next;
+}
+
 // ─── Git helpers ──────────────────────────────────────────────────────────────
 
 /**
@@ -238,6 +263,7 @@ module.exports = {
   safeReadFile,
   findProjectRoot,
   loadConfig,
+  patchConfig,
   deepMerge,
   execGit,
   isGitIgnored,
