@@ -24,7 +24,7 @@ const path = require('node:path');
 const readline = require('node:readline');
 
 const { error } = require('./lib/core.cjs');
-const { runInstall, FAST_LANE } = require('./lib/install.cjs');
+const { runInstall, runUpgrade, FAST_LANE } = require('./lib/install.cjs');
 
 const PKG_ROOT = path.join(__dirname, '..');
 
@@ -113,6 +113,33 @@ function renderHuman(r) {
   say('');
 }
 
+/**
+ * Render the upgrade result for humans. `dir` is the resolved project root.
+ * @param {import('./lib/install.cjs').UpgradeResult} r
+ * @param {string} dir
+ */
+function renderUpgrade(r, dir) {
+  say('');
+  if (r.status === 'not_installed') {
+    say(`  No SOVEREIGN install found in ${dir}.`);
+    say('  Run `npx sovereign-cli init` first.');
+    say('');
+    process.exitCode = 1;
+    return;
+  }
+  say(`  \x1b[1m✦ SOVEREIGN\x1b[0m  v${r.installed_version}`);
+  say('');
+  if (r.status === 'up_to_date') {
+    say(`  \x1b[32m✓\x1b[0m Already on ${r.installed_version} — nothing to upgrade.`);
+  } else {
+    say(`  \x1b[32m✓\x1b[0m Upgraded ${r.previous_version} → ${r.installed_version}.`);
+    say(`    Refreshed: ${r.skills_copied.length} skills, ${r.agents_copied.length} agents, engine + references.`);
+    say('    Your .sovereign/ content was preserved.');
+  }
+  say('  \x1b[2mTo pull the newest published version: npx sovereign-cli@latest upgrade\x1b[0m');
+  say('');
+}
+
 function usage() {
   const v = readVersion();
   say('');
@@ -125,6 +152,7 @@ function usage() {
   say('    npx sovereign-cli init --adopt         full install, geared to existing code');
   say('    npx sovereign-cli init --global        install to ~/.claude instead of ./.claude');
   say('    npx sovereign-cli init --json          raw machine-readable result (scripting/CI)');
+  say('    npx sovereign-cli@latest upgrade     move an existing project to the newest version (keeps your .sovereign/)');
   say('    npx sovereign-cli --version');
   say('');
   say('  After install, the skills run \x1b[1minside your agent\x1b[0m (e.g. /council, /tdd).');
@@ -173,6 +201,29 @@ async function main() {
       fs.writeSync(1, JSON.stringify(result, null, 2) + '\n');
     } else {
       renderHuman({ ...result, adopt });
+    }
+    return;
+  }
+
+  if (command === 'upgrade' || command === 'update') {
+    const has = (f) => args.includes(f);
+    const cwdIdx = args.indexOf('--cwd');
+    const dir = cwdIdx !== -1 && args[cwdIdx + 1] ? args[cwdIdx + 1] : process.cwd();
+    const target = has('--global') ? 'global' : 'project';
+    const json = has('--json');
+
+    let result;
+    try {
+      result = runUpgrade({ cwd: dir, target, mode: 'full', packageRoot: PKG_ROOT });
+    } catch (err) {
+      error('upgrade failed: ' + (err && err.message ? err.message : String(err)));
+      return;
+    }
+
+    if (json) {
+      fs.writeSync(1, JSON.stringify(result, null, 2) + '\n');
+    } else {
+      renderUpgrade(result, dir);
     }
     return;
   }

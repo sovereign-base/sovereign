@@ -24,7 +24,7 @@ It is for engineers and agents who want to build properly — and refuse to let 
 - ✓ `council --standard` (5 parallel advisors + anonymous peer review + chairman verdict) + 4 subagents — M1
 - ✓ Conventions (skill-format, adr-format, commenting, unverified-marker, listing-budget) + per-skill docs — M1
 
-**Shipped:** **v1.0 (M1)** + **v1.1 (M2)** + **v1.2 (M3)** + **v1.3 (M4)** + **v1.4 (M5)**, all complete and verified. M1–M3 published as `sovereign-cli@2.0.0`; the **2.2.0 install fix** is live; **M4 + M5 ship as 2.4.0** (M4 = anti-hallucination loop; M5 = construction/quality skills). **20 skills** + 4 subagents + 6 references + 16 engine lib modules; **164 engine tests; listing budget held at 5 auto-triggerable across all five milestones.** `/council`, the `npx skills` extension protocol, and the published `npx sovereign-cli init` are proven live (Claude Code + Gemini CLI). Milestone detail archived under `.planning/milestones/`.
+**Shipped:** **v1.0 (M1)** + **v1.1 (M2)** + **v1.2 (M3)** + **v1.3 (M4)** + **v1.4 (M5)**, all complete and verified; **2.4.0** (M4 + M5) is live on npm. A post-M5 **MCP feature** (contributor PR #6: `mcp-attach` skill + `mcp` engine command + `scanMcpServer` audit) was vetted and ships as **2.5.0**. **21 skills** + 4 subagents + 7 references + 17 engine lib modules; **190 engine tests; listing budget held at 5 auto-triggerable.** `/council`, the `npx skills` extension protocol, and the published `npx sovereign-cli init` are proven live (Claude Code + Gemini CLI). Milestone detail archived under `.planning/milestones/`.
 
 ## Current State: between milestones (M5 shipped)
 

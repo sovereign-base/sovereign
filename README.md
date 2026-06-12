@@ -45,6 +45,8 @@ It asks how you want to start:
 
 Non-interactive? `npx sovereign-cli init --quick|--full|--adopt` (and `--global` for `~/.claude`, `--json` for scripts). It's **idempotent** — re-run any time to update; your `.sovereign/` content is never clobbered.
 
+**Upgrading?** `npx sovereign-cli@latest upgrade` moves an existing project to the newest version — it refreshes the skills, subagents, and engine while preserving your `.sovereign/` content. (Run `init` first if the project has never been set up.)
+
 What you get: SOVEREIGN's skills + subagents copied into `.claude/`, and a scaffolded **`.sovereign/`** folder — your project's committed engineering memory. **Commit `.sovereign/`**; it travels with the repo so every teammate and every future session shares the same context.
 
 ---
@@ -53,7 +55,7 @@ What you get: SOVEREIGN's skills + subagents copied into `.claude/`, and a scaff
 
 > **New project?** Follow the flow below top to bottom. **Existing code?** Jump to [Adopting an existing project](#adopting-an-existing-project) first, then rejoin wherever the gaps are.
 
-You don't run all 20 skills every time — you reach for the right one at the right moment. Here's the natural arc of a project:
+You don't run all 21 skills every time — you reach for the right one at the right moment. Here's the natural arc of a project:
 
 ### 1. Decide if it should exist — `/council`
 Before building anything expensive-to-undo (a product bet, a big architecture call, a stack choice), run:
@@ -135,6 +137,10 @@ SOVEREIGN is best on **new projects** (you get the full ideation→architecture�
 | `/handoff` | Resumable session capture | Quick |
 | `/entity-design` `/api-design` `/stack-select` `/scale-design` `/security-design` `/deploy-design` | The architecture-phase design skills | Full |
 | `/adr-log` | Record an architectural decision (gated) | Full |
+| `/diagnose` | Debug a failure methodically (reproduce → isolate → hypothesis → fix → verify) | Full |
+| `/qa` | Sweep the whole repo for correctness before a running build | Full |
+| `/anchor-docs` `/verify-self` | Ground-truth: anchor to current external docs; catch your own uncertainty | Full |
+| `/mcp-attach` | Attach an MCP server to SOVEREIGN, vetted (5-gate) | Full |
 | `/bridge` | Cross-project handoff + staleness | Full |
 | `/import-skill` | Vet + install third-party skills | Full |
 | `/sovereign-adopt` | Retrofit onto an existing codebase | Full |
