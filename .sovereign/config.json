@@ -4,6 +4,5 @@
   "parallelization": true,
   "council_mode_default": "standard",
   "resolve_model_ids": false,
-  "context_window": 200000,
-  "mcp_servers": {}
+  "context_window": 200000
 }

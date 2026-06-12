@@ -132,6 +132,43 @@ function dateStamp() {
 }
 
 /**
+ * The MCP servers a given consuming skill may use, from the merged config's
+ * `mcp_servers` map (written by `mcp add`, deep-merged global + project). A
+ * server is "available" to a skill when its `for` list includes the skill name
+ * or the wildcard `*`. Returns a compact array `{ id, transport, description }`
+ * (the launch detail stays in config / `.mcp.json`; the skill only needs to know
+ * a server exists and how to address its `mcp__<id>__*` tools).
+ *
+ * Greenfield-safe: no `mcp_servers` → []. This is how a consuming skill learns,
+ * from its one `init` call, whether to prefer an attached docs server over raw
+ * web/memory — with NO silent fallback (the skill says so when none is attached).
+ *
+ * @param {string} cwd - project root
+ * @param {string} skill - the consuming workflow/skill name
+ * @returns {Array<{id: string, transport: string, description: string}>}
+ */
+function mcpAvailableFor(cwd, skill) {
+  const cfg = loadConfig(cwd);
+  const servers = cfg && cfg.mcp_servers;
+  if (!servers || typeof servers !== 'object' || Array.isArray(servers)) return [];
+  return Object.keys(servers)
+    .sort()
+    .filter((id) => {
+      const s = servers[id];
+      const forList = s && Array.isArray(s.for) ? s.for : ['*'];
+      return forList.includes('*') || forList.includes(skill);
+    })
+    .map((id) => {
+      const s = servers[id] || {};
+      return {
+        id,
+        transport: typeof s.transport === 'string' ? s.transport : 'stdio',
+        description: typeof s.description === 'string' ? s.description : '',
+      };
+    });
+}
+
+/**
  * The standard context-injection block — the paths a skill reads CONTENT from
  * when it needs to inject project context into reasoning agents. `relevant_adrs`
  * is a real listing of `.sovereign/docs/adr/*.md` (or [] when absent).
@@ -383,6 +420,7 @@ function buildInit(cwd, workflow) {
           state: '.sovereign/STATE.md',
           manifest: '.sovereign/MANIFEST.md',
         },
+        mcp: { available: mcpAvailableFor(cwd, 'anchor-docs') },
         exists,
       };
       break;
@@ -406,6 +444,51 @@ function buildInit(cwd, workflow) {
           state: '.sovereign/STATE.md',
           manifest: '.sovereign/MANIFEST.md',
         },
+        mcp: { available: mcpAvailableFor(cwd, 'verify-self') },
+        exists,
+      };
+      break;
+    }
+
+    case 'mcp': {
+      // Orientation for the /mcp-attach skill — the committed config the
+      // `mcp add|list|remove` substrate reads/writes plus the per-attach decision
+      // log dir. Greenfield-safe: every path is a string regardless of disk state.
+      blob = {
+        models: {},
+        config: orientationConfig,
+        phase,
+        context_injection: contextInjection(cwd),
+        paths: {
+          mcp_dir: '.sovereign/mcp',
+          config: '.sovereign/config.json',
+          state: '.sovereign/STATE.md',
+          manifest: '.sovereign/MANIFEST.md',
+        },
+        mcp: { available: mcpAvailableFor(cwd, 'mcp') },
+        exists,
+      };
+      break;
+    }
+
+    case 'stack-select':
+    case 'grill-with-docs': {
+      // Design/ground-truth consumers (otherwise fast-lane-shaped) that become
+      // MCP-aware: the `mcp.available` list tells them whether to prefer an
+      // attached docs server over raw web/memory for current external facts.
+      blob = {
+        models: {},
+        config: orientationConfig,
+        phase,
+        context_injection: {
+          manifest_path: '.sovereign/MANIFEST.md',
+          glossary_path: '.sovereign/CONTEXT.md',
+        },
+        paths: {
+          state: '.sovereign/STATE.md',
+          manifest: '.sovereign/MANIFEST.md',
+        },
+        mcp: { available: mcpAvailableFor(cwd, workflow) },
         exists,
       };
       break;
@@ -463,4 +546,5 @@ module.exports = {
   readState,
   existsBlock,
   relevantAdrs,
+  mcpAvailableFor,
 };

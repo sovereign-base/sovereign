@@ -26,7 +26,7 @@ A **thin orchestrator** over the engine — recommendation-first, like its sibli
 INIT=$(node ".claude/sovereign-engine/sovereign-tools.cjs" init stack-select)
 if [[ "$INIT" == @file:* ]]; then INIT=$(cat "${INIT#@file:}"); fi
 ```
-Parse `paths.state` + glossary path; draw the project's `phase`/`active_tracks` from the blob rather than re-reading files. Read `ENTITY_MODEL.md`/`API_SPEC.md` by path if present — they inform the choice.
+Parse `paths.state` + glossary path and `mcp.available`; draw the project's `phase`/`active_tracks` from the blob rather than re-reading files. Read `ENTITY_MODEL.md`/`API_SPEC.md` by path if present — they inform the choice.
 
 **2 — Gather the deciding inputs, one at a time, recommending as you go:**
 - **Project type / track** (web, mobile, backend, data, IoT…).
@@ -37,7 +37,7 @@ Parse `paths.state` + glossary path; draw the project's `phase`/`active_tracks` 
 
 **3 — Recommend per layer.** For language/runtime, framework, datastore, and infra primitives: give the **best fit for these constraints** with reasoning, plus **what you're NOT picking and why** (the explicit no is as valuable as the yes). Be opinionated; this is a strong read, not a menu.
 
-**4 — Be honest about currency.** When a recommendation hinges on fast-moving facts (current versions, pricing, a new managed option), say so and flag the user may want to verify against current docs (the future `anchor-docs`, M3). Don't assert stale specifics with false confidence.
+**4 — Be honest about currency.** When a recommendation hinges on fast-moving facts (current versions, pricing, a new managed option), say so. **MCP-aware:** if `mcp.available` lists a docs/pricing server, prefer its `mcp__<id>__*` tools to check those facts live before committing the recommendation; otherwise flag that the user may want to verify against current docs (`/anchor-docs`) and don't assert stale specifics with false confidence. Attach a server with `/mcp-attach`.
 
 **5 — Record + offer ADRs.** Write/update `.sovereign/docs/STACK.md` (the chosen stack + rationale + rejected alternatives). Lock-in choices that pass the three-condition gate (datastore, framework, cloud) → **offer `/adr-log`** (don't write ADRs here). Then `state save` and `commit` via `sovereign-tools`.
 
